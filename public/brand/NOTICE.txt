@@ -1,6 +1,6 @@
-Photo: Protective headphones and glasses for carpentry in workshop
-Creator: Ono Kosuki
-Source: https://www.pexels.com/photo/protective-headphones-and-glasses-for-carpentry-in-workshop-5974014/
+Photo: Backpack with Gloves on Wall
+Creator: Dan Galvani Sommavilla
+Source: https://www.pexels.com/photo/backpack-with-gloves-on-wall-7393146/
 License: Pexels https://www.pexels.com/license/
-Changes: cropped to emphasize the protective eyewear and earmuffs, resized and converted to WebP.
-Illustrative photograph; does not represent the company premises or inventory.
+Changes: resized and converted to WebP; displayed with CSS masks.
+Illustrative photograph; does not represent company premises or inventory.

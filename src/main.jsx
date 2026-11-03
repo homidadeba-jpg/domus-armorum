@@ -69,7 +69,8 @@ function App() {
           const scene = frame.closest('figure') || frame.parentElement;
           gsap.timeline({ scrollTrigger: { trigger: scene, start: 'clamp(top 94%)', end: 'clamp(center 52%)', scrub: 0.75, invalidateOnRefresh: true } })
             .fromTo(frame, { y: () => window.innerWidth < 768 ? 48 : 84 }, { y: 0, ease: 'power1.out' }, 0)
-            .fromTo(frame.querySelector('img'), { scale: 1.14, yPercent: -3 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0);
+            .fromTo(frame.querySelector('img'), { scale: 1.12, yPercent: -3 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0)
+            .fromTo(scene, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask-entry').trim() || 'inset(0%)' }, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask').trim() || 'inset(0%)', ease: 'none' }, 0);
         });
         gsap.utils.toArray('.activity-illustration').forEach(frame => {
           gsap.fromTo(frame.querySelector('img'), { y: 8, scale: 0.95 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', end: 'clamp(top 48%)', scrub: 0.65 } });
@@ -131,11 +132,14 @@ function App() {
           <p className="muted" data-reveal>O nome, o emblema e a maneira de atender fazem parte da mesma identidade. Uma marca que valoriza o contato próximo e o atendimento especializado.</p>
           <div className="story-year" data-reveal><div><p>DESDE</p><span>2017</span></div><p>Cascavel,<br />Paraná.</p></div>
         </div>
-        <figure className="story-photo photo-scene" aria-label="Imagem ilustrativa do segmento de armas e equipamentos"><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt="Armas e equipamentos de proteção dispostos sobre uma bancada em um estande" width="1600" height="1067" loading="lazy" /></div></figure>
+        <div className="story-visual">
+          <figure className="story-photo photo-scene photo-cut photo-cut--arms" aria-label="Imagem ilustrativa do segmento de armas e equipamentos"><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt="Armas e equipamentos de proteção dispostos sobre uma bancada em um estande" width="1600" height="1067" loading="lazy" /></div></figure>
+          <figure className="story-detail photo-scene photo-cut photo-cut--ammunition"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt="Munições fotografadas em close sobre uma superfície escura" width="1600" height="1067" loading="lazy" /></div></figure>
+        </div>
       </section>
 
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
-        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p><figure className="activity-photo photo-scene"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt="Munições fotografadas em close sobre uma superfície escura" width="1600" height="1067" loading="lazy" /></div></figure></div>
+        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
         <div className="values-list activity-list">
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
@@ -145,7 +149,7 @@ function App() {
 
       <section className="protection protection-layout shell" aria-labelledby="protection-heading">
         <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
-        <figure className="protection-glasses photo-scene"><div className="photo-frame" data-photo><img src="/brand/protecao-equipamentos-f03492ba.webp" alt="Óculos de proteção e protetor auditivo juntos sobre uma bancada de madeira" width="1400" height="1050" loading="lazy" /></div></figure>
+        <figure className="protection-glasses photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt="Composição de equipamentos táticos com mochila, luvas, óculos e acessórios" width="1000" height="1503" loading="lazy" /></div></figure>
       </section>
 
       <section className="contact shell" id="contato">
