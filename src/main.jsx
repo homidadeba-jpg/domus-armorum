@@ -65,7 +65,6 @@ function App() {
         gsap.utils.toArray('.manifesto-line').forEach(el => {
           gsap.fromTo(el, { opacity: 0.25, x: 20 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 85%)', end: 'clamp(top 48%)', scrub: 0.5 } });
         });
-        gsap.to('.footer-wordmark', { xPercent: -5, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
       return () => context.revert();
@@ -116,12 +115,11 @@ function App() {
       </section>
 
       <section className="story shell" id="historia">
-        <figure className="brand-photo brand-original"><img src="/brand/domus-original.webp" alt="Logo original da Domus Armorum" width="680" height="980" loading="lazy" /><figcaption>A identidade Domus, presente nos detalhes.</figcaption></figure>
+        <div className="story-year" data-reveal><p>DESDE</p><span>2017</span><p>Cascavel, Paraná.</p></div>
         <div className="story-copy">
           <div className="section-overflow"><h2 data-reveal>UMA HISTÓRIA.<br />NOSSA ASSINATURA.</h2></div>
           <p data-reveal>Fundada em setembro de 2017, a Domus Armorum nasceu em Cascavel, no oeste do Paraná.</p>
           <p className="muted" data-reveal>O nome, o emblema e a maneira de atender fazem parte da mesma identidade. Uma marca que valoriza o contato próximo e o atendimento especializado.</p>
-          <div className="story-facts" data-reveal><div><span>2017</span><p>O início da nossa história</p></div><div><MapPin size={26} weight="light" /><p>Cascavel, Paraná</p></div></div>
         </div>
       </section>
 
@@ -144,7 +142,7 @@ function App() {
       </section>
 
       <section className="contact shell" id="contato">
-        <div className="contact-title"><p className="eyebrow">INFORMAÇÕES E CONTATO</p><h2 data-reveal>A CONVERSA<br />COMEÇA AQUI.</h2><p>Informações institucionais, horários e atendimento geral.</p><WhatsAppLink className="button contact-button"><WhatsappLogo size={22} /> Contato geral <ArrowUpRight size={19} /></WhatsAppLink></div>
+        <div className="contact-title"><p className="eyebrow">INFORMAÇÕES E CONTATO</p><h2 data-reveal>A CONVERSA<br />COMEÇA AQUI.</h2><p>Informações institucionais, horários e atendimento geral pelo WhatsApp no canto da tela.</p></div>
         <div className="contact-details" data-reveal>
           <div><span className="detail-label">Estamos em</span><p>Cascavel<span>Paraná, Brasil</span></p></div>
           <div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div>
@@ -155,11 +153,10 @@ function App() {
     </main>
 
     <footer>
-      <div className="footer-top shell"><a className="footer-home" href="#inicio">DOMUS ARMORUM <ArrowUpRight size={20} /></a><span>História. Identidade. Presença.</span></div>
-      <div className="footer-wordmark" aria-hidden="true">DOMUS ARMORUM</div>
+      <div className="footer-top shell"><a className="footer-home" href="#inicio">Voltar ao início <ArrowUpRight size={20} /></a><span>História. Identidade. Presença.</span></div>
       <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><WhatsAppLink author className="author-credit">Desenvolvido por <strong>Jonas Jr.</strong> <ArrowUpRight size={13} /></WhatsAppLink></div>
     </footer>
-    <WhatsAppLink className="floating-whatsapp" floating><WhatsappLogo size={29} weight="regular" /><span>Contato</span></WhatsAppLink>
+    <WhatsAppLink className="floating-whatsapp" floating><WhatsappLogo size={31} weight="regular" /></WhatsAppLink>
   </div>;
 }
 
