@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, Crosshair, Stack, Backpack, Fingerprint } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, Fingerprint } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -68,6 +68,9 @@ function App() {
         gsap.utils.toArray('[data-photo]').forEach(frame => {
           gsap.fromTo(frame.querySelector('img'), { scale: 1.045 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 90%)', end: 'clamp(top 28%)', scrub: 0.7 } });
         });
+        gsap.utils.toArray('.activity-illustration').forEach(frame => {
+          gsap.fromTo(frame.querySelector('img'), { y: 8, scale: 0.95 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', end: 'clamp(top 48%)', scrub: 0.65 } });
+        });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
       return () => context.revert();
@@ -129,11 +132,12 @@ function App() {
 
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
         <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
-        <div className="values-list">
-          <article data-reveal><Crosshair size={32} weight="light" aria-hidden="true" /><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
-          <article data-reveal><Stack size={32} weight="light" aria-hidden="true" /><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
-          <article data-reveal><Backpack size={32} weight="light" aria-hidden="true" /><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
+        <div className="values-list activity-list">
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-6d3441cf.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-6dfddd59.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-c7a24c55.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
         </div>
+        <p className="activity-credit">Ilustrações de John Colburn, Lorc e Delapouite / <a href="https://game-icons.net/" target="_blank" rel="noopener noreferrer">Game-icons.net</a>. <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>. Fundo removido.</p>
       </section>
 
       <section className="protection shell" aria-labelledby="protection-heading">

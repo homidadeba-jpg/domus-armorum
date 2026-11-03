@@ -1,0 +1,26 @@
+[
+  {
+    "file": "armas-6d3441cf.svg",
+    "author": "John Colburn",
+    "source": "https://raw.githubusercontent.com/game-icons/icons/master/john-colburn/pistol-gun.svg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "change": "Removed background path; original illustration paths preserved."
+  },
+  {
+    "file": "municoes-6dfddd59.svg",
+    "author": "Lorc",
+    "source": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/bullets.svg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "change": "Removed background path; original illustration paths preserved."
+  },
+  {
+    "file": "equipamentos-c7a24c55.svg",
+    "author": "Delapouite",
+    "source": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/backpack.svg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "change": "Removed background path; original illustration paths preserved."
+  }
+]

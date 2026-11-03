@@ -4,6 +4,8 @@ Site institucional em português feito com React, Vite e GSAP ScrollTrigger. Apr
 
 A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. As fotografias editoriais de proteção e organização não representam estoque ou marcas comercializadas pela empresa. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
 
+As três áreas de atuação possuem símbolos vetoriais ilustrativos, sem identificação de modelos, marcas, preços ou disponibilidade. Icons made by John Colburn (pistol-gun), Lorc (bullets) and Delapouite (backpack), disponibilizados por [Game-icons.net](https://game-icons.net/) sob CC BY 3.0. Somente o fundo dos SVGs foi removido. Os desenhos originais foram preservados; não foram usadas imagens geradas. A licença e as fontes exatas estão em `public/illustrations/LICENSE.txt` e `public/illustrations/attribution.json`.
+
 ## Desenvolvimento
 
 ```sh
