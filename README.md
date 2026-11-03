@@ -47,3 +47,7 @@ O teste usa Playwright para desktop/celular, temas, menu, rolagem, imagens, feed
 ## Prévia de compartilhamento
 
 Capa própria com emblema original e tipografia do site, em JPEG 1200 × 630. Open Graph e Twitter Card são entregues no HTML inicial, com URL absoluta de produção e nome de arquivo versionado por conteúdo. Para gerar novamente: `node scripts/prepare-social.mjs`. A exibição e a atualização de prévias já armazenadas dependem do aplicativo de compartilhamento.
+
+## Idiomas
+
+Português (padrão), inglês e espanhol, com seletor nativo discreto ao lado do tema. Textos, rótulos acessíveis, descrições das imagens, título da página e feedback do WhatsApp estão traduzidos. A escolha fica salva no navegador; `?lang=en` e `?lang=es` permitem abrir um idioma diretamente, preservando os demais parâmetros do link. A troca atualiza o ScrollTrigger sem reiniciar as animações. A mensagem geral do WhatsApp acompanha o idioma; razão social, CNPJ, contatos e nome Jonas Jr. são preservados. As prévias sociais no HTML inicial continuam em português.
