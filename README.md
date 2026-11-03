@@ -2,7 +2,7 @@
 
 Site institucional em português feito com React, Vite e GSAP ScrollTrigger. Apresenta a história, a identidade e as informações institucionais da empresa. Não possui catálogo, preços, pedidos ou fluxo de compra.
 
-A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. A fotografia de armas aparece como transição após a história, a fotografia de munições acompanha as áreas de atuação e a seção de proteção exibe somente a fotografia original dos óculos. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
+A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. A fotografia de armas integra o bloco da história, e a fotografia de munições acompanha as áreas de atuação. As fotos entram com deslocamento e zoom vinculados ao scroll, reversíveis na subida. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
 
 As três áreas de atuação mantêm os símbolos vetoriais aprovados. Icons made by John Colburn (pistol-gun), Lorc (bullets) and Delapouite (backpack), disponibilizados por [Game-icons.net](https://game-icons.net/) sob CC BY 3.0. Os desenhos originais foram preservados. As atribuições acompanham os próprios arquivos SVG, o `public/illustrations/NOTICE.txt`, a licença e o manifesto de fontes. Não há rodapés de fontes no layout. Não foram usadas imagens geradas.
 
