@@ -132,7 +132,7 @@ function App() {
         <div className="values-list">
           <article data-reveal><Crosshair size={32} weight="light" aria-hidden="true" /><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
           <article data-reveal><Stack size={32} weight="light" aria-hidden="true" /><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
-          <article data-reveal><Backpack size={32} weight="light" aria-hidden="true" /><div><h3>Acessórios táticos</h3><p>A empresa também apresenta acessórios táticos entre suas áreas de atuação.</p></div></article>
+          <article data-reveal><Backpack size={32} weight="light" aria-hidden="true" /><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
         </div>
       </section>
 
@@ -146,19 +146,15 @@ function App() {
       </section>
 
       <section className="equipment shell" aria-labelledby="equipment-heading">
-        <div className="equipment-intro"><h2 id="equipment-heading" data-reveal>PROTEÇÃO, VESTUÁRIO<br />E ORGANIZAÇÃO.</h2><p data-reveal>Conheça exemplos de itens presentes no universo dos acessórios táticos e da proteção individual.</p></div>
+        <div className="equipment-intro"><h2 id="equipment-heading" data-reveal>EQUIPAMENTOS<br />TÁTICOS.</h2><p data-reveal>Proteção e organização fazem parte desse universo. As fotos abaixo ilustram esses temas.</p></div>
         <div className="equipment-grid">
           <article className="equipment-feature equipment-backpack" data-reveal>
             <figure><div className="photo-frame" data-photo><img src="/brand/mochila-ce86cdc5.webp" alt="Mochila tática preta com bolsos e compartimentos, fotografada em uma trilha" width="1400" height="933" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Tactical_backpack_at_Lower_Falls_Trail.jpg" target="_blank" rel="noopener noreferrer">~riley / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
-            <h3>Mochilas e organização</h3><p>Bolsos e compartimentos permitem organizar pertences pessoais, vestuário e itens de proteção para atividades ao ar livre.</p>
+            <h3>Mochilas e organização</h3><p>Bolsos e compartimentos permitem organizar pertences pessoais e itens de proteção para atividades ao ar livre.</p>
           </article>
           <article className="equipment-feature equipment-glasses" data-reveal>
             <figure><div className="photo-frame" data-photo><img src="/brand/protecao-visual-c98e433f.webp" alt="Óculos de proteção reais com lentes transparentes e armação preta" width="1024" height="712" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg" target="_blank" rel="noopener noreferrer">WorkWare / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
             <h3>Proteção visual</h3><p>Óculos de proteção compõem a proteção individual. O modelo e a especificação devem corresponder à atividade praticada.</p>
-          </article>
-          <article className="equipment-feature equipment-clothing" data-reveal>
-            <figure><div className="photo-frame" data-photo><img src="/brand/vestuario-1e3d787d.webp" alt="Calça cargo verde com bolsos laterais, fotografada em um cabide" width="1280" height="1927" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Cargo_pants_001.jpg" target="_blank" rel="noopener noreferrer">Ocdp / Wikimedia Commons</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>. Redimensionada em WebP.</figcaption></figure>
-            <h3>Vestuário funcional</h3><p>Calças cargo e peças com bolsos utilitários fazem parte desse universo. Conforto e liberdade de movimento orientam seu uso.</p>
           </article>
         </div>
         <p className="equipment-note">Fotografias ilustrativas dos temas apresentados.</p>
