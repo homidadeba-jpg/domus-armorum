@@ -130,8 +130,12 @@ function App() {
         </div>
       </section>
 
+      <figure className="brand-scene shell" aria-label="Imagem ilustrativa do segmento de armas e equipamentos">
+        <div className="photo-frame" data-photo data-reveal><img src="/brand/armas-contexto-a29f18f3.webp" alt="Armas e equipamentos de proteção dispostos sobre uma bancada em um estande" width="1600" height="1067" loading="lazy" /></div>
+      </figure>
+
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
-        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
+        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p><figure className="activity-photo" data-reveal><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt="Munições fotografadas em close sobre uma superfície escura" width="1600" height="1067" loading="lazy" /></div></figure></div>
         <div className="values-list activity-list">
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
@@ -139,12 +143,9 @@ function App() {
         </div>
       </section>
 
-      <section className="protection shell" aria-labelledby="protection-heading">
+      <section className="protection protection-layout shell" aria-labelledby="protection-heading">
         <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
-        <div className="institutional-photo-grid">
-          <figure className="protection-photo" data-reveal><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt="Fotografia ilustrativa de armas e equipamentos de proteção sobre uma bancada em um estande" width="1600" height="1067" loading="lazy" /></div></figure>
-          <figure className="protection-photo" data-reveal><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt="Fotografia ilustrativa de munições em close sobre uma superfície escura" width="1600" height="1067" loading="lazy" /></div></figure>
-        </div>
+        <figure className="protection-glasses" data-reveal><div className="photo-frame" data-photo><img src="/brand/protecao-oculos-bc09adc4.webp" alt="Óculos de proteção com lentes transparentes e armação preta" width="1024" height="712" loading="lazy" /></div></figure>
       </section>
 
       <section className="contact shell" id="contato">
