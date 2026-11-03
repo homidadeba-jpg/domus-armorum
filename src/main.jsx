@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, MapPin, ShieldCheck, Handshake, Fingerprint } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, Crosshair, Stack, Backpack, Fingerprint } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -11,7 +11,7 @@ import '@fontsource/manrope/600.css';
 import './styles.css';
 
 gsap.registerPlugin(ScrollTrigger);
-const COMPANY = { whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/' };
+const COMPANY = { whatsapp: `https://wa.me/5545999794330?text=${encodeURIComponent('Olá, vim pelo site.')}`, instagram: 'https://www.instagram.com/domus.armorum/' };
 
 function WhatsAppLink({ children, className = '', author = false, floating = false }) {
   const [opening, setOpening] = useState(false);
@@ -65,6 +65,9 @@ function App() {
         gsap.utils.toArray('.manifesto-line').forEach(el => {
           gsap.fromTo(el, { opacity: 0.25, x: 20 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 85%)', end: 'clamp(top 48%)', scrub: 0.5 } });
         });
+        gsap.utils.toArray('[data-photo]').forEach(frame => {
+          gsap.fromTo(frame.querySelector('img'), { scale: 1.045 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 90%)', end: 'clamp(top 28%)', scrub: 0.7 } });
+        });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
       return () => context.revert();
@@ -82,6 +85,7 @@ function App() {
         <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label="Navegação principal">
           <a href="#essencia" onClick={() => setMenu(false)}>Nossa essência</a>
           <a href="#historia" onClick={() => setMenu(false)}>A Domus</a>
+          <a href="#atuacao" onClick={() => setMenu(false)}>Atuação</a>
           <a href="#contato" onClick={() => setMenu(false)}>Informações <ArrowUpRight size={15} /></a>
         </nav>
         <div className="header-actions">
@@ -123,22 +127,41 @@ function App() {
         </div>
       </section>
 
+      <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
+        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
+        <div className="values-list">
+          <article data-reveal><Crosshair size={32} weight="light" aria-hidden="true" /><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
+          <article data-reveal><Stack size={32} weight="light" aria-hidden="true" /><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
+          <article data-reveal><Backpack size={32} weight="light" aria-hidden="true" /><div><h3>Acessórios táticos</h3><p>A empresa também apresenta acessórios táticos entre suas áreas de atuação.</p></div></article>
+        </div>
+      </section>
+
       <section className="protection shell" aria-labelledby="protection-heading">
         <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
         <figure className="protection-photo" data-reveal>
-          <img src="/brand/protecao-auditiva-83d4539f.webp" alt="Fotografia real de diferentes protetores auditivos tipo concha Peltor sobre uma prateleira" width="1600" height="675" loading="lazy" />
+          <div className="photo-frame" data-photo><img src="/brand/protecao-auditiva-83d4539f.webp" alt="Fotografia real de diferentes protetores auditivos tipo concha Peltor sobre uma prateleira" width="1600" height="675" loading="lazy" /></div>
           <figcaption><span>Proteção auditiva: exemplos de equipamentos.</span><span>Foto: <a href="https://commons.wikimedia.org/wiki/File:Peltor_earmuffs.jpg" target="_blank" rel="noopener noreferrer">JiriMatejicek / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</span></figcaption>
         </figure>
         <a className="safety-source" href="https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/" target="_blank" rel="noopener noreferrer">Informações sobre proteção dos olhos e ouvidos <ArrowUpRight size={15} /></a>
       </section>
 
-      <section className="values shell" aria-labelledby="values-heading">
-        <div className="values-intro"><h2 id="values-heading" data-reveal>O QUE NOS<br />REPRESENTA.</h2><p data-reveal>Mais do que um nome, uma forma de estar presente.</p></div>
-        <div className="values-list">
-          <article data-reveal><Handshake size={29} weight="light" /><div><h3>Proximidade</h3><p>Atendimento personalizado, com espaço para ouvir e conversar.</p></div></article>
-          <article data-reveal><ShieldCheck size={29} weight="light" /><div><h3>Compromisso</h3><p>Atenção aos detalhes e respeito em cada atendimento.</p></div></article>
-          <article data-reveal><Fingerprint size={29} weight="light" /><div><h3>Identidade</h3><p>Uma marca própria, reconhecível em cada detalhe.</p></div></article>
+      <section className="equipment shell" aria-labelledby="equipment-heading">
+        <div className="equipment-intro"><h2 id="equipment-heading" data-reveal>PROTEÇÃO, VESTUÁRIO<br />E ORGANIZAÇÃO.</h2><p data-reveal>Conheça exemplos de itens presentes no universo dos acessórios táticos e da proteção individual.</p></div>
+        <div className="equipment-grid">
+          <article className="equipment-feature equipment-backpack" data-reveal>
+            <figure><div className="photo-frame" data-photo><img src="/brand/mochila-ce86cdc5.webp" alt="Mochila tática preta com bolsos e compartimentos, fotografada em uma trilha" width="1400" height="933" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Tactical_backpack_at_Lower_Falls_Trail.jpg" target="_blank" rel="noopener noreferrer">~riley / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
+            <h3>Mochilas e organização</h3><p>Bolsos e compartimentos permitem organizar pertences pessoais, vestuário e itens de proteção para atividades ao ar livre.</p>
+          </article>
+          <article className="equipment-feature equipment-glasses" data-reveal>
+            <figure><div className="photo-frame" data-photo><img src="/brand/protecao-visual-c98e433f.webp" alt="Óculos de proteção reais com lentes transparentes e armação preta" width="1024" height="712" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg" target="_blank" rel="noopener noreferrer">WorkWare / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
+            <h3>Proteção visual</h3><p>Óculos de proteção compõem a proteção individual. O modelo e a especificação devem corresponder à atividade praticada.</p>
+          </article>
+          <article className="equipment-feature equipment-clothing" data-reveal>
+            <figure><div className="photo-frame" data-photo><img src="/brand/vestuario-1e3d787d.webp" alt="Calça cargo verde com bolsos laterais, fotografada em um cabide" width="1280" height="1927" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Cargo_pants_001.jpg" target="_blank" rel="noopener noreferrer">Ocdp / Wikimedia Commons</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>. Redimensionada em WebP.</figcaption></figure>
+            <h3>Vestuário funcional</h3><p>Calças cargo e peças com bolsos utilitários fazem parte desse universo. Conforto e liberdade de movimento orientam seu uso.</p>
+          </article>
         </div>
+        <p className="equipment-note">Fotografias ilustrativas dos temas apresentados.</p>
       </section>
 
       <section className="contact shell" id="contato">

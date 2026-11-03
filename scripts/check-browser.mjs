@@ -40,7 +40,9 @@ try {
     await page.screenshot({ path: `artifacts/${viewport.width}-light.png`, fullPage: true });
     await page.locator('.floating-whatsapp').evaluate(el => el.addEventListener('click', event => event.preventDefault()));
     await page.locator('.floating-whatsapp').click();
-    assert.equal(await page.locator('.floating-whatsapp').getAttribute('href'), 'https://wa.me/5545999794330');
+    const whatsappUrl = new URL(await page.locator('.floating-whatsapp').getAttribute('href'));
+    assert.equal(whatsappUrl.pathname, '/5545999794330');
+    assert.equal(whatsappUrl.searchParams.get('text'), 'Olá, vim pelo site.');
     assert.equal(await page.locator('.floating-whatsapp').getAttribute('class').then(v => v.includes('is-opening')), true);
     await page.evaluate(() => window.dispatchEvent(new Event('pageshow')));
     assert.equal(await page.locator('.floating-whatsapp').getAttribute('class').then(v => v.includes('is-opening')), false);
