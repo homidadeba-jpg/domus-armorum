@@ -16,7 +16,9 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 
 ## Conteúdo e imagens
 
-- Logo original e fotografia do emblema: materiais enviados pelo responsável no chat em 03/11/2026. A foto é um recorte da publicação visível no print do Instagram. Sua resolução de origem é limitada; não foi usada fotografia genérica nem imagem gerada.
+- Logo original: material enviado pelo responsável no chat em 03/11/2026. O recorte desfocado do print foi retirado da página e da pasta pública.
+- Fotografia real de protetores auditivos: JiriMatejicek, [Peltor earmuffs](https://commons.wikimedia.org/wiki/File:Peltor_earmuffs.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Redimensionada em WebP, sem geração de imagem. A versão otimizada permanece sob a mesma licença. É uma imagem editorial de equipamentos de proteção, sem indicação de estoque, representação da loja ou parceria comercial.
+- Texto educativo sobre proteção dos olhos e ouvidos: [NSSF](https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/).
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
 - Instagram: https://www.instagram.com/domus.armorum/
 - WhatsApp completo extraído do link no print: https://wa.me/5545999794330. O número digitado no chat, `(45) 9979-4330`, possui um dígito a menos; a confirmação foi solicitada.

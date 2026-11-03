@@ -65,7 +65,6 @@ function App() {
         gsap.utils.toArray('.manifesto-line').forEach(el => {
           gsap.fromTo(el, { opacity: 0.25, x: 20 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 85%)', end: 'clamp(top 48%)', scrub: 0.5 } });
         });
-        gsap.fromTo('.brand-photo img', { yPercent: -6, scale: 1.12 }, { yPercent: 6, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.brand-photo', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
         gsap.to('.footer-wordmark', { xPercent: -5, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
@@ -117,13 +116,22 @@ function App() {
       </section>
 
       <section className="story shell" id="historia">
-        <figure className="brand-photo"><img src="/brand/marca-no-espaco.webp" alt="Emblema da Domus Armorum aplicado sobre um painel de madeira, conforme registro da própria marca" width="384" height="512" loading="lazy" /><figcaption>A identidade Domus, presente nos detalhes.</figcaption></figure>
+        <figure className="brand-photo brand-original"><img src="/brand/domus-original.webp" alt="Logo original da Domus Armorum" width="680" height="980" loading="lazy" /><figcaption>A identidade Domus, presente nos detalhes.</figcaption></figure>
         <div className="story-copy">
           <div className="section-overflow"><h2 data-reveal>UMA HISTÓRIA.<br />NOSSA ASSINATURA.</h2></div>
           <p data-reveal>Fundada em setembro de 2017, a Domus Armorum nasceu em Cascavel, no oeste do Paraná.</p>
           <p className="muted" data-reveal>O nome, o emblema e a maneira de atender fazem parte da mesma identidade. Uma marca que valoriza o contato próximo e o atendimento especializado.</p>
           <div className="story-facts" data-reveal><div><span>2017</span><p>O início da nossa história</p></div><div><MapPin size={26} weight="light" /><p>Cascavel, Paraná</p></div></div>
         </div>
+      </section>
+
+      <section className="protection shell" aria-labelledby="protection-heading">
+        <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
+        <figure className="protection-photo" data-reveal>
+          <img src="/brand/protecao-auditiva-83d4539f.webp" alt="Fotografia real de diferentes protetores auditivos tipo concha Peltor sobre uma prateleira" width="1600" height="675" loading="lazy" />
+          <figcaption><span>Proteção auditiva: exemplos de equipamentos.</span><span>Foto: <a href="https://commons.wikimedia.org/wiki/File:Peltor_earmuffs.jpg" target="_blank" rel="noopener noreferrer">JiriMatejicek / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</span></figcaption>
+        </figure>
+        <a className="safety-source" href="https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/" target="_blank" rel="noopener noreferrer">Informações sobre proteção dos olhos e ouvidos <ArrowUpRight size={15} /></a>
       </section>
 
       <section className="values shell" aria-labelledby="values-heading">
