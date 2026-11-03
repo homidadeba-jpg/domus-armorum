@@ -13,6 +13,12 @@ import './styles.css';
 gsap.registerPlugin(ScrollTrigger);
 const COMPANY = { whatsapp: `https://wa.me/5545999794330?text=${encodeURIComponent('Olá, vim pelo site.')}`, instagram: 'https://www.instagram.com/domus.armorum/' };
 
+function SegmentAccent({ sight = false }) {
+  return <svg className={`segment-accent ${sight ? 'segment-accent--sight' : ''}`} data-accent viewBox="0 0 88 56" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    {sight ? <><circle cx="44" cy="28" r="17" /><circle cx="44" cy="28" r="5" /><path d="M44 3v14m0 22v14M19 28h14m22 0h14M4 9h9M75 47h9" /></> : <><path d="M25 43V22l4-5v-5l3-7 3 7v5l4 5v21zm-2 0h18v5H23zM49 43V27l4-5v-5l3-7 3 7v5l4 5v16zm-2 0h18v5H47zM25 25h14M49 30h14M8 37h7m58-17h7" /></>}
+  </svg>;
+}
+
 function WhatsAppLink({ children, className = '', author = false, floating = false }) {
   const [opening, setOpening] = useState(false);
   const timer = useRef();
@@ -75,6 +81,9 @@ function App() {
         gsap.utils.toArray('.activity-illustration').forEach(frame => {
           gsap.fromTo(frame.querySelector('img'), { y: 8, scale: 0.95 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', end: 'clamp(top 48%)', scrub: 0.65 } });
         });
+        gsap.utils.toArray('[data-accent]').forEach(accent => {
+          gsap.fromTo(accent, { y: 9, rotation: -4 }, { y: -7, rotation: 3, ease: 'none', scrollTrigger: { trigger: accent.closest('section'), start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+        });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
       return () => context.revert();
@@ -117,6 +126,7 @@ function App() {
           <img className="hero-emblem" src="/brand/domus-original.webp" alt="Emblema Domus Armorum com espada e ramos" width="680" height="980" fetchPriority="high" />
           <span className="art-caption">UMA MARCA. UMA IDENTIDADE.</span>
         </div>
+        <div className="ambient-mark ambient-mark--sight" aria-hidden="true"><SegmentAccent sight /></div>
       </section>
 
       <section className="manifesto shell" id="essencia">
@@ -139,17 +149,20 @@ function App() {
       </section>
 
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
-        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
+        <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Armas, munições e equipamentos e acessórios táticos formam as três frentes de atuação da Domus Armorum. Conheça o papel de cada uma nesse segmento.</p></div>
         <div className="values-list activity-list">
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-9528d30f.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas de fogo integra a atuação da Domus Armorum e está presente na identidade da empresa desde o seu nome.</p><p>O segmento reúne armas curtas e longas, categorias com diferentes projetos e características de construção.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>As munições também fazem parte da atuação da empresa. São os cartuchos utilizados pelas armas de fogo, com identificações e características próprias.</p><p>Calibre e tipo de cartucho fazem parte da descrição desse segmento. Armas e munições são categorias distintas, embora relacionadas.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-9528d30f.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos e acessórios táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação da Domus Armorum.</p><p>Esse universo inclui itens de organização, transporte e apoio. Materiais, compartimentos e formas de acondicionamento fazem parte da função de cada equipamento.</p></div></article>
         </div>
+        <div className="ambient-mark ambient-mark--cartridges" aria-hidden="true"><SegmentAccent /></div>
       </section>
 
-      <section className="protection protection-layout shell" aria-labelledby="protection-heading">
-        <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
-        <figure className="protection-glasses photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt="Composição de equipamentos táticos com mochila, luvas, óculos e acessórios" width="1000" height="1503" loading="lazy" /></div></figure>
+      <section className="company-profile company-layout shell" aria-labelledby="company-heading">
+        <div className="company-intro"><p className="eyebrow" data-reveal>A DOMUS ARMORUM</p><h2 id="company-heading" data-reveal>ATENDIMENTO<br />ESPECIALIZADO.</h2><p data-reveal>Uma empresa de Cascavel com atuação em armas, munições e equipamentos e acessórios táticos. O contato próximo e a atenção a cada pessoa fazem parte da identidade da marca.</p><p data-reveal>Desde 2017, a Domus Armorum valoriza o atendimento personalizado. Sua origem e sua maneira de atender fazem parte da mesma história.</p>
+          <dl className="company-facts" data-reveal><div><dt>Razão social</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>CNPJ</dt><dd>28.698.049/0001-89</dd></div><div><dt>Fundação</dt><dd>21 de setembro de 2017</dd></div><div><dt>Cidade</dt><dd>Cascavel, Paraná</dd></div></dl>
+        </div>
+        <figure className="tactical-photo photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt="Composição de equipamentos táticos com mochila, luvas, óculos e acessórios" width="1000" height="1503" loading="lazy" /></div></figure>
       </section>
 
       <section className="contact shell" id="contato">
