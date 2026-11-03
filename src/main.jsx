@@ -60,7 +60,7 @@ function App() {
         gsap.from('.hero-enter', { y: 30, opacity: 0, stagger: 0.11, duration: 0.9, ease: 'power3.out', clearProps: 'all' });
         gsap.to('.hero-emblem', { yPercent: 14, rotation: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
         gsap.utils.toArray('[data-reveal]').forEach(el => {
-          gsap.fromTo(el, { y: 48 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 94%)', end: 'clamp(top 52%)', scrub: 0.65 } });
+          gsap.fromTo(el, { y: 18 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 94%)', end: 'clamp(top 52%)', scrub: 0.65 } });
         });
         gsap.utils.toArray('.manifesto-line').forEach(el => {
           gsap.fromTo(el, { opacity: 0.25, x: 20 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 85%)', end: 'clamp(top 48%)', scrub: 0.5 } });
