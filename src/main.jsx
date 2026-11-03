@@ -133,35 +133,18 @@ function App() {
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
         <div className="values-intro"><h2 id="activities-heading" data-reveal>O QUE A<br />DOMUS FAZ.</h2><p data-reveal>Conheça as áreas de atuação da Domus Armorum, empresa de Cascavel presente no segmento desde 2017.</p></div>
         <div className="values-list activity-list">
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-6d3441cf.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-6dfddd59.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-c7a24c55.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt="Ilustração simbólica de uma arma de fogo" width="160" height="160" loading="lazy" /></div><div><h3>Armas</h3><p>O comércio varejista de armas integra a atividade empresarial da Domus Armorum.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>O segmento de munições também faz parte do ramo de atuação da empresa.</p></div></article>
+          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-9528d30f.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação informadas pela Domus Armorum.</p></div></article>
         </div>
-        <p className="activity-credit">Ilustrações de John Colburn, Lorc e Delapouite / <a href="https://game-icons.net/" target="_blank" rel="noopener noreferrer">Game-icons.net</a>. <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>. Fundo removido.</p>
       </section>
 
       <section className="protection shell" aria-labelledby="protection-heading">
         <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
-        <figure className="protection-photo" data-reveal>
-          <div className="photo-frame" data-photo><img src="/brand/protecao-auditiva-83d4539f.webp" alt="Fotografia real de diferentes protetores auditivos tipo concha Peltor sobre uma prateleira" width="1600" height="675" loading="lazy" /></div>
-          <figcaption><span>Proteção auditiva: exemplos de equipamentos.</span><span>Foto: <a href="https://commons.wikimedia.org/wiki/File:Peltor_earmuffs.jpg" target="_blank" rel="noopener noreferrer">JiriMatejicek / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</span></figcaption>
-        </figure>
-        <a className="safety-source" href="https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/" target="_blank" rel="noopener noreferrer">Informações sobre proteção dos olhos e ouvidos <ArrowUpRight size={15} /></a>
-      </section>
-
-      <section className="equipment shell" aria-labelledby="equipment-heading">
-        <div className="equipment-intro"><h2 id="equipment-heading" data-reveal>EQUIPAMENTOS<br />TÁTICOS.</h2><p data-reveal>Proteção e organização fazem parte desse universo. As fotos abaixo ilustram esses temas.</p></div>
-        <div className="equipment-grid">
-          <article className="equipment-feature equipment-backpack" data-reveal>
-            <figure><div className="photo-frame" data-photo><img src="/brand/mochila-ce86cdc5.webp" alt="Mochila tática preta com bolsos e compartimentos, fotografada em uma trilha" width="1400" height="933" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Tactical_backpack_at_Lower_Falls_Trail.jpg" target="_blank" rel="noopener noreferrer">~riley / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
-            <h3>Mochilas e organização</h3><p>Bolsos e compartimentos permitem organizar pertences pessoais e itens de proteção para atividades ao ar livre.</p>
-          </article>
-          <article className="equipment-feature equipment-glasses" data-reveal>
-            <figure><div className="photo-frame" data-photo><img src="/brand/protecao-visual-c98e433f.webp" alt="Óculos de proteção reais com lentes transparentes e armação preta" width="1024" height="712" loading="lazy" /></div><figcaption>Foto: <a href="https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg" target="_blank" rel="noopener noreferrer">WorkWare / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Redimensionada em WebP.</figcaption></figure>
-            <h3>Proteção visual</h3><p>Óculos de proteção compõem a proteção individual. O modelo e a especificação devem corresponder à atividade praticada.</p>
-          </article>
+        <div className="institutional-photo-grid">
+          <figure className="protection-photo" data-reveal><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt="Fotografia ilustrativa de armas e equipamentos de proteção sobre uma bancada em um estande" width="1600" height="1067" loading="lazy" /></div></figure>
+          <figure className="protection-photo" data-reveal><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt="Fotografia ilustrativa de munições em close sobre uma superfície escura" width="1600" height="1067" loading="lazy" /></div></figure>
         </div>
-        <p className="equipment-note">Fotografias ilustrativas dos temas apresentados.</p>
       </section>
 
       <section className="contact shell" id="contato">

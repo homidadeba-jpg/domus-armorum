@@ -2,9 +2,9 @@
 
 Site institucional em português feito com React, Vite e GSAP ScrollTrigger. Apresenta a história, a identidade e as informações institucionais da empresa. Não possui catálogo, preços, pedidos ou fluxo de compra.
 
-A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. As fotografias editoriais de proteção e organização não representam estoque ou marcas comercializadas pela empresa. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
+A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. Duas fotos reais contextualizam armas e munições, sem identificação comercial de modelos, preços ou disponibilidade. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
 
-As três áreas de atuação possuem símbolos vetoriais ilustrativos, sem identificação de modelos, marcas, preços ou disponibilidade. Icons made by John Colburn (pistol-gun), Lorc (bullets) and Delapouite (backpack), disponibilizados por [Game-icons.net](https://game-icons.net/) sob CC BY 3.0. Somente o fundo dos SVGs foi removido. Os desenhos originais foram preservados; não foram usadas imagens geradas. A licença e as fontes exatas estão em `public/illustrations/LICENSE.txt` e `public/illustrations/attribution.json`.
+As três áreas de atuação mantêm os símbolos vetoriais aprovados. Icons made by John Colburn (pistol-gun), Lorc (bullets) and Delapouite (backpack), disponibilizados por [Game-icons.net](https://game-icons.net/) sob CC BY 3.0. Os desenhos originais foram preservados. As atribuições acompanham os próprios arquivos SVG, o `public/illustrations/NOTICE.txt`, a licença e o manifesto de fontes. Não há rodapés de fontes no layout. Não foram usadas imagens geradas.
 
 ## Desenvolvimento
 
@@ -21,10 +21,10 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 ## Conteúdo e imagens
 
 - Logo original: material enviado pelo responsável no chat em 03/11/2026. O recorte desfocado do print foi retirado da página e da pasta pública.
-- Fotografia real de protetores auditivos: JiriMatejicek, [Peltor earmuffs](https://commons.wikimedia.org/wiki/File:Peltor_earmuffs.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Redimensionada em WebP, sem geração de imagem. A versão otimizada permanece sob a mesma licença. É uma imagem editorial de equipamentos de proteção, sem indicação de estoque, representação da loja ou parceria comercial.
+- Foto de armas e equipamentos em uma bancada: [Kaboompics / Pexels, 5202438](https://www.pexels.com/photo/weapons-on-a-table-5202438/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
+- Foto de munições: [Pexels, 6091294](https://www.pexels.com/photo/a-row-of-bullets-6091294/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
+- As fotos são ilustrativas e não representam a estrutura, o estoque ou a equipe da empresa. As imagens genéricas anteriores foram retiradas da página e da pasta pública.
 - Texto educativo sobre proteção dos olhos e ouvidos: [NSSF](https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/).
-- Óculos de proteção: WorkWare, [Eyes Safety Glasses](https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg), CC BY-SA 4.0. Redimensionada em WebP, sob a mesma licença.
-- Mochila: ~riley, [Tactical backpack at Lower Falls Trail](https://commons.wikimedia.org/wiki/File:Tactical_backpack_at_Lower_Falls_Trail.jpg), CC BY-SA 4.0. Redimensionada em WebP, sob a mesma licença.
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
 - Instagram: https://www.instagram.com/domus.armorum/
 - WhatsApp completo extraído do link no print: https://wa.me/5545999794330. O número digitado no chat, `(45) 9979-4330`, possui um dígito a menos; a confirmação foi solicitada.

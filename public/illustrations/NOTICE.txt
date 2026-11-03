@@ -1,0 +1,17 @@
+Icons made by John Colburn
+File: armas-a3d0cf4c.svg
+Source: https://raw.githubusercontent.com/game-icons/icons/master/john-colburn/pistol-gun.svg
+License: CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
+Changes: Removed background path; attribution preserved inside the SVG and accompanying notices.
+
+Icons made by Lorc
+File: municoes-692b7d30.svg
+Source: https://raw.githubusercontent.com/game-icons/icons/master/lorc/bullets.svg
+License: CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
+Changes: Removed background path; attribution preserved inside the SVG and accompanying notices.
+
+Icons made by Delapouite
+File: equipamentos-9528d30f.svg
+Source: https://raw.githubusercontent.com/game-icons/icons/master/delapouite/backpack.svg
+License: CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
+Changes: Removed background path; attribution preserved inside the SVG and accompanying notices.
