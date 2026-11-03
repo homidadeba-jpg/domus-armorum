@@ -16,6 +16,7 @@ try {
     assert.equal(await page.locator('h1').count(), 1);
     assert.match(await page.locator('h1').innerText(), /DOMUS/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'Horizontal overflow');
+    await page.locator('img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
     assert.equal(await page.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0)), true, 'Missing images');
     await page.screenshot({ path: `artifacts/${viewport.width}-dark.png`, fullPage: true });
     if (viewport.width < 768) {
