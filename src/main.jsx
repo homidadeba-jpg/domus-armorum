@@ -145,7 +145,7 @@ function App() {
 
       <section className="protection protection-layout shell" aria-labelledby="protection-heading">
         <div className="protection-intro"><h2 id="protection-heading" data-reveal>PROTEÇÃO FAZ<br />PARTE DO ESPORTE.</h2><p data-reveal>Óculos de proteção e protetores auditivos fazem parte da proteção individual no tiro esportivo. Siga as orientações do local e de profissionais habilitados.</p></div>
-        <figure className="protection-glasses photo-scene"><div className="photo-frame" data-photo><img src="/brand/protecao-oculos-bc09adc4.webp" alt="Óculos de proteção com lentes transparentes e armação preta" width="1024" height="712" loading="lazy" /></div></figure>
+        <figure className="protection-glasses photo-scene"><div className="photo-frame" data-photo><img src="/brand/protecao-equipamentos-f03492ba.webp" alt="Óculos de proteção e protetor auditivo juntos sobre uma bancada de madeira" width="1400" height="1050" loading="lazy" /></div></figure>
       </section>
 
       <section className="contact shell" id="contato">

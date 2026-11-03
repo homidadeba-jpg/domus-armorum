@@ -1,6 +1,6 @@
-Photo: Eyes Safety Glasses
-Creator: WorkWare
-Source: https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg
-License: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
-Changes: resized and converted to WebP; attribution also embedded in image metadata.
-The adapted photograph is distributed under the same CC BY-SA 4.0 license.
+Photo: Protective headphones and glasses for carpentry in workshop
+Creator: Ono Kosuki
+Source: https://www.pexels.com/photo/protective-headphones-and-glasses-for-carpentry-in-workshop-5974014/
+License: Pexels https://www.pexels.com/license/
+Changes: cropped to emphasize the protective eyewear and earmuffs, resized and converted to WebP.
+Illustrative photograph; does not represent the company premises or inventory.

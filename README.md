@@ -23,7 +23,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - Logo original: material enviado pelo responsável no chat em 03/11/2026. O recorte desfocado do print foi retirado da página e da pasta pública.
 - Foto de armas e equipamentos em uma bancada: [Kaboompics / Pexels, 5202438](https://www.pexels.com/photo/weapons-on-a-table-5202438/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
 - Foto de munições: [Pexels, 6091294](https://www.pexels.com/photo/a-row-of-bullets-6091294/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
-- Foto original dos óculos de proteção: WorkWare, [Eyes Safety Glasses](https://commons.wikimedia.org/wiki/File:Eyes_Safety_Glasses.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Redimensionada em WebP e mantida sob a mesma licença; atribuição e origem acompanham os metadados da própria imagem e `public/brand/NOTICE.txt`. Sem crédito visível no layout.
+- Foto de óculos e protetor auditivo na bancada: Ono Kosuki / [Pexels, 5974014](https://www.pexels.com/photo/protective-headphones-and-glasses-for-carpentry-in-workshop-5974014/). Fotografia real com recorte para destacar os equipamentos, otimizada em WebP. Licença Pexels, sem obrigação de crédito visual. Substitui a foto isolada em fundo branco.
 - As fotos são ilustrativas e não representam a estrutura, o estoque ou a equipe da empresa.
 - Texto educativo sobre proteção dos olhos e ouvidos: [NSSF](https://www.nssf.org/articles/always-wear-eye-and-ear-protection-when-shooting/).
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
