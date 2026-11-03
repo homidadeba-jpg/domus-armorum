@@ -82,7 +82,9 @@ function App() {
           gsap.fromTo(frame.querySelector('img'), { y: 8, scale: 0.95 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', end: 'clamp(top 48%)', scrub: 0.65 } });
         });
         gsap.utils.toArray('[data-accent]').forEach(accent => {
-          gsap.fromTo(accent, { y: 9, rotation: -4 }, { y: -7, rotation: 3, ease: 'none', scrollTrigger: { trigger: accent.closest('section'), start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+          const depth = () => window.innerWidth < 768 ? 48 : 110;
+          const isSight = accent.classList.contains('segment-accent--sight');
+          gsap.fromTo(accent, { y: () => depth(), x: () => isSight ? -16 : 14, rotation: isSight ? -14 : 9 }, { y: () => -depth(), x: () => isSight ? 20 : -18, rotation: isSight ? 10 : -7, ease: 'none', scrollTrigger: { trigger: accent.closest('section'), start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: 1.1, invalidateOnRefresh: true } });
         });
         gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
       }, root);
@@ -126,7 +128,7 @@ function App() {
           <img className="hero-emblem" src="/brand/domus-original.webp" alt="Emblema Domus Armorum com espada e ramos" width="680" height="980" fetchPriority="high" />
           <span className="art-caption">UMA MARCA. UMA IDENTIDADE.</span>
         </div>
-        <div className="ambient-mark ambient-mark--sight" aria-hidden="true"><SegmentAccent sight /></div>
+        <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--sight"><SegmentAccent sight /></div></div>
       </section>
 
       <section className="manifesto shell" id="essencia">
@@ -155,7 +157,7 @@ function App() {
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt="Ilustração simbólica de munições" width="160" height="160" loading="lazy" /></div><div><h3>Munições</h3><p>As munições também fazem parte da atuação da empresa. São os cartuchos utilizados pelas armas de fogo, com identificações e características próprias.</p><p>Calibre e tipo de cartucho fazem parte da descrição desse segmento. Armas e munições são categorias distintas, embora relacionadas.</p></div></article>
           <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-9528d30f.svg" alt="Ilustração de uma mochila representando equipamentos táticos" width="160" height="160" loading="lazy" /></div><div><h3>Equipamentos e acessórios táticos</h3><p>Equipamentos e acessórios táticos completam as áreas de atuação da Domus Armorum.</p><p>Esse universo inclui itens de organização, transporte e apoio. Materiais, compartimentos e formas de acondicionamento fazem parte da função de cada equipamento.</p></div></article>
         </div>
-        <div className="ambient-mark ambient-mark--cartridges" aria-hidden="true"><SegmentAccent /></div>
+        <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--cartridges"><SegmentAccent /></div></div>
       </section>
 
       <section className="company-profile company-layout shell" aria-labelledby="company-heading">

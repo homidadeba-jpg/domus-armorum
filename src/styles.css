@@ -85,10 +85,11 @@
 .activities .values-list p+p{margin-top:12px}
 @media(max-width:767px){.company-profile h2{font-size:50px}.company-intro>p:not(.eyebrow){font-size:12px}.company-facts{gap:22px 18px}.company-facts dd{font-size:11px}}
 
-.hero,.activities{position:relative}
-.ambient-mark{position:absolute;pointer-events:none;user-select:none;color:var(--accent);opacity:.22}
-.ambient-mark--sight{right:0;bottom:14px}
-.ambient-mark--cartridges{left:24px;bottom:72px}
-.segment-accent{display:block;width:108px;height:68px;transform-origin:center}
-.segment-accent--sight{width:80px;height:51px}
-@media(max-width:767px){.ambient-mark--sight{right:4px;bottom:5px}.segment-accent--sight{width:54px;height:34px}.ambient-mark--cartridges{left:auto;right:0;bottom:7px}.ambient-mark--cartridges .segment-accent{width:66px;height:42px}}
+/* The oversized drawings live behind each section, clipped to its background. */
+.hero,.activities{position:relative;isolation:isolate}
+.ambient-field{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none;user-select:none}
+.ambient-mark{position:absolute;color:var(--accent);opacity:.11}
+.ambient-mark--sight{right:-110px;bottom:-65px;width:480px;height:306px;opacity:.13}
+.ambient-mark--cartridges{left:-75px;bottom:90px;width:420px;height:267px}
+.segment-accent{display:block;width:100%;height:100%;transform-origin:center}
+@media(max-width:767px){.ambient-mark--sight{right:-100px;bottom:-45px;width:300px;height:191px;opacity:.1}.ambient-mark--cartridges{left:auto;right:-110px;bottom:10px;width:260px;height:165px;opacity:.07}}
