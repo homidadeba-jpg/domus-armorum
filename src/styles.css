@@ -212,3 +212,12 @@
 .reading-cartridge>svg{display:block;width:100%;height:auto}
 .reading-exit{position:absolute;right:-4px;top:0;width:15px;height:20px;opacity:0}
 @media(max-width:767px){.reading-progress{height:18px;bottom:-9px}.reading-cartridge{width:58px;height:18px;transform:translateX(-59px)}.reading-exit{height:18px;width:13px;right:-3px}}
+
+/* Keep the navigation below system UI when the mobile browser chrome moves. */
+:root{--header-row-height:80px;--header-safe-top:env(safe-area-inset-top,0px);--header-height:calc(var(--header-row-height) + var(--header-safe-top) + 1px)}
+#root{padding-top:var(--header-height)}
+html{scroll-padding-top:calc(var(--header-height) + 24px)}
+header{position:fixed;inset:0 0 auto;padding-top:var(--header-safe-top);overflow:visible;isolation:isolate}
+header .header-inner{height:var(--header-row-height)}
+@media(max-width:980px){header .navigation{top:100%;max-height:calc(100dvh - var(--header-height));overflow-y:auto;overscroll-behavior:contain}}
+@media(max-width:767px){:root{--header-row-height:70px}}
