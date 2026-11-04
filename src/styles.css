@@ -132,7 +132,6 @@
 .activity-photo img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;filter:none}
 .activity-photo--equipment{max-width:370px;justify-self:center}
 .activity-photo--equipment img{aspect-ratio:1000/1503}
-.activity-index{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-bottom:19px}
 .activities .values-list h3{font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,3vw,43px);font-weight:500;line-height:1.08;max-width:470px}
 .activities .values-list p{font-size:14px;line-height:1.9;max-width:470px;margin-top:18px}
 .activities .values-list p+p{margin-top:13px}
@@ -167,7 +166,6 @@
  .activities .activity-list article{grid-template-columns:minmax(0,1fr);gap:25px;padding-block:32px;align-items:start}
  .activities .activity-list article:nth-child(2) .activity-photo,.activities .activity-list article:nth-child(2) .activity-copy{order:initial}
  .activity-photo--equipment{max-width:300px;width:86%;justify-self:start}
- .activity-index{margin-bottom:12px;font-size:9px}
  .activities .values-list h3{font-size:32px;max-width:100%}
  .activities .values-list p{font-size:14px;line-height:1.85;margin-top:16px;max-width:100%}
  .company-layout{grid-template-columns:1fr;gap:30px;padding-block:20px 54px}
@@ -180,3 +178,20 @@
  .ambient-mark--sight{opacity:.065}
  .ambient-mark--cartridges{left:auto;right:-140px;opacity:.04}
 }
+
+/* The emblem anchors the introduction beside the copy, rather than above it. */
+.hero{grid-template-columns:1.18fr .82fr;gap:90px;align-items:center}
+.hero-art{height:520px;align-items:center;justify-content:flex-end;align-self:center}
+.hero-emblem{width:min(100%,350px);height:auto;max-width:350px}
+@media(min-width:768px) and (max-width:1100px){.hero{gap:48px}.hero-art{height:410px}.hero-emblem{width:100%;max-width:280px}}
+@media(max-width:767px){
+ .hero{grid-template-columns:minmax(0,1fr) minmax(96px,.58fr);column-gap:24px;row-gap:24px;padding-block:46px 60px;align-items:start}
+ .hero-copy{display:contents}
+ .hero .eyebrow{grid-column:1/-1;grid-row:1}
+ .hero h1{grid-column:1/-1;grid-row:2;margin-top:0;margin-bottom:6px}
+ .hero-description{grid-column:1;grid-row:3;max-width:none;margin-top:0;font-size:14px;line-height:1.8}
+ .hero-art{grid-column:2;grid-row:3;order:initial;align-self:center;justify-self:end;width:100%;height:auto;justify-content:flex-end}
+ .hero-emblem{width:100%;height:auto;max-width:160px}
+ .hero .button{grid-column:1/-1;grid-row:4;margin-top:0;justify-self:start}
+}
+@media(max-width:359px){.hero{column-gap:18px;grid-template-columns:minmax(0,1fr) 96px}.hero-description{font-size:13px}}

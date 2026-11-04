@@ -86,19 +86,21 @@ function App() {
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const context = gsap.context(() => {
-        gsap.from('.hero-enter', { y: 30, opacity: 0, stagger: 0.11, duration: 0.9, ease: 'power3.out', clearProps: 'all' });
-        gsap.to('.hero-emblem', { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+        gsap.timeline({ defaults: { ease: 'power2.out' } })
+          .from('.hero-copy .hero-enter', { y: 24, opacity: 0, stagger: 0.09, duration: 0.85, clearProps: 'all' }, 0)
+          .from('.hero-art', { x: 20, opacity: 0, scale: 0.97, duration: 1.05, clearProps: 'all' }, 0.12);
+        gsap.to('.hero-emblem', { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.85 } });
         gsap.utils.toArray('[data-reveal]').forEach(el => {
-          gsap.fromTo(el, { y: 18 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 94%)', end: 'clamp(top 52%)', scrub: 0.65 } });
+          gsap.fromTo(el, { y: 24 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 92%)', end: 'clamp(top 54%)', scrub: 0.55 } });
         });
         gsap.utils.toArray('.manifesto-line').forEach(el => {
-          gsap.fromTo(el, { opacity: 0.25, x: 20 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 85%)', end: 'clamp(top 48%)', scrub: 0.5 } });
+          gsap.fromTo(el, { opacity: 0.5, y: 22 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 88%)', end: 'clamp(top 50%)', scrub: 0.55 } });
         });
-        gsap.utils.toArray('[data-photo]').forEach(frame => {
+        gsap.utils.toArray('[data-photo]').forEach((frame, index) => {
           const scene = frame.closest('figure') || frame.parentElement;
-          gsap.timeline({ scrollTrigger: { trigger: scene, start: 'clamp(top 94%)', end: 'clamp(center 52%)', scrub: 0.75, invalidateOnRefresh: true } })
-            .fromTo(frame, { y: () => window.innerWidth < 768 ? 48 : 84 }, { y: 0, ease: 'power1.out' }, 0)
-            .fromTo(frame.querySelector('img'), { scale: 1.12, yPercent: -3 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0)
+          gsap.timeline({ scrollTrigger: { trigger: scene, start: 'clamp(top 94%)', end: 'clamp(top 40%)', scrub: 0.65, invalidateOnRefresh: true } })
+            .fromTo(frame, { y: () => window.innerWidth < 768 ? 30 : 46, x: () => window.innerWidth < 768 ? 0 : (index % 2 ? -18 : 18) }, { y: 0, x: 0, ease: 'power2.out' }, 0)
+            .fromTo(frame.querySelector('img'), { scale: 1.07, yPercent: -2 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0)
             .fromTo(scene, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask-entry').trim() || 'inset(0%)' }, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask').trim() || 'inset(0%)', ease: 'none' }, 0);
         });
         gsap.utils.toArray('[data-accent]').forEach(accent => {
@@ -170,15 +172,15 @@ function App() {
         <div className="values-list activity-list">
           <article>
             <figure className="activity-photo photo-scene photo-cut photo-cut--arms"><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt={t.armsPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">01</span><h3>{t.arms}</h3><p>{t.armsFirst}</p><p>{t.armsSecond}</p></div>
+            <div className="activity-copy" data-reveal><h3>{t.arms}</h3><p>{t.armsFirst}</p><p>{t.armsSecond}</p></div>
           </article>
           <article>
             <figure className="activity-photo photo-scene photo-cut photo-cut--ammunition"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt={t.ammunitionPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">02</span><h3>{t.ammunition}</h3><p>{t.ammunitionFirst}</p><p>{t.ammunitionSecond}</p></div>
+            <div className="activity-copy" data-reveal><h3>{t.ammunition}</h3><p>{t.ammunitionFirst}</p><p>{t.ammunitionSecond}</p></div>
           </article>
           <article>
             <figure className="activity-photo activity-photo--equipment photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt={t.equipmentPhoto} width="1000" height="1503" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">03</span><h3>{t.equipment}</h3><p>{t.equipmentFirst}</p><p>{t.equipmentSecond}</p></div>
+            <div className="activity-copy" data-reveal><h3>{t.equipment}</h3><p>{t.equipmentFirst}</p><p>{t.equipmentSecond}</p></div>
           </article>
         </div>
         <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--cartridges"><SegmentAccent /></div></div>

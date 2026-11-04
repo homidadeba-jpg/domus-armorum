@@ -55,3 +55,7 @@ Português (padrão), inglês e espanhol, com seletor nativo discreto ao lado do
 ## Revisão visual de 04/11/2026
 
 Ícones substituídos por fotos reais, sem painéis coloridos. Hero sem caixa ou halo, textos ampliados no celular e fotografias usadas uma vez por segmento. Build e verificações estáticas passaram. A rodada visual desta revisão não foi concluída: Edge e Chromium fecharam na inicialização do Playwright, e o navegador local do Computer Use estava desativado nas configurações.
+
+## Refinamento da marca e do movimento
+
+Emblema maior e alinhado à apresentação: lateral direita no desktop e ao lado do texto no celular. Numeração das áreas removida. Entrada do hero coordenada em timeline; fotos com deslocamento menor, zoom reduzido e chegada concentrada na entrada da tela. Os movimentos de scroll continuam contínuos e reversíveis, com limpeza via GSAP context e respeito a movimento reduzido.
