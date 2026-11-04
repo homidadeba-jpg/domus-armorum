@@ -27,6 +27,7 @@ function SegmentAccent({ sight = false }) {
 
 function ReadingProgress() {
   return <div className="reading-progress" aria-hidden="true">
+    <div className="reading-trail" />
     <div className="reading-cartridge">
       <svg viewBox="0 0 120 24" fill="none" focusable="false">
         <defs>
@@ -130,14 +131,17 @@ function App() {
         });
         const track = root.current.querySelector('.reading-progress');
         const marker = track.querySelector('.reading-cartridge');
+        const trail = track.querySelector('.reading-trail');
         const exitMark = track.querySelector('.reading-exit');
         const setPosition = gsap.quickSetter(marker, 'x', 'px');
+        const setTrail = gsap.quickSetter(trail, 'scaleX');
         const setImpact = gsap.quickSetter(exitMark, 'opacity');
         let trackWidth = track.clientWidth;
         let markerWidth = marker.offsetWidth;
         const renderProgress = progress => {
           const state = readingProgressState(progress, trackWidth, markerWidth);
           setPosition(state.x);
+          setTrail(state.trailScale);
           setImpact(state.impactOpacity);
         };
         ScrollTrigger.create({

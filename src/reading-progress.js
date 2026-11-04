@@ -6,8 +6,10 @@ export function readingProgressState(progress, trackWidth, markerWidth) {
   const travel = width + marker + 2;
   const contact = (width + 1) / travel;
   const exit = (p - contact) / (1 - contact);
+  const x = -marker - 1 + travel * p;
   return {
-    x: -marker - 1 + travel * p,
+    x,
+    trailScale: Math.max(0, Math.min(1, x / width)),
     impactOpacity: exit > 0 && exit < 1 ? Math.sin(Math.PI * exit) * 0.7 : 0,
   };
 }

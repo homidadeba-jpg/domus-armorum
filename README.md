@@ -65,3 +65,5 @@ O fundo preto do hero foi removido após esclarecimento do responsável. O emble
 ## Indicador de rolagem
 
 A antiga barra foi substituída por um pequeno cartucho vetorial horizontal. Ele fica totalmente fora da tela no início, atravessa a borda inferior do cabeçalho conforme a posição real de scroll e sai completamente no final. Uma marca discreta de passagem acompanha a saída e também desaparece. O movimento é reversível e recalculado em mudanças de tamanho e idioma, sem temporizadores, interações ou deslocamento do conteúdo. O indicador é decorativo e fica oculto para tecnologias assistivas e com movimento reduzido.
+
+O cartucho foi reduzido para 72 px no desktop e 58 px no celular. Uma linha de 1 px cresce até sua parte traseira, retrai ao subir e permanece preenchida no fim da página, após a saída do cartucho.
