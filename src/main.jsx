@@ -10,6 +10,7 @@ import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/600.css';
 import './styles.css';
 import { languages, translations, initialLanguage } from './translations.js';
+import { readingProgressState } from './reading-progress.js';
 
 gsap.registerPlugin(ScrollTrigger);
 const COMPANY = { whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/' };
@@ -22,6 +23,25 @@ function SegmentAccent({ sight = false }) {
   return <svg className={`segment-accent ${sight ? 'segment-accent--sight' : ''}`} data-accent viewBox="0 0 88 56" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     {sight ? <><circle cx="44" cy="28" r="17" /><circle cx="44" cy="28" r="5" /><path d="M44 3v14m0 22v14M19 28h14m22 0h14M4 9h9M75 47h9" /></> : <><path d="M25 43V22l4-5v-5l3-7 3 7v5l4 5v21zm-2 0h18v5H23zM49 43V27l4-5v-5l3-7 3 7v5l4 5v16zm-2 0h18v5H47zM25 25h14M49 30h14M8 37h7m58-17h7" /></>}
   </svg>;
+}
+
+function ReadingProgress() {
+  return <div className="reading-progress" aria-hidden="true">
+    <div className="reading-cartridge">
+      <svg viewBox="0 0 120 24" fill="none" focusable="false">
+        <defs>
+          <linearGradient id="progress-brass" x1="0" y1="3" x2="0" y2="21" gradientUnits="userSpaceOnUse"><stop stopColor="#b99d67" /><stop offset=".3" stopColor="#e0c38b" /><stop offset=".56" stopColor="#a88a52" /><stop offset="1" stopColor="#725a32" /></linearGradient>
+          <linearGradient id="progress-copper" x1="0" y1="7" x2="0" y2="17" gradientUnits="userSpaceOnUse"><stop stopColor="#d2aa7e" /><stop offset=".5" stopColor="#aa7b4e" /><stop offset="1" stopColor="#795434" /></linearGradient>
+        </defs>
+        <path d="M6 4H68L80 8H88V16H80L68 20H6Z" fill="url(#progress-brass)" />
+        <path d="M88 8H95C102 8 110 10 118 12C110 14 102 16 95 16H88Z" fill="url(#progress-copper)" />
+        <path d="M2 3H7V21H2Z" fill="url(#progress-brass)" />
+        <path d="M10 5V19M67 5V19M83 9V15" stroke="#544021" strokeOpacity=".55" />
+        <path d="M14 6H65M83 9H94" stroke="#f0dbad" strokeOpacity=".55" strokeWidth=".7" />
+      </svg>
+    </div>
+    <svg className="reading-exit" viewBox="0 0 20 28" fill="none" focusable="false"><path d="M12 14L5 10L8 5M12 14L3 16L5 23M12 14L14 4M12 14L15 24" stroke="currentColor" strokeWidth="1" strokeLinecap="round" /></svg>
+  </div>;
 }
 
 function WhatsAppLink({ children, className = '', author = false, floating = false, copy = translations.pt }) {
@@ -108,7 +128,29 @@ function App() {
           const isSight = accent.classList.contains('segment-accent--sight');
           gsap.fromTo(accent, { y: () => depth(), x: () => isSight ? -16 : 14, rotation: isSight ? -14 : 9 }, { y: () => -depth(), x: () => isSight ? 20 : -18, rotation: isSight ? 10 : -7, ease: 'none', scrollTrigger: { trigger: accent.closest('section'), start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: 1.1, invalidateOnRefresh: true } });
         });
-        gsap.to('.reading-progress', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+        const track = root.current.querySelector('.reading-progress');
+        const marker = track.querySelector('.reading-cartridge');
+        const exitMark = track.querySelector('.reading-exit');
+        const setPosition = gsap.quickSetter(marker, 'x', 'px');
+        const setImpact = gsap.quickSetter(exitMark, 'opacity');
+        let trackWidth = track.clientWidth;
+        let markerWidth = marker.offsetWidth;
+        const renderProgress = progress => {
+          const state = readingProgressState(progress, trackWidth, markerWidth);
+          setPosition(state.x);
+          setImpact(state.impactOpacity);
+        };
+        ScrollTrigger.create({
+          start: 0,
+          end: 'max',
+          onUpdate: self => renderProgress(self.progress),
+          onRefresh: self => {
+            trackWidth = track.clientWidth;
+            markerWidth = marker.offsetWidth;
+            renderProgress(self.progress);
+          },
+        });
+        renderProgress(window.scrollY / Math.max(1, ScrollTrigger.maxScroll(window)));
       }, root);
       return () => context.revert();
     });
@@ -135,7 +177,7 @@ function App() {
           <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button>
         </div>
       </div>
-      <div className="reading-progress" />
+      <ReadingProgress />
     </header>
 
     <main id="conteudo">
