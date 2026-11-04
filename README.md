@@ -59,3 +59,5 @@ Português (padrão), inglês e espanhol, com seletor nativo discreto ao lado do
 ## Refinamento da marca e do movimento
 
 Emblema maior e alinhado à apresentação: lateral direita no desktop e ao lado do texto no celular. Numeração das áreas removida. Entrada do hero coordenada em timeline; fotos com deslocamento menor, zoom reduzido e chegada concentrada na entrada da tela. Os movimentos de scroll continuam contínuos e reversíveis, com limpeza via GSAP context e respeito a movimento reduzido.
+
+A pedido do responsável, o emblema do hero passa a ter fundo preto nos dois temas. O único botão flutuante da empresa usa o símbolo preenchido do WhatsApp, com contraste reforçado e resposta de toque; o feedback imediato de abertura e o contato permanecem preservados.

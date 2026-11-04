@@ -206,7 +206,7 @@ function App() {
       <div className="footer-top shell"><a className="footer-home" href="#inicio">{t.back} <ArrowUpRight size={20} /></a><span>{t.footer}</span></div>
       <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><WhatsAppLink copy={t} author className="author-credit">{t.developed} <strong>Jonas Jr.</strong> <ArrowUpRight size={13} /></WhatsAppLink></div>
     </footer>
-    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={31} weight="regular" /></WhatsAppLink>
+    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={32} weight="fill" aria-hidden="true" /></WhatsAppLink>
   </div>;
 }
 
