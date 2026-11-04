@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, Fingerprint, CaretDown } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -87,7 +87,7 @@ function App() {
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const context = gsap.context(() => {
         gsap.from('.hero-enter', { y: 30, opacity: 0, stagger: 0.11, duration: 0.9, ease: 'power3.out', clearProps: 'all' });
-        gsap.to('.hero-emblem', { yPercent: 14, rotation: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+        gsap.to('.hero-emblem', { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
         gsap.utils.toArray('[data-reveal]').forEach(el => {
           gsap.fromTo(el, { y: 18 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 94%)', end: 'clamp(top 52%)', scrub: 0.65 } });
         });
@@ -100,9 +100,6 @@ function App() {
             .fromTo(frame, { y: () => window.innerWidth < 768 ? 48 : 84 }, { y: 0, ease: 'power1.out' }, 0)
             .fromTo(frame.querySelector('img'), { scale: 1.12, yPercent: -3 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0)
             .fromTo(scene, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask-entry').trim() || 'inset(0%)' }, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask').trim() || 'inset(0%)', ease: 'none' }, 0);
-        });
-        gsap.utils.toArray('.activity-illustration').forEach(frame => {
-          gsap.fromTo(frame.querySelector('img'), { y: 8, scale: 0.95 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', end: 'clamp(top 48%)', scrub: 0.65 } });
         });
         gsap.utils.toArray('[data-accent]').forEach(accent => {
           const depth = () => window.innerWidth < 768 ? 48 : 110;
@@ -148,9 +145,7 @@ function App() {
           <a href="#essencia" className="button hero-enter">{t.discover} <ArrowDown size={20} /></a>
         </div>
         <div className="hero-art hero-enter" aria-label={t.emblem}>
-          <div className="emblem-halo" />
           <img className="hero-emblem" src="/brand/domus-original.webp" alt={t.emblemAlt} width="680" height="980" fetchPriority="high" />
-          <span className="art-caption">{t.brandCaption}</span>
         </div>
         <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--sight"><SegmentAccent sight /></div></div>
       </section>
@@ -158,37 +153,40 @@ function App() {
       <section className="manifesto shell" id="essencia">
         <div className="section-overflow"><p className="section-note" data-reveal>{t.essence}</p></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line outline-text">{t.manifestoSecond}</span></h2>
-        <div className="manifesto-bottom"><span className="small-emblem" aria-hidden="true"><Fingerprint size={37} weight="thin" /></span><p data-reveal>{t.manifesto}</p></div>
+        <div className="manifesto-bottom"><p data-reveal>{t.manifesto}</p></div>
       </section>
 
       <section className="story shell" id="historia">
+        <div className="story-heading"><h2 data-reveal><TextLines value={t.storyHeading} /></h2></div>
         <div className="story-copy">
-          <div className="section-overflow"><h2 data-reveal><TextLines value={t.storyHeading} /></h2></div>
           <p data-reveal>{t.story}</p>
           <p className="muted" data-reveal>{t.storyIdentity}</p>
           <div className="story-year" data-reveal><div><p>{t.sinceLabel}</p><span>2017</span></div><p>Cascavel,<br />Paraná.</p></div>
-        </div>
-        <div className="story-visual">
-          <figure className="story-photo photo-scene photo-cut photo-cut--arms" aria-label={t.armsPhotoLabel}><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt={t.armsPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
-          <figure className="story-detail photo-scene photo-cut photo-cut--ammunition"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt={t.ammunitionPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
         </div>
       </section>
 
       <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
         <div className="values-intro"><h2 id="activities-heading" data-reveal><TextLines value={t.areasHeading} /></h2><p data-reveal>{t.areasIntro}</p></div>
         <div className="values-list activity-list">
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/armas-a3d0cf4c.svg" alt={t.armsIcon} width="160" height="160" loading="lazy" /></div><div><h3>{t.arms}</h3><p>{t.armsFirst}</p><p>{t.armsSecond}</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/municoes-692b7d30.svg" alt={t.ammunitionIcon} width="160" height="160" loading="lazy" /></div><div><h3>{t.ammunition}</h3><p>{t.ammunitionFirst}</p><p>{t.ammunitionSecond}</p></div></article>
-          <article data-reveal><div className="activity-illustration"><img src="/illustrations/equipamentos-9528d30f.svg" alt={t.equipmentIcon} width="160" height="160" loading="lazy" /></div><div><h3>{t.equipment}</h3><p>{t.equipmentFirst}</p><p>{t.equipmentSecond}</p></div></article>
+          <article>
+            <figure className="activity-photo photo-scene photo-cut photo-cut--arms"><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt={t.armsPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
+            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">01</span><h3>{t.arms}</h3><p>{t.armsFirst}</p><p>{t.armsSecond}</p></div>
+          </article>
+          <article>
+            <figure className="activity-photo photo-scene photo-cut photo-cut--ammunition"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt={t.ammunitionPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
+            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">02</span><h3>{t.ammunition}</h3><p>{t.ammunitionFirst}</p><p>{t.ammunitionSecond}</p></div>
+          </article>
+          <article>
+            <figure className="activity-photo activity-photo--equipment photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt={t.equipmentPhoto} width="1000" height="1503" loading="lazy" /></div></figure>
+            <div className="activity-copy" data-reveal><span className="activity-index" aria-hidden="true">03</span><h3>{t.equipment}</h3><p>{t.equipmentFirst}</p><p>{t.equipmentSecond}</p></div>
+          </article>
         </div>
         <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--cartridges"><SegmentAccent /></div></div>
       </section>
 
       <section className="company-profile company-layout shell" aria-labelledby="company-heading">
-        <div className="company-intro"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 id="company-heading" data-reveal><TextLines value={t.companyHeading} /></h2><p data-reveal>{t.company}</p><p data-reveal>{t.companyHistory}</p>
-          <dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl>
-        </div>
-        <figure className="tactical-photo photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt={t.equipmentPhoto} width="1000" height="1503" loading="lazy" /></div></figure>
+        <div className="company-intro"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 id="company-heading" data-reveal><TextLines value={t.companyHeading} /></h2><p data-reveal>{t.company}</p><p data-reveal>{t.companyHistory}</p></div>
+        <dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl>
       </section>
 
       <section className="contact shell" id="contato">
