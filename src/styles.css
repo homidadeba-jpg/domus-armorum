@@ -196,10 +196,11 @@
 }
 @media(max-width:359px){.hero{column-gap:18px;grid-template-columns:minmax(0,1fr) 96px}.hero-description{font-size:13px}}
 
-.hero-art{background:#000;justify-content:center;padding:32px;overflow:hidden}
-.hero-art .hero-emblem{filter:invert(1);mix-blend-mode:screen;max-height:100%;object-fit:contain}
+.hero-art{background:transparent;justify-content:center;padding:0;overflow:visible}
+.hero-art .hero-emblem{filter:invert(1);mix-blend-mode:normal;max-height:100%;object-fit:contain}
+[data-theme=light] .hero-art .hero-emblem{filter:none;mix-blend-mode:normal}
 .floating-whatsapp{width:60px;height:60px;min-height:60px;background:#128c4a;border:1px solid #ffffff40;box-shadow:0 5px 20px #0003;transition:transform .2s ease,background .2s ease}
 .floating-whatsapp .wa-normal{align-items:center;justify-content:center;line-height:0}
 .floating-whatsapp:hover{background:#107c42;transform:translateY(-2px) scale(1.03)}
 .floating-whatsapp:active{transform:scale(.96)}
-@media(max-width:767px){.hero-art{padding:8px}.floating-whatsapp{width:58px;height:58px;min-height:58px}}
+@media(max-width:767px){.floating-whatsapp{width:58px;height:58px;min-height:58px}}

@@ -147,7 +147,7 @@ function App() {
           <a href="#essencia" className="button hero-enter">{t.discover} <ArrowDown size={20} /></a>
         </div>
         <div className="hero-art hero-enter" aria-label={t.emblem}>
-          <img className="hero-emblem" src="/brand/domus-original.webp" alt={t.emblemAlt} width="680" height="980" fetchPriority="high" />
+          <img className="hero-emblem" src="/brand/domus-transparente-de24c017.webp" alt={t.emblemAlt} width="683" height="984" fetchPriority="high" />
         </div>
         <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--sight"><SegmentAccent sight /></div></div>
       </section>
