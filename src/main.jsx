@@ -13,7 +13,11 @@ import { languages, translations, initialLanguage } from './translations.js';
 import { readingProgressState } from './reading-progress.js';
 
 gsap.registerPlugin(ScrollTrigger);
-const COMPANY = { whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/' };
+const COMPANY = {
+  whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/',
+  street: 'Via Alessandro Volta, 90', city: 'Gardone Val Trompia', postalCity: '25063 Gardone Val Trompia BS',
+  map: 'https://www.google.com/maps/search/?api=1&query=Via%20Alessandro%20Volta%2C%2090%2C%2025063%20Gardone%20Val%20Trompia%20BS%2C%20Italia',
+};
 
 function TextLines({ value }) {
   return value.split('\n').map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{line}</React.Fragment>);
@@ -45,7 +49,7 @@ function ReadingProgress() {
   </div>;
 }
 
-function WhatsAppLink({ children, className = '', author = false, floating = false, copy = translations.pt }) {
+function WhatsAppLink({ children, className = '', author = false, floating = false, copy = translations.it }) {
   const [opening, setOpening] = useState(false);
   const timer = useRef();
   useEffect(() => {
@@ -78,15 +82,20 @@ function App() {
     document.documentElement.lang = languages.find(item => item.code === language).tag;
     document.title = t.pageTitle;
     document.querySelector('meta[name="description"]').content = t.description;
-    try { localStorage.setItem('domus-language', language); } catch { /* Language changes still work without storage. */ }
+    const locale = { it: 'it_IT', en: 'en_US', es: 'es_ES', pt: 'pt_BR' }[language];
+    for (const [selector, content] of [
+      ['meta[property="og:locale"]', locale], ['meta[property="og:title"]', t.pageTitle],
+      ['meta[property="og:description"]', t.description], ['meta[name="twitter:title"]', t.pageTitle],
+      ['meta[name="twitter:description"]', t.description],
+    ]) document.querySelector(selector).content = content;
     const url = new URL(window.location.href);
-    if (language === 'pt') url.searchParams.delete('lang'); else url.searchParams.set('lang', language);
+    url.searchParams.set('lang', language);
     window.history.replaceState(window.history.state, '', url);
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(frame);
   }, [language, t]);
   useEffect(() => {
-    const restore = () => { const code = new URLSearchParams(location.search).get('lang'); setLanguage(Object.hasOwn(translations, code) ? code : 'pt'); };
+    const restore = () => setLanguage(initialLanguage());
     window.addEventListener('popstate', restore);
     return () => window.removeEventListener('popstate', restore);
   }, []);
@@ -176,7 +185,11 @@ function App() {
         </nav>
         <div className="header-actions">
           <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={19} /> : <Sun size={19} />}</button>
-          <label className="language-switch"><select aria-label={t.language} value={language} onChange={event => { setLanguage(event.target.value); setMenu(false); }}>{languages.map(item => <option key={item.code} value={item.code} lang={item.tag} label={item.name}>{item.code.toUpperCase()}</option>)}</select><span aria-hidden="true">{language.toUpperCase()}</span><CaretDown size={10} aria-hidden="true" /></label>
+          <label className="language-switch"><select aria-label={t.language} value={language} onChange={event => {
+            const selected = event.target.value;
+            try { localStorage.setItem('domus-language', selected); } catch { /* Manual selection works without storage. */ }
+            setLanguage(selected); setMenu(false);
+          }}>{languages.map(item => <option key={item.code} value={item.code} lang={item.tag}>{item.name}</option>)}</select><span aria-hidden="true">{language.toUpperCase()}</span><CaretDown size={10} aria-hidden="true" /></label>
           <a className="instagram-nav" href={COMPANY.instagram} target="_blank" rel="noopener noreferrer" aria-label={t.instagram}><InstagramLogo size={22} /></a>
           <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button>
         </div>
@@ -209,7 +222,7 @@ function App() {
         <div className="story-copy">
           <p data-reveal>{t.story}</p>
           <p className="muted" data-reveal>{t.storyIdentity}</p>
-          <div className="story-year" data-reveal><div><p>{t.sinceLabel}</p><span>2017</span></div><p>Cascavel,<br />Paraná.</p></div>
+          <div className="story-year" data-reveal><div><p>{t.sinceLabel}</p><span>2017</span></div><p>{COMPANY.city},<br />{t.country}.</p></div>
         </div>
       </section>
 
@@ -234,13 +247,13 @@ function App() {
 
       <section className="company-profile company-layout shell" aria-labelledby="company-heading">
         <div className="company-intro"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 id="company-heading" data-reveal><TextLines value={t.companyHeading} /></h2><p data-reveal>{t.company}</p><p data-reveal>{t.companyHistory}</p></div>
-        <dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl>
+        <dl className="company-facts" data-reveal><div><dt>{t.address}</dt><dd>{COMPANY.street}</dd></div><div><dt>{t.city}</dt><dd>{COMPANY.postalCity}</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.countryLabel}</dt><dd>{t.country}</dd></div></dl>
       </section>
 
       <section className="contact shell" id="contato">
         <div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div>
         <div className="contact-details" data-reveal>
-          <div><span className="detail-label">{t.location}</span><p>Cascavel<span>{t.country}</span></p></div>
+          <div><span className="detail-label">{t.location}</span><address className="store-address"><a href={COMPANY.map} target="_blank" rel="noopener noreferrer">{COMPANY.street}<br />{COMPANY.postalCity}<br />{t.country}<span className="map-label">{t.map}</span></a></address></div>
           <div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div>
           <div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div>
           <a className="social-link" href={COMPANY.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={23} /><span>@domus.armorum</span><ArrowUpRight size={20} /></a>
@@ -250,7 +263,7 @@ function App() {
 
     <footer>
       <div className="footer-top shell"><a className="footer-home" href="#inicio">{t.back} <ArrowUpRight size={20} /></a><span>{t.footer}</span></div>
-      <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><WhatsAppLink copy={t} author className="author-credit">{t.developed} <strong>Jonas Jr.</strong> <ArrowUpRight size={13} /></WhatsAppLink></div>
+      <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>{COMPANY.city} · {t.country}</p></div><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span> <ArrowUpRight size={13} /></WhatsAppLink></div>
     </footer>
     <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={32} weight="fill" aria-hidden="true" /></WhatsAppLink>
   </div>;

@@ -214,6 +214,9 @@
 @media(max-width:767px){.reading-progress{height:18px;bottom:-9px}.reading-cartridge{width:58px;height:18px;transform:translateX(-59px)}.reading-exit{height:18px;width:13px;right:-3px}}
 
 /* Keep the navigation below system UI when the mobile browser chrome moves. */
+.store-address{font-style:normal;font-size:clamp(16px,1.6vw,21px);line-height:1.65;overflow-wrap:anywhere}
+.store-address a:hover{color:var(--accent)}
+.map-label{display:block;font-size:12px;margin-top:10px;text-decoration:underline;text-underline-offset:4px;color:var(--muted)}
 :root{--header-row-height:80px;--header-safe-top:env(safe-area-inset-top,0px);--header-height:calc(var(--header-row-height) + var(--header-safe-top) + 1px)}
 #root{padding-top:var(--header-height)}
 html{scroll-padding-top:calc(var(--header-height) + 24px)}

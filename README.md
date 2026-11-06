@@ -1,6 +1,6 @@
 # Domus Armorum
 
-Site institucional em português feito com React, Vite e GSAP ScrollTrigger. Apresenta a história, a identidade e as informações institucionais da empresa. Não possui catálogo, preços, pedidos ou fluxo de compra.
+Site institucional em italiano, inglês, espanhol e português feito com React, Vite e GSAP ScrollTrigger. Apresenta a história, a identidade e as informações institucionais da empresa. Não possui catálogo, preços, pedidos ou fluxo de compra.
 
 A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. Cada área de atuação é acompanhada por uma fotografia real correspondente, sem repetição em outras seções. Os textos ocupam colunas amplas no desktop e toda a largura no celular. A história e os dados institucionais ficam em blocos tipográficos. O hero apresenta o emblema original sem painel ou halo. O conteúdo apresenta as três áreas de atuação e seu contexto, sem afirmar modelos ou estoque disponível. A seção educativa sobre proteção foi retirada a pedido do responsável. Os recortes diagonais remetem à espada do emblema e se abrem com deslocamento e zoom vinculados ao scroll, reversíveis na subida. Dois desenhos vetoriais ampliados (cartuchos e mira) compõem uma camada de fundo, parcialmente recortada nas bordas das seções. O parallax GSAP desloca essa camada em velocidade diferente do conteúdo, com percurso menor no celular e reversão contínua. A camada fica atrás do conteúdo, em baixo contraste, não recebe cliques e permanece estática quando há preferência por movimento reduzido. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
 
@@ -28,7 +28,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
 - Instagram: https://www.instagram.com/domus.armorum/
 - WhatsApp completo extraído do link no print: https://wa.me/5545999794330. O número digitado no chat, `(45) 9979-4330`, possui um dígito a menos; a confirmação foi solicitada.
-- Ano de fundação, cidade, razão social e CNPJ: informações enviadas pelo responsável. Endereço cadastral de referência: https://cnpj.biz/28698049000189. Endereço completo e horários não foram publicados sem confirmação da operação atual.
+- Endereço da loja informado pelo responsável em 06/11/2026: Via Alessandro Volta, 90, 25063 Gardone Val Trompia BS, Itália. As referências à localização brasileira foram corrigidas; razão social brasileira e CNPJ foram retirados da página enquanto os dados italianos não são informados. A data de fundação e o WhatsApp existentes foram preservados. Horários não foram informados. O endereço no contato abre a pesquisa correspondente no Google Maps.
 - Fontes Barlow Condensed e Manrope hospedadas localmente com Fontsource; ícones Phosphor.
 
 ## Acessibilidade e movimento
@@ -50,7 +50,9 @@ Capa própria com emblema original e tipografia do site, em JPEG 1200 × 630. Op
 
 ## Idiomas
 
-Português (padrão), inglês e espanhol, com seletor nativo discreto ao lado do tema. Textos, rótulos acessíveis, descrições das imagens, título da página e feedback do WhatsApp estão traduzidos. A escolha fica salva no navegador; `?lang=en` e `?lang=es` permitem abrir um idioma diretamente, preservando os demais parâmetros do link. A troca atualiza o ScrollTrigger sem reiniciar as animações. A mensagem geral do WhatsApp acompanha o idioma; razão social, CNPJ, contatos e nome Jonas Jr. são preservados. As prévias sociais no HTML inicial continuam em português.
+Italiano, inglês, espanhol e português, com seletor nativo ao lado do tema. A seleção inicial segue esta ordem: idioma válido no parâmetro `?lang=it|en|es|pt`, escolha manual salva no navegador, primeiro idioma compatível da lista de preferências do navegador e italiano como padrão quando não houver correspondência. Não há solicitação de localização nem consulta externa por IP. Somente escolhas manuais ficam salvas; parâmetros e âncoras do link são preservados. Textos, rótulos acessíveis, descrições das imagens, título, descrição e feedback do WhatsApp acompanham o idioma. A troca atualiza o ScrollTrigger sem reiniciar as animações. A prévia social no HTML inicial e a capa de compartilhamento usam italiano e a localização na Itália. O crédito “Desenvolvido por Jonas Jr” permanece visível com o link do autor.
+
+Verificação da resolução de idiomas e integridade das traduções: `npm run test:languages`. O teste de navegador também cobre os quatro idiomas em desktop e celular, persistência, precedência da URL, navegação pelo histórico, armazenamento indisponível, endereço e mapa.
 
 ## Revisão visual de 04/11/2026
 
