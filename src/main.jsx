@@ -15,8 +15,7 @@ import { readingProgressState } from './reading-progress.js';
 gsap.registerPlugin(ScrollTrigger);
 const COMPANY = {
   whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/',
-  street: 'Via Alessandro Volta, 90', city: 'Gardone Val Trompia', postalCity: '25063 Gardone Val Trompia BS',
-  map: 'https://www.google.com/maps/search/?api=1&query=Via%20Alessandro%20Volta%2C%2090%2C%2025063%20Gardone%20Val%20Trompia%20BS%2C%20Italia',
+  city: 'Cascavel', region: 'Paraná',
 };
 
 function TextLines({ value }) {
@@ -247,13 +246,13 @@ function App() {
 
       <section className="company-profile company-layout shell" aria-labelledby="company-heading">
         <div className="company-intro"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 id="company-heading" data-reveal><TextLines value={t.companyHeading} /></h2><p data-reveal>{t.company}</p><p data-reveal>{t.companyHistory}</p></div>
-        <dl className="company-facts" data-reveal><div><dt>{t.address}</dt><dd>{COMPANY.street}</dd></div><div><dt>{t.city}</dt><dd>{COMPANY.postalCity}</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.countryLabel}</dt><dd>{t.country}</dd></div></dl>
+        <dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>{COMPANY.city}, {COMPANY.region}</dd></div></dl>
       </section>
 
       <section className="contact shell" id="contato">
         <div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div>
         <div className="contact-details" data-reveal>
-          <div><span className="detail-label">{t.location}</span><address className="store-address"><a href={COMPANY.map} target="_blank" rel="noopener noreferrer">{COMPANY.street}<br />{COMPANY.postalCity}<br />{t.country}<span className="map-label">{t.map}</span></a></address></div>
+          <div className="store-location"><span className="detail-label">{t.location}</span><p>{COMPANY.city}<span>{t.country}</span></p></div>
           <div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div>
           <div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div>
           <a className="social-link" href={COMPANY.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={23} /><span>@domus.armorum</span><ArrowUpRight size={20} /></a>
@@ -263,7 +262,7 @@ function App() {
 
     <footer>
       <div className="footer-top shell"><a className="footer-home" href="#inicio">{t.back} <ArrowUpRight size={20} /></a><span>{t.footer}</span></div>
-      <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>{COMPANY.city} · {t.country}</p></div><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span> <ArrowUpRight size={13} /></WhatsAppLink></div>
+      <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span> <ArrowUpRight size={13} /></WhatsAppLink></div>
     </footer>
     <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={32} weight="fill" aria-hidden="true" /></WhatsAppLink>
   </div>;

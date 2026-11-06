@@ -67,15 +67,15 @@ try {
       assert.equal(await page.title(), translations[code].pageTitle);
       assert.equal(await page.locator('.language-switch option').count(), 4);
       assert.equal(await page.evaluate(() => localStorage.getItem('domus-language')), null, 'Automatic detection must not save a manual preference');
-      const address = page.locator('.store-address');
-      assert.match(await address.innerText(), /Via Alessandro Volta, 90/);
-      assert.match(await address.innerText(), /25063 Gardone Val Trompia BS/);
-      const map = new URL(await address.locator('a').getAttribute('href'));
-      assert.equal(map.hostname, 'www.google.com');
-      assert.match(map.searchParams.get('query'), /Via Alessandro Volta, 90/);
-      assert.doesNotMatch(await page.locator('body').innerText(), /Cascavel|Paraná|CNPJ|AWM/);
+      const location = page.locator('.store-location');
+      assert.match(await location.innerText(), /Cascavel/);
+      assert.match(await location.innerText(), /Paraná/);
+      assert.match(await page.locator('.company-facts').innerText(), /AWM Armas e Munições LTDA/);
+      assert.match(await page.locator('.company-facts').innerText(), /28\.698\.049\/0001-89/);
+      assert.doesNotMatch(await page.locator('body').innerText(), /Gardone|Alessandro Volta|25063/);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Overflow: ${code} at ${viewport.width}`);
-      await page.screenshot({ path: `artifacts/${viewport.width}-${code}-address.png` });
+      await location.scrollIntoViewIfNeeded();
+      await page.screenshot({ path: `artifacts/${viewport.width}-${code}-location.png` });
       const selected = code === 'it' ? 'pt' : 'it';
       await page.locator('.language-switch select').selectOption(selected);
       assert.equal(await page.locator('html').getAttribute('lang'), languages.find(item => item.code === selected).tag);
@@ -90,7 +90,7 @@ try {
       await page.evaluate(() => { history.pushState({}, '', '/?campaign=back'); window.dispatchEvent(new PopStateEvent('popstate')); });
       assert.equal(await page.locator('.language-switch select').inputValue(), selected, 'History restores saved preference');
       assert.deepEqual(errors, []);
-      report.push({ viewport, language: code, result: 'passed', checks: ['browser language', 'store address and map', 'translated content', 'responsive width', 'manual selection', 'preference persistence', 'URL override', 'history restoration'] });
+      report.push({ viewport, language: code, result: 'passed', checks: ['browser language', 'Cascavel location and company details', 'translated content', 'responsive width', 'manual selection', 'preference persistence', 'URL override', 'history restoration'] });
       await context.close();
     }
   }

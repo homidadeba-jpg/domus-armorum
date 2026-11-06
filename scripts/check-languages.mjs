@@ -29,6 +29,8 @@ const keys = Object.keys(translations.it).sort();
 for (const { code } of languages) {
   assert.deepEqual(Object.keys(translations[code]).sort(), keys, `Missing translations: ${code}`);
   assert.ok(Object.values(translations[code]).every(value => typeof value === 'string' && value.trim()));
-  assert.doesNotMatch(JSON.stringify(translations[code]), /Cascavel|Paraná|CNPJ|AWM/);
+  assert.match(translations[code].company, /Cascavel/);
+  assert.match(translations[code].description, /Cascavel, Paraná/);
+  assert.doesNotMatch(JSON.stringify(translations[code]), /Gardone|Alessandro Volta|25063/);
 }
 console.log('Language detection, precedence, blocked storage and translation completeness passed.');

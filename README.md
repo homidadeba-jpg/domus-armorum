@@ -18,6 +18,12 @@ npm run build
 
 Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `dist`.
 
+- Repositório: https://github.com/homidadeba-jpg/domus-armorum
+- Branch de produção: `main`
+- Painel Vercel: https://vercel.com/jonas-jr/domus-armorum
+- URL de produção: https://domus-armorum.vercel.app/
+- Publicação contínua pela integração GitHub–Vercel: commit e push em `main`, seguidos da verificação do status do deploy e da URL pública. Reutilizar as conexões existentes.
+
 ## Conteúdo e imagens
 
 - Logo original: material enviado pelo responsável no chat em 03/11/2026. O recorte desfocado do print foi retirado da página e da pasta pública.
@@ -28,7 +34,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
 - Instagram: https://www.instagram.com/domus.armorum/
 - WhatsApp completo extraído do link no print: https://wa.me/5545999794330. O número digitado no chat, `(45) 9979-4330`, possui um dígito a menos; a confirmação foi solicitada.
-- Endereço da loja informado pelo responsável em 06/11/2026: Via Alessandro Volta, 90, 25063 Gardone Val Trompia BS, Itália. As referências à localização brasileira foram corrigidas; razão social brasileira e CNPJ foram retirados da página enquanto os dados italianos não são informados. A data de fundação e o WhatsApp existentes foram preservados. Horários não foram informados. O endereço no contato abre a pesquisa correspondente no Google Maps.
+- Localização confirmada pelo responsável em 06/11/2026: Cascavel, Paraná, Brasil. O endereço italiano informado anteriormente foi corrigido e retirado da página. O endereço completo e os horários devem ser consultados pelo canal de contato até serem confirmados. Razão social e CNPJ brasileiros foram restaurados conforme os dados já existentes no projeto: AWM Armas e Munições LTDA, 28.698.049/0001-89.
 - Fontes Barlow Condensed e Manrope hospedadas localmente com Fontsource; ícones Phosphor.
 
 ## Acessibilidade e movimento
@@ -50,9 +56,9 @@ Capa própria com emblema original e tipografia do site, em JPEG 1200 × 630. Op
 
 ## Idiomas
 
-Italiano, inglês, espanhol e português, com seletor nativo ao lado do tema. A seleção inicial segue esta ordem: idioma válido no parâmetro `?lang=it|en|es|pt`, escolha manual salva no navegador, primeiro idioma compatível da lista de preferências do navegador e italiano como padrão quando não houver correspondência. Não há solicitação de localização nem consulta externa por IP. Somente escolhas manuais ficam salvas; parâmetros e âncoras do link são preservados. Textos, rótulos acessíveis, descrições das imagens, título, descrição e feedback do WhatsApp acompanham o idioma. A troca atualiza o ScrollTrigger sem reiniciar as animações. A prévia social no HTML inicial e a capa de compartilhamento usam italiano e a localização na Itália. O crédito “Desenvolvido por Jonas Jr” permanece visível com o link do autor.
+Italiano, inglês, espanhol e português, com seletor nativo ao lado do tema. A seleção inicial segue esta ordem: idioma válido no parâmetro `?lang=it|en|es|pt`, escolha manual salva no navegador, primeiro idioma compatível da lista de preferências do navegador e italiano como padrão quando não houver correspondência. Não há solicitação de localização nem consulta externa por IP. Somente escolhas manuais ficam salvas; parâmetros e âncoras do link são preservados. Textos, rótulos acessíveis, descrições das imagens, título, descrição e feedback do WhatsApp acompanham o idioma. A troca atualiza o ScrollTrigger sem reiniciar as animações. A prévia social no HTML inicial e a capa de compartilhamento usam italiano e a localização em Cascavel, Paraná, Brasil. O crédito “Desenvolvido por Jonas Jr” permanece visível com o link do autor.
 
-Verificação da resolução de idiomas e integridade das traduções: `npm run test:languages`. O teste de navegador também cobre os quatro idiomas em desktop e celular, persistência, precedência da URL, navegação pelo histórico, armazenamento indisponível, endereço e mapa.
+Verificação da resolução de idiomas e integridade das traduções: `npm run test:languages`. O teste de navegador também cobre os quatro idiomas em desktop e celular, persistência, precedência da URL, navegação pelo histórico, armazenamento indisponível, localização em Cascavel e dados da empresa.
 
 ## Revisão visual de 04/11/2026
 

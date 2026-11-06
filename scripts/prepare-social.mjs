@@ -17,7 +17,7 @@ try {
     .eyebrow{color:#c2ccac;font-size:13px;letter-spacing:2px;margin:0 0 28px}h1{font-family:Barlow,sans-serif;font-weight:500;font-size:113px;line-height:.92;letter-spacing:-1px;margin:0}h1 span{color:#c2ccac}
     .description{font-size:20px;line-height:1.6;color:#a8ada2;margin:26px 0 0}.address{font-size:12px;letter-spacing:1px;color:#a8ada2;margin-top:35px}
     .mark{height:490px;display:flex;align-items:center;justify-content:center;background:#1d201c;clip-path:polygon(12% 0,100% 0,100% 88%,88% 100%,0 100%,0 12%)}.mark img{height:400px;width:auto;filter:invert(1);mix-blend-mode:screen}
-  </style></head><body><main><div><p class="eyebrow">GARDONE VAL TROMPIA, ITALIA · DAL 2017</p><h1>DOMUS<br><span>ARMORUM.</span></h1><p class="description">Armi, munizioni e<br>attrezzature e accessori tattici.</p><p class="address">domus-armorum.vercel.app</p></div><div class="mark"><img src="${logo}" alt="Emblema originale di Domus Armorum"></div></main></body></html>`);
+  </style></head><body><main><div><p class="eyebrow">CASCAVEL, PARANÁ · DAL 2017</p><h1>DOMUS<br><span>ARMORUM.</span></h1><p class="description">Armi, munizioni e<br>attrezzature e accessori tattici.</p><p class="address">domus-armorum.vercel.app</p></div><div class="mark"><img src="${logo}" alt="Emblema originale di Domus Armorum"></div></main></body></html>`);
   await page.evaluate(async () => { await document.fonts.ready; await document.querySelector('img').decode(); });
   buffer = await page.screenshot({ type: 'jpeg', quality: 92 });
 } finally { await browser.close(); }
