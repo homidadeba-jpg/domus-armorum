@@ -14,6 +14,7 @@ import { languages, translations, initialLanguage } from './translations.js';
 import { WhatsAppLink } from './contact.jsx';
 import { BrandScene } from './BrandScene.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
+import { ItalyExperiences } from './ItalyExperiences.jsx';
 import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
@@ -147,7 +148,7 @@ function App() {
       <section className="italy" id="italia" aria-labelledby="italy-heading">
         <JourneyMap t={t} />
         <figure className="italy-landscape" data-photo><img src="/experiences/italia.webp" alt={t.italyPhoto} width="1800" height="1200" loading="lazy" /><div className="landscape-shade" /><span className="italy-word" aria-hidden="true">{t.italyCountry.toUpperCase()}.</span><figcaption><span>{t.italyCaption}</span><span>DOMUS · {t.italyCountry.toUpperCase()}</span></figcaption></figure>
-        <div className="italy-body shell"><div className="italy-intro"><div className="italy-intro-inner"><p className="eyebrow" data-reveal>{t.italyLabel}</p><h2 id="italy-heading" data-reveal><TextLines value={t.italyHeading} /></h2><p data-reveal>{t.italyIntro}</p><div className="italy-signature"><span className="italian-flag" aria-hidden="true"><i /><i /><i /></span><span>{t.world}</span></div></div></div><div className="experience-list">{[[t.cultureTitle, t.cultureText], [t.foodTitle, t.foodText], [t.connectionTitle, t.connectionText]].map(([title, text]) => <article key={title} data-reveal><span className="experience-diamond" aria-hidden="true" /><h3>{title}</h3><p>{text}</p></article>)}<p className="experience-note">{t.italyNote}</p></div></div>
+        <ItalyExperiences t={t} />
         <div className="italy-pull shell"><span className="pull-rule" /><p data-reveal>{t.italyPull}</p><span className="pull-rule" /></div>
       </section>
       <section className="story shell" id="historia"><div className="story-heading"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 data-reveal><TextLines value={t.storyHeading} /></h2><span className="story-date" aria-hidden="true">2017</span></div><div className="story-copy"><p data-reveal>{t.story}</p><p className="muted" data-reveal>{t.storyIdentity}</p><dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl></div></section>

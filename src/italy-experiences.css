@@ -1,0 +1,33 @@
+.italy-body{--experience-edge:max(64px,calc((100vw - 1376px)/2))}
+.italy-heading-line{display:block}
+.experience-list{min-width:0}
+.experience-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.68) contrast(1.03);display:block}
+.experience-photo figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:12px;font-size:7px;line-height:1.7;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.experience-photo--training{margin-left:-60px;margin-right:calc(-1 * var(--experience-edge));margin-bottom:25px}
+.experience-photo--training img{height:clamp(330px,31vw,470px);object-position:48% 57%}
+.experience-photo--training figcaption{padding-right:var(--experience-edge)}
+.experience-list .experience-training-copy{border-top:0;padding-top:12px;padding-bottom:36px}
+.experience-training-copy .experience-diamond{top:24px}
+.experience-table{display:grid;grid-template-columns:.86fr 1fr;gap:32px;align-items:center;margin:30px 25px 40px -85px}
+.experience-list .experience-table article{grid-column:2;grid-row:1;padding:0;border:0}
+.experience-table article>p{font-size:12px}
+.experience-table .experience-diamond{display:none}
+.experience-photo--food{grid-column:1;grid-row:1}
+.experience-photo--food img{height:345px;object-position:50% 46%}
+.experience-photo--food figcaption{font-size:6px}
+@media(max-width:1199px){.italy-body{--experience-edge:40px}.experience-photo--training{margin-left:-25px}.experience-table{margin-left:-35px;margin-right:0;gap:23px}.experience-photo--food img{height:290px}}
+@media(max-width:767px){
+  .italy-body{--experience-edge:20px}
+  .experience-photo--training{margin-left:0;margin-bottom:18px}
+  .experience-photo--training img{height:clamp(260px,74vw,390px);object-position:46% 60%}
+  .experience-photo figcaption{font-size:6px;letter-spacing:.7px}
+  .experience-list .experience-training-copy{padding-top:13px;padding-bottom:28px}
+  .experience-training-copy .experience-diamond{top:25px}
+  .experience-table{grid-template-columns:.92fr 1fr;margin:28px 0 35px;gap:24px}
+  .experience-list .experience-table article{padding:0;border:0}
+  .experience-table h3{font-size:27px}
+  .experience-table article>p{font-size:11px;line-height:1.85}
+  .experience-photo--food{margin-left:-20px}
+  .experience-photo--food img{height:270px}
+  .experience-photo--food figcaption{padding-left:20px;font-size:6px}
+}

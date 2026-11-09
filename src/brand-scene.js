@@ -101,8 +101,8 @@ export async function createBrandScene(container, { light = false, motion, onRea
     if (!active || !contextAvailable || document.hidden || disposed) return;
     const pose = motion.pose;
     assembly.rotation.set(pose.x, pose.y, pose.z);
-    assembly.position.set(pose.shift, pose.lift, 0);
-    lightStrip.position.x = -1 + pose.y * 5;
+    assembly.position.set(0, 0, pose.depth);
+    lightStrip.position.set(-1, .5 - pose.x * 5, 4);
     renderer.render(scene, camera);
     if (first) { first = false; onReady?.(); }
   }
@@ -110,7 +110,7 @@ export async function createBrandScene(container, { light = false, motion, onRea
   observer.observe(container);
   const unsubscribeResize = motion.onResize(resize);
   setTheme(light); resize();
-  // Compile before revealing the canvas; there is no timed spin or size change on load.
+  // The renderer joins the already-running entrance; it never restarts it or shifts the mark.
   await renderer.compileAsync(scene, camera);
   gsap.ticker.add(draw);
   return {

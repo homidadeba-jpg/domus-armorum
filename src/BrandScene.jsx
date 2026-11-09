@@ -3,7 +3,7 @@ import outline from './data/brand-outline.json';
 import { createEmblemMotion } from './emblem-motion.js';
 
 export function BrandScene({ light, alt }) {
-  const host = useRef(null), fallback = useRef(null), controller = useRef(null), motion = useRef(null), currentLight = useRef(light);
+  const host = useRef(null), poster = useRef(null), controller = useRef(null), motion = useRef(null), entryPlayed = useRef(false), currentLight = useRef(light);
   const [status, setStatus] = useState('loading');
   useEffect(() => { currentLight.current = light; controller.current?.setTheme(light); }, [light]);
   useEffect(() => {
@@ -13,7 +13,8 @@ export function BrandScene({ light, alt }) {
       const version = ++generation;
       controller.current?.destroy(); controller.current = null;
       motion.current?.destroy();
-      motion.current = createEmblemMotion(host.current, fallback.current, { enabled: !preference.matches });
+      motion.current = createEmblemMotion(host.current, poster.current, { enabled: !preference.matches, entrance: !entryPlayed.current });
+      entryPlayed.current = true;
       if (preference.matches) { setStatus('reduced'); return; }
       setStatus('loading');
       try {
@@ -34,7 +35,10 @@ export function BrandScene({ light, alt }) {
   }, []);
   return <div className={`brand-scene is-${status}`} data-scene={status}>
     <div className="scene-orbit" aria-hidden="true" />
-    <img ref={fallback} className="scene-fallback" src="/brand/domus-original.webp" style={{ clipPath: outline.clip }} width="683" height="984" alt={alt} fetchPriority="high" />
+    <div ref={poster} className="scene-poster">
+      <img className="scene-fallback" src="/brand/domus-original.webp" style={{ clipPath: outline.clip }} width="683" height="984" alt={alt} fetchPriority="high" />
+      <span className="scene-poster-back" style={{ clipPath: outline.clip }} aria-hidden="true" />
+    </div>
     <div className="scene-canvas" ref={host} aria-hidden="true" />
   </div>;
 }

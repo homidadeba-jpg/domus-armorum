@@ -17,8 +17,8 @@ try {
       await page.evaluate(p => {
         const rect = document.querySelector('.journey-cartography').getBoundingClientRect();
         const top = rect.top + scrollY;
-        const start = top - innerHeight * .78;
-        const end = top + rect.height - innerHeight * .45;
+        const start = top - innerHeight * .86;
+        const end = top - innerHeight * .32;
         scrollTo(0, start + (end - start) * p);
       }, progress);
       await page.waitForTimeout(1100);
@@ -38,6 +38,9 @@ try {
     await scrollToProgress(1);
     const end = await routeState();
     assert.ok(end.offset < .05, 'The connection reaches Italy');
+    const visibleMap = await page.locator('.journey-cartography').boundingBox();
+    const header = await page.locator('header').boundingBox();
+    assert.ok(visibleMap.y >= header.y + header.height && visibleMap.y + visibleMap.height <= page.viewportSize().height, 'The route finishes while the entire globe is visible');
     await page.screenshot({ path: `artifacts/journey-${width}-complete.png` });
     await scrollToProgress(.05);
     assert.ok((await routeState()).offset > .9, 'Scrolling back reverses the narrative');

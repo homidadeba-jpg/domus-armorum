@@ -20,13 +20,29 @@ try {
   for (const width of [390, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 1000 }, locale: 'pt-BR', isMobile: width === 390, hasTouch: width === 390 });
     const errors = []; page.on('pageerror', error => errors.push(error.message));
+    await page.addInitScript(() => {
+      window.entrySamples = [];
+      window.entryStates = [];
+      new MutationObserver(records => {
+        for (const { target, attributeName } of records) {
+          if (attributeName === 'data-emblem-entry' && window.entryStates.at(-1) !== target.dataset.emblemEntry) window.entryStates.push(target.dataset.emblemEntry);
+          if (attributeName === 'style' && target.classList?.contains('scene-poster') && window.entrySamples.length < 400) {
+            const match = target.style.transform.match(/rotateY\(([-\d.e]+)rad\)/);
+            if (match) window.entrySamples.push(Number(match[1]));
+          }
+        }
+      }).observe(document, { subtree: true, attributes: true, attributeFilter: ['style', 'data-emblem-entry'] });
+    });
     let release;
     const blocked = new Promise(resolve => { release = resolve; });
     await page.route(/brand-scene[^/]*\.js(?:\?.*)?$/, async route => { await blocked; await route.continue(); });
     await page.goto(base + '/?lang=pt', { waitUntil: 'domcontentloaded' });
     await page.locator('.scene-fallback').evaluate(image => image.decode());
     assert.equal(await page.locator('[data-scene]').getAttribute('data-scene'), 'loading');
-    await page.waitForTimeout(1000);
+    await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.emblemEntry === 'complete');
+    const entrance = await page.evaluate(() => ({ states: entryStates, angles: entrySamples }));
+    assert.ok(entrance.states.includes('playing'), 'An intentional entrance runs once');
+    assert.ok(Math.max(...entrance.angles) - Math.min(...entrance.angles) > 5.5, 'The emblem completes a full entrance turn');
     const before = await page.locator('.brand-scene').screenshot({ path: `artifacts/handoff-${width}-before.png` });
     release();
     await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.scene === 'ready');
@@ -34,16 +50,21 @@ try {
     const after = await page.locator('.brand-scene').screenshot({ path: `artifacts/handoff-${width}-after.png` });
     const initialBounds = await inkBounds(before), renderedBounds = await inkBounds(after);
     for (const key of Object.keys(initialBounds)) assert.ok(Math.abs(initialBounds[key] - renderedBounds[key]) <= 3, `No ${key} jump during WebGL handoff at ${width}px`);
-    const pose = () => page.locator('.scene-fallback').evaluate(image => image.style.transform);
+    const pose = () => page.locator('.scene-poster').evaluate(image => image.style.transform);
     const idle = await pose();
     await page.waitForTimeout(700);
-    assert.equal(await pose(), idle, 'No automatic spin after loading');
+    assert.equal(await pose(), idle, 'The entrance settles and does not restart when WebGL loads');
     await page.locator('.scene-canvas').dispatchEvent('pointermove', { pointerType: 'touch', clientX: 20, clientY: 20 });
     await page.waitForTimeout(100);
     assert.equal(await pose(), idle, 'Touch scrolling is not interpreted as a mouse tilt');
     await page.evaluate(() => scrollTo(0, 220));
     await page.waitForTimeout(650);
     assert.notEqual(await pose(), idle, 'Scrolling drives the emblem');
+    const scrolledPose = await pose();
+    assert.match(scrolledPose, /translateZ\(-/, 'Scroll moves the emblem into depth');
+    assert.match(scrolledPose, /rotateY\(0rad\)/, 'Scroll does not turn the emblem sideways');
+    const duringScroll = await inkBounds(await page.locator('.brand-scene').screenshot());
+    assert.ok(Math.abs((duringScroll.left + duringScroll.right) - (renderedBounds.left + renderedBounds.right)) < 5, 'Scroll keeps the emblem horizontally centred');
     await page.locator('.brand-scene').screenshot({ path: `artifacts/handoff-${width}-scrolled.png` });
     await page.evaluate(() => scrollTo(0, 0));
     await page.waitForTimeout(850);
@@ -57,7 +78,8 @@ try {
     assert.match(await page.locator('#italia').innerText(), /organiza tours para a Itália/);
     assert.match(await page.locator('#italia').innerText(), /fábricas de armas e munições/);
     assert.deepEqual(errors, []);
-    report.push({ width, initialBounds, renderedBounds, returned, result: 'passed' });
+    assert.equal(await page.evaluate(() => entryStates.filter(state => state === 'playing').length), 1, 'Only one entrance per visit');
+    report.push({ width, entranceTurn: Math.max(...entrance.angles) - Math.min(...entrance.angles), initialBounds, renderedBounds, duringScroll, returned, result: 'passed' });
     await page.close();
   }
 } finally { await browser.close(); }
