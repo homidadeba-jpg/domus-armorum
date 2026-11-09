@@ -14,6 +14,7 @@
     "test:handoff": "node scripts/check-handoff.mjs",
     "test:scroll": "node scripts/check-scroll-flow.mjs",
     "test:partners": "node scripts/check-partners.mjs",
+    "test:responsive": "node scripts/check-responsive.mjs",
     "prepare:map": "node scripts/prepare-journey-map.mjs"
   },
   "dependencies": {

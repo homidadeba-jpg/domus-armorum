@@ -24,7 +24,7 @@
 .konus-feature h3{font-size:39px;line-height:1.1;margin-bottom:15px}
 .konus-feature>p:last-child{font-size:13px;color:var(--muted);max-width:370px;margin-top:20px}
 .konus-image{grid-column:2;grid-row:1;margin-top:15px;margin-left:20px}
-.konus-image img{width:100%;height:auto;min-height:145px;object-fit:cover;filter:saturate(.65)}
+.konus-image img{width:100%;height:auto;aspect-ratio:1500/366;object-fit:contain;filter:saturate(.65)}
 .sightron-feature{grid-column:2;grid-row:2;display:grid;grid-template-columns:.9fr 1.3fr;gap:30px;align-items:center;margin:38px 0 0 -35px}
 .sightron-feature .partner-identity{height:110px;width:100%;padding:20px 23px}
 .sightron-feature h3{font-size:30px;margin-top:8px}

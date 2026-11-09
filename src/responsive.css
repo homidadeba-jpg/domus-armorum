@@ -1,0 +1,14 @@
+/* Reserve the floating contact button's space while the footer uses a single row. */
+@media(min-width:768px) and (max-width:1599px){
+  .footer-bottom{padding-inline-end:88px}
+}
+
+/* Keep the visible icon sizes; enlarge their interactive areas on touch screens. */
+@media(pointer:coarse){
+  .theme-toggle,.menu-toggle{min-width:44px;min-height:44px}
+  .language-switch{min-width:44px;height:44px}
+  .instagram-nav{width:44px;height:44px;display:grid;place-items:center}
+}
+@media(pointer:coarse) and (max-width:767px){
+  .instagram-nav{display:none}
+}

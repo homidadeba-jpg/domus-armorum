@@ -33,7 +33,7 @@
   .store-feature--ammunition{grid-template-columns:.9fr 1fr;gap:24px;margin-top:64px;align-items:center}
   .store-feature--ammunition img{height:285px;object-position:54% 70%}
   .store-feature--ammunition .store-feature-copy{margin-left:0}
-  .store-feature--ammunition h3{font-size:31px}
+  .store-feature--ammunition h3{font-size:clamp(27px,7.8vw,31px)}
   .store-feature--ammunition p{font-size:11px}
   .store-feature--equipment{grid-template-columns:1fr;gap:26px;width:100%;margin-top:65px}
   .store-feature--equipment .store-photo{width:74%;margin-left:auto;margin-right:-20px}

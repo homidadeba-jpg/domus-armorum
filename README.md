@@ -108,3 +108,7 @@ As três posições do acervo próprio estão definidas em src/data/partners.js,
 Os dados públicos da matriz estão centralizados em src/company.js; o JSON-LD Store é entregue no HTML inicial (index.html). Ao alterar endereço/telefone, atualizar também esse JSON-LD. Não são publicados horários ou coordenadas não confirmados.
 
 Verificação das relações institucionais, dados de contato/JSON-LD e controles do carrossel: `npm run test:partners`.
+
+## Responsividade
+
+`npm run test:responsive` verifica 56 combinações: quatro idiomas e 14 larguras entre 320 e 2560 px, além de menus em retrato (320×568) e paisagem (844×390). A checagem inclui texto ultrapassando o próprio bloco, sobreposições, controles de toque com área mínima de 44 px e links do rodapé livres do WhatsApp flutuante. O título de munições usa tamanho fluido no celular; a imagem panorâmica Konus conserva seu enquadramento; o rodapé reserva o espaço do botão flutuante nas larguras em que os créditos ficam à direita. Regras transversais em src/responsive.css.

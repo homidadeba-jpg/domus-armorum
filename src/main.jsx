@@ -19,6 +19,7 @@ import { StoreShowcase } from './StoreShowcase.jsx';
 import { Representations } from './Representations.jsx';
 import { CompanyContact } from './CompanyContact.jsx';
 import { company } from './company.js';
+import './responsive.css';
 import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
