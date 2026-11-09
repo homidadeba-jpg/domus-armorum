@@ -2,9 +2,9 @@
 
 Site institucional em italiano, inglês, espanhol e português, feito com React, Vite, Three.js, GSAP e Lenis. Apresenta a identidade da Domus Armorum, a loja em Cascavel e os projetos de conexões e experiências culturais na Itália.
 
-A identidade visual utiliza grafite, oliva e latão, tipografia editorial e uma textura discreta. A face da cena 3D usa os pixels do emblema original, preservando o desenho e os espaços positivos e negativos. O contorno da base é extraído da própria imagem, com espessura e chanfro discretos; a textura original também fornece o relevo de iluminação. Materiais, luzes, perspectiva e movimento são renderizados com Three.js, sem imagem gerada ou alteração do arquivo original. O modelo responde ao ponteiro e à rolagem. A base aproximada e os contornos decorativos adicionais foram removidos após a revisão de fidelidade; o fallback usa a mesma imagem original com recorte do contorno extraído por `scripts/prepare-brand-outline.mjs`. A cena é carregada separadamente e só renderiza quando está visível.
+A identidade visual utiliza grafite, oliva e latão, tipografia editorial e uma textura discreta. A face da cena 3D usa os pixels do emblema original, preservando o desenho e os espaços positivos e negativos. O contorno da base é extraído da própria imagem, com espessura e chanfro discretos; a face mantém as cores originais sem alteração pela iluminação; a espessura recebe iluminação própria. Materiais, luzes, perspectiva e movimento são renderizados com Three.js, sem imagem gerada ou alteração do arquivo original. Uma única pose controla a imagem inicial e o modelo: a passagem para o WebGL preserva tamanho, posição e desenho. O giro acontece em resposta à rolagem e ao mouse, sem giro automático ao carregar. O toque não produz inclinação de mouse. A cena é pré-compilada antes de aparecer e o render não usa o antigo limitador que reduzia telas de 60 Hz para 30 quadros/s. A base aproximada e os contornos decorativos adicionais foram removidos após a revisão de fidelidade; o fallback usa a mesma imagem original com recorte do contorno extraído por `scripts/prepare-brand-outline.mjs`. A cena é carregada separadamente e só renderiza quando está visível.
 
-A loja e as conexões na Itália têm seções próprias e acessos equivalentes. O conteúdo internacional se baseia nas conversas fornecidas pelo responsável, com foco institucional em cultura, encontros e gastronomia. Não são anunciados pacotes, valores, datas, parceiros identificados ou disponibilidade. Endereço completo não é publicado. As fotografias são ilustrativas.
+A loja e as conexões na Itália têm seções próprias e acessos equivalentes. O conteúdo internacional se baseia nas conversas fornecidas pelo responsável, com apresentação clara dos tours na Itália, visitas a fábricas de armas e munições, parceiros locais e gastronomia. Não são anunciados pacotes, valores, datas, parceiros identificados ou disponibilidade. Endereço completo não é publicado. As fotografias são ilustrativas.
 
 ## Desenvolvimento
 
@@ -36,6 +36,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - Paisagem italiana: imagem de atmosfera do Unsplash, arquivo `public/experiences/italia.webp`. Origem e licença em `public/experiences/NOTICE.txt`; não representa um roteiro confirmado.
 - As fotos são ilustrativas e não representam a estrutura, o estoque ou a equipe da empresa.
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
+- WhatsApp flutuante: símbolo original em SVG local, com proporção preservada e sem o ícone Phosphor. Fonte em `public/brand/NOTICE.txt`.
 - Instagram: https://www.instagram.com/domus.armorum/
 - WhatsApp completo extraído do link no print: https://wa.me/5545999794330. O número digitado no chat, `(45) 9979-4330`, possui um dígito a menos; a confirmação foi solicitada.
 - Localização confirmada pelo responsável em 06/11/2026: Cascavel, Paraná, Brasil. O endereço italiano informado anteriormente foi corrigido e retirado da página. O endereço completo e os horários devem ser consultados pelo canal de contato até serem confirmados. Razão social e CNPJ brasileiros foram restaurados conforme os dados já existentes no projeto: AWM Armas e Munições LTDA, 28.698.049/0001-89.
@@ -52,7 +53,7 @@ npm run dev
 npm run test:browser
 ```
 
-Os testes usam Playwright para desktop/celular, os quatro idiomas, temas, menu, rolagem, imagens e feedback do WhatsApp. A verificação de movimento cobre a cena WebGL, resposta visual ao ponteiro, Lenis e âncoras, cabeçalho fixo, mudanças dinâmicas de movimento reduzido, descarte do canvas e fallback sem GPU ou com perda de contexto. Use `TEST_BROWSER_CHANNEL=msedge` para testar com o Edge instalado, ou instale Chromium com Playwright. Os artefatos ficam em `artifacts/` (não versionados).
+Os testes usam Playwright para desktop/celular, os quatro idiomas, temas, menu, rolagem, imagens e feedback do WhatsApp. O teste de entrada retarda o carregamento do 3D e compara os limites visuais antes e depois, além de verificar giro por rolagem, retorno e proporção do símbolo original do WhatsApp. A verificação de movimento cobre a cena WebGL, resposta visual ao ponteiro, Lenis e âncoras, cabeçalho fixo, mudanças dinâmicas de movimento reduzido, descarte do canvas e fallback sem GPU ou com perda de contexto. Use `TEST_BROWSER_CHANNEL=msedge` para testar com o Edge instalado, ou instale Chromium com Playwright. Os artefatos ficam em `artifacts/` (não versionados).
 
 ## Prévia de compartilhamento
 

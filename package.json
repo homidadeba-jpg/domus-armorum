@@ -11,6 +11,7 @@
     "test:languages": "node scripts/check-languages.mjs",
     "test:motion": "node scripts/check-motion.mjs",
     "test:journey": "node scripts/check-journey.mjs",
+    "test:handoff": "node scripts/check-handoff.mjs",
     "prepare:map": "node scripts/prepare-journey-map.mjs"
   },
   "dependencies": {

@@ -24,7 +24,7 @@ export function JourneyMap({ t }) {
       };
       const timeline = gsap.timeline({
         defaults: { ease: 'power2.out' },
-        scrollTrigger: { id: 'domus-journey', trigger: root.current, start: 'clamp(top 78%)', end: 'clamp(bottom 45%)', scrub: .75 },
+        scrollTrigger: { id: 'domus-journey', trigger: root.current.querySelector('.journey-cartography'), start: 'clamp(top 78%)', end: 'clamp(bottom 45%)', scrub: .5 },
       });
       timeline
         .fromTo('.map-geography', { opacity: .35 }, { opacity: 1, duration: 1.5 }, 0)

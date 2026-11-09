@@ -15,7 +15,7 @@ try {
     await page.goto(base + '/?lang=pt', { waitUntil: 'networkidle' });
     const scrollToProgress = async progress => {
       await page.evaluate(p => {
-        const rect = document.querySelector('.journey-stage').getBoundingClientRect();
+        const rect = document.querySelector('.journey-cartography').getBoundingClientRect();
         const top = rect.top + scrollY;
         const start = top - innerHeight * .78;
         const end = top + rect.height - innerHeight * .45;

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, InstagramLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -14,6 +14,7 @@ import { languages, translations, initialLanguage } from './translations.js';
 import { WhatsAppLink } from './contact.jsx';
 import { BrandScene } from './BrandScene.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
+import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -71,9 +72,8 @@ function App() {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .from('.hero-title-line', { yPercent: 110, rotation: 3, duration: 1.2, stagger: .12 }, .10)
+        .from('.hero-title-line', { y: 12, opacity: .5, duration: .8, stagger: .08, clearProps: 'all' }, .10)
         .from('.hero-kicker,.hero-description,.hero-link', { y: 18, autoAlpha: 0, duration: .9, stagger: .09, clearProps: 'all' }, .55)
-        .from('.hero-art', { autoAlpha: 0, y: 22, duration: 1.4, clearProps: 'all' }, .15)
         .from('.hero-bottom', { autoAlpha: 0, y: 10, duration: .8, clearProps: 'all' }, .9);
       gsap.to('.hero-copy', { y: -36, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .8 } });
       gsap.utils.toArray('[data-reveal]').forEach(element => {
@@ -101,7 +101,7 @@ function App() {
     <a href="#conteudo" className="skip-link">{t.skip}</a>
     <header ref={header}>
       <div className="header-inner shell">
-        <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
+        <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" style={{ clipPath: brandOutline.clip }} width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
         <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
           {nav('#historia', t.about)}{nav('#atuacao', t.shopNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
@@ -154,7 +154,7 @@ function App() {
       <section className="contact shell" id="contato"><div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div><div className="contact-details" data-reveal><div className="store-location"><span className="detail-label">{t.location}</span><p>Cascavel<span>{t.country}</span></p></div><div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div><div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div><a className="social-link" href={INSTAGRAM} target="_blank" rel="noopener noreferrer"><InstagramLogo size={22} /><span>@domus.armorum</span><ArrowUpRight size={18} /></a></div></section>
     </main>
     <footer className="shell"><div className="footer-top"><a className="footer-brand" href="#inicio">DOMUS ARMORUM<span>EST. 2017 · CASCAVEL, BRASIL</span></a><a className="footer-home" href="#inicio">{t.back}<ArrowUpRight size={16} /></a></div><div className="footer-bottom"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><span className="footer-motto">{t.footer}</span><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span></WhatsAppLink></div></footer>
-    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={28} weight="fill" aria-hidden="true" /></WhatsAppLink>
+    <WhatsAppLink copy={t} className="floating-whatsapp" floating><img className="whatsapp-original" src="/brand/whatsapp.svg" width="54" height="54" alt="" aria-hidden="true" /></WhatsAppLink>
   </div>;
 }
 createRoot(document.getElementById('root')).render(<App />);

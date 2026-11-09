@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { gsap } from 'gsap';
+import { CAMERA_FOV, MARK_HEIGHT, MARK_WIDTH } from './emblem-motion.js';
 
 // Use the actual image as the face, including its original positive/negative spaces.
 // Only the outside silhouette is extracted, so the mark is never redrawn or inverted.
@@ -40,13 +40,13 @@ async function originalMark() {
   return { shape, mapTexture, maskTexture };
 }
 
-export async function createBrandScene(container, { light = false, onReady, onUnavailable } = {}) {
+export async function createBrandScene(container, { light = false, motion, onReady, onUnavailable } = {}) {
   const mark = await originalMark();
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' });
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'default' });
   } catch (error) { mark.mapTexture.dispose(); mark.maskTexture.dispose(); throw error; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.35 : 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -57,13 +57,8 @@ export async function createBrandScene(container, { light = false, onReady, onUn
   const contextLost = event => { event.preventDefault(); contextAvailable = false; active = false; onUnavailable?.(); };
   renderer.domElement.addEventListener('webglcontextlost', contextLost);
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(31, 1, .1, 50);
-  camera.position.set(.05, .12, 12.5);
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const room = new RoomEnvironment();
-  const env = pmrem.fromScene(room, .04);
-  scene.environment = env.texture;
-  room.dispose(); pmrem.dispose();
+  const camera = new THREE.PerspectiveCamera(CAMERA_FOV, 1, .1, 50);
+  camera.position.set(0, 0, motion.layout.cameraZ + .012);
   const assembly = new THREE.Group();
   scene.add(assembly);
   const darkMetal = new THREE.MeshStandardMaterial({ color: 0x171c16, metalness: .72, roughness: .38, envMapIntensity: .4 });
@@ -73,13 +68,12 @@ export async function createBrandScene(container, { light = false, onReady, onUn
   assembly.add(back);
   mark.mapTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
   mark.maskTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
-  const faceMaterial = new THREE.MeshStandardMaterial({
+  const faceMaterial = new THREE.MeshBasicMaterial({
     map: mark.mapTexture, alphaMap: mark.maskTexture,
-    color: 0xe0dfd7, metalness: .48, roughness: .4, envMapIntensity: .55,
-    bumpMap: mark.mapTexture, bumpScale: .026,
+    color: 0xffffff, toneMapped: false,
     transparent: true, alphaTest: .45,
   });
-  const face = new THREE.Mesh(new THREE.PlaneGeometry(3.08, 4.44), faceMaterial);
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(MARK_WIDTH, MARK_HEIGHT), faceMaterial);
   face.position.z = .012;
   assembly.add(face);
   const key = new THREE.DirectionalLight(0xffe3b6, 2.3);
@@ -89,59 +83,43 @@ export async function createBrandScene(container, { light = false, onReady, onUn
   const lightStrip = new THREE.PointLight(0xe7c68b, 10, 18, 2);
   lightStrip.position.set(-3, .5, 4); scene.add(lightStrip);
 
-  const state = { reveal: 0, scroll: 0 }, pointer = { x: 0, y: 0 };
-  let active = true, disposed = false, first = true, last = 0;
+  let active = true, disposed = false, first = true, lastWidth = 0, lastHeight = 0;
   function resize() {
-    const { width, height } = container.getBoundingClientRect();
-    if (!width || !height || disposed) return;
+    if (disposed) return;
+    const { width, height, cameraZ } = motion.layout;
+    if (Math.abs(width - lastWidth) < .5 && Math.abs(height - lastHeight) < .5) return;
+    lastWidth = width; lastHeight = height;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.position.z = camera.aspect < .75 ? 13.5 : 11.9;
+    camera.position.z = cameraZ + .012;
     camera.updateProjectionMatrix();
   }
   function setTheme(isLight) {
     darkMetal.color.set(isLight ? 0x30372a : 0x171c16);
-    faceMaterial.envMapIntensity = isLight ? .7 : .55;
   }
-  function draw(time) {
-    if (!active || !contextAvailable || document.hidden || disposed || time - last < 1 / 45) return;
-    const dt = Math.min(time - last || .016, .05); last = time;
-    const bounds = container.closest('.hero').getBoundingClientRect();
-    state.scroll = THREE.MathUtils.clamp(-bounds.top / bounds.height, 0, 1);
-    const goalX = -.025 + pointer.y * .055 + state.scroll * .07;
-    const goalY = -.11 + pointer.x * .12 + (1 - state.reveal) * -.32 + state.scroll * .11;
-    assembly.rotation.x = THREE.MathUtils.damp(assembly.rotation.x, goalX, 5, dt);
-    assembly.rotation.y = THREE.MathUtils.damp(assembly.rotation.y, goalY, 5, dt);
-    assembly.rotation.z = -.025 + state.scroll * .035;
-    assembly.position.y = (1 - state.reveal) * -.18 + state.scroll * .25;
-    assembly.scale.setScalar(.94 + state.reveal * .06);
-    lightStrip.position.x = -3 + state.reveal * 4.5 + pointer.x;
+  function draw() {
+    if (!active || !contextAvailable || document.hidden || disposed) return;
+    const pose = motion.pose;
+    assembly.rotation.set(pose.x, pose.y, pose.z);
+    assembly.position.set(pose.shift, pose.lift, 0);
+    lightStrip.position.x = -1 + pose.y * 5;
     renderer.render(scene, camera);
     if (first) { first = false; onReady?.(); }
   }
-  function move(event) {
-    const r = container.getBoundingClientRect();
-    pointer.x = THREE.MathUtils.clamp((event.clientX - r.left) / r.width * 2 - 1, -1, 1);
-    pointer.y = THREE.MathUtils.clamp((event.clientY - r.top) / r.height * 2 - 1, -1, 1);
-  }
-  const reset = () => { pointer.x = 0; pointer.y = 0; };
-  container.addEventListener('pointermove', move);
-  container.addEventListener('pointerleave', reset);
   const observer = new IntersectionObserver(([entry]) => { active = entry.isIntersecting; }, { rootMargin: '80px' });
   observer.observe(container);
-  const resizeObserver = new ResizeObserver(resize);
-  resizeObserver.observe(container);
+  const unsubscribeResize = motion.onResize(resize);
   setTheme(light); resize();
-  const intro = gsap.to(state, { reveal: 1, duration: 2.3, ease: 'power2.out' });
+  // Compile before revealing the canvas; there is no timed spin or size change on load.
+  await renderer.compileAsync(scene, camera);
   gsap.ticker.add(draw);
   return {
     setTheme,
     destroy() {
-      disposed = true; gsap.ticker.remove(draw); intro.kill(); observer.disconnect(); resizeObserver.disconnect();
-      container.removeEventListener('pointermove', move); container.removeEventListener('pointerleave', reset);
+      disposed = true; gsap.ticker.remove(draw); observer.disconnect(); unsubscribeResize();
       const materials = new Set(), geometries = new Set();
       scene.traverse(object => { if (object.geometry) geometries.add(object.geometry); if (object.material) materials.add(object.material); });
-      geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); env.dispose();
+      geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose());
       mark.mapTexture.dispose(); mark.maskTexture.dispose();
       renderer.dispose(); renderer.domElement.remove();
       renderer.domElement.removeEventListener('webglcontextlost', contextLost);

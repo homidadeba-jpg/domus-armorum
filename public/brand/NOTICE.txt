@@ -4,3 +4,5 @@ Source: https://www.pexels.com/photo/backpack-with-gloves-on-wall-7393146/
 License: Pexels https://www.pexels.com/license/
 Changes: resized and converted to WebP; displayed with CSS masks.
 Illustrative photograph; does not represent company premises or inventory.
+
+WhatsApp logo: WhatsApp, original vector artwork distributed via https://commons.wikimedia.org/wiki/File:WhatsApp.svg . Asset served locally without changing its paths or aspect ratio.
