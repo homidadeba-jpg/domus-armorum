@@ -1,3 +1,4 @@
+import { partnersCopy } from './partners-copy.js';
 import { journeyCopy } from './journey-copy.js';
 import { brandCopy } from './brand-copy.js';
 
@@ -25,6 +26,7 @@ export const translations = {
     back: 'Torna all’inizio', footer: 'Storia. Identità. Presenza.', developed: 'Sviluppato da', whatsappOpening: 'Apertura di WhatsApp…', whatsappContact: 'Contatto generale tramite WhatsApp', greeting: 'Ciao, vi contatto dal sito.', pageTitle: 'Domus Armorum | Storia, identità e servizio', description: 'Scopri Domus Armorum a Cascavel, Paraná, Brasile. La nostra storia, identità e le informazioni di contatto in un unico posto.',
     ...brandCopy.it,
     ...journeyCopy.it,
+    ...partnersCopy.it,
   },
   pt: {
     language: 'Selecionar idioma', skip: 'Pular para o conteúdo', home: 'Domus Armorum, início', navigation: 'Navegação principal',
@@ -42,6 +44,7 @@ export const translations = {
     back: 'Voltar ao início', footer: 'História. Identidade. Presença.', developed: 'Desenvolvido por', whatsappOpening: 'Abrindo WhatsApp…', whatsappContact: 'Contato geral pelo WhatsApp', greeting: 'Olá, vim pelo site.', pageTitle: 'Domus Armorum | História, identidade e atendimento', description: 'Conheça a Domus Armorum, em Cascavel, Paraná. Nossa história, identidade e informações de atendimento em um só lugar.',
     ...brandCopy.pt,
     ...journeyCopy.pt,
+    ...partnersCopy.pt,
   },
   en: {
     language: 'Select language', skip: 'Skip to content', home: 'Domus Armorum, home', navigation: 'Main navigation',
@@ -59,6 +62,7 @@ export const translations = {
     back: 'Back to top', footer: 'History. Identity. Presence.', developed: 'Developed by', whatsappOpening: 'Opening WhatsApp…', whatsappContact: 'General contact via WhatsApp', greeting: 'Hello, I came from the website.', pageTitle: 'Domus Armorum | History, identity and service', description: 'Discover Domus Armorum in Cascavel, Paraná, Brazil. Our history, identity and contact information in one place.',
     ...brandCopy.en,
     ...journeyCopy.en,
+    ...partnersCopy.en,
   },
   es: {
     language: 'Seleccionar idioma', skip: 'Saltar al contenido', home: 'Domus Armorum, inicio', navigation: 'Navegación principal',
@@ -76,6 +80,7 @@ export const translations = {
     back: 'Volver al inicio', footer: 'Historia. Identidad. Presencia.', developed: 'Desarrollado por', whatsappOpening: 'Abriendo WhatsApp…', whatsappContact: 'Contacto general por WhatsApp', greeting: 'Hola, vengo del sitio web.', pageTitle: 'Domus Armorum | Historia, identidad y atención', description: 'Conozca Domus Armorum, en Cascavel, Paraná, Brasil. Nuestra historia, identidad e información de atención en un solo lugar.',
     ...brandCopy.es,
     ...journeyCopy.es,
+    ...partnersCopy.es,
   },
 };
 

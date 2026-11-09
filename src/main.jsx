@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowUpRight, ArrowDown, InstagramLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
+import { InstagramLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -16,6 +16,9 @@ import { BrandScene } from './BrandScene.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
 import { ItalyExperiences } from './ItalyExperiences.jsx';
 import { StoreShowcase } from './StoreShowcase.jsx';
+import { Representations } from './Representations.jsx';
+import { CompanyContact } from './CompanyContact.jsx';
+import { company } from './company.js';
 import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
@@ -105,7 +108,7 @@ function App() {
       <div className="header-inner shell">
         <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" style={{ clipPath: brandOutline.clip }} width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
         <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
-          {nav('#historia', t.about)}{nav('#atuacao', t.shopNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
+          {nav('#historia', t.about)}{nav('#atuacao', t.shopNav)}{nav('#marcas', t.brandsNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
         <div className="header-actions">
           <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={18} /> : <Sun size={18} />}</button>
@@ -126,7 +129,7 @@ function App() {
           <p className="hero-kicker eyebrow"><span />{t.heroKicker}</p>
           <h1><span className="title-mask"><span className="hero-title-line">DOMUS</span></span><span className="title-mask"><span className="hero-title-line">ARMORUM<span className="title-dot">.</span></span></span></h1>
           <p className="hero-description">{t.hero}</p>
-          <a href="#essencia" className="hero-link">{t.exploreBrand}<span className="link-icon"><ArrowDown size={19} /></span></a>
+          <a href="#essencia" className="hero-link">{t.exploreBrand}</a>
         </div>
         <div className="hero-art"><span className="scene-caption scene-caption--top">DOMUS ARMORUM <span>EST. 2017</span></span><BrandScene light={light} alt={t.emblemAlt} /><span className="scene-caption scene-caption--bottom">{t.signature}</span></div>
         <div className="hero-bottom"><span>{t.since}</span><span className="hero-bottom-line" /><span>{t.heroFoot}</span></div>
@@ -135,13 +138,14 @@ function App() {
         <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>
         <div className="manifesto-bottom"><BrandContour className="manifesto-seal" /><p data-reveal>{t.manifesto}</p></div>
-        <div className="world-links" data-reveal><a href="#atuacao"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.shopNav}<ArrowDown size={18} /></span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}<ArrowDown size={18} /></span></a></div>
+        <div className="world-links" data-reveal><a href="#atuacao"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.shopNav}</span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}</span></a></div>
       </section>
       <section className="activities shell" id="atuacao" aria-labelledby="activities-heading">
         <div className="section-heading"><div><p className="eyebrow" data-reveal>{t.shopLabel}</p><h2 id="activities-heading" data-reveal><TextLines value={t.shopHeading} /></h2></div><p data-reveal>{t.shopIntro}</p></div>
         <StoreShowcase t={t} />
         <div className="section-tail"><span className="small-cross" aria-hidden="true" /><p>{t.shopNote}</p><span className="micro">DOMUS ARMORUM</span></div>
       </section>
+      <Representations t={t} />
       <section className="italy" id="italia" aria-labelledby="italy-heading">
         <JourneyMap t={t} />
         <figure className="italy-landscape" data-photo><img src="/experiences/italia.webp" alt={t.italyPhoto} width="1800" height="1200" loading="lazy" /><div className="landscape-shade" /><span className="italy-word" aria-hidden="true">{t.italyCountry.toUpperCase()}.</span><figcaption><span>{t.italyCaption}</span><span>DOMUS · {t.italyCountry.toUpperCase()}</span></figcaption></figure>
@@ -149,9 +153,9 @@ function App() {
         <div className="italy-pull shell"><span className="pull-rule" /><p data-reveal>{t.italyPull}</p><span className="pull-rule" /></div>
       </section>
       <section className="story shell" id="historia"><div className="story-heading"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 data-reveal><TextLines value={t.storyHeading} /></h2><span className="story-date" aria-hidden="true">2017</span></div><div className="story-copy"><p data-reveal>{t.story}</p><p className="muted" data-reveal>{t.storyIdentity}</p><dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl></div></section>
-      <section className="contact shell" id="contato"><div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div><div className="contact-details" data-reveal><div className="store-location"><span className="detail-label">{t.location}</span><p>Cascavel<span>{t.country}</span></p></div><div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div><div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div><a className="social-link" href={INSTAGRAM} target="_blank" rel="noopener noreferrer"><InstagramLogo size={22} /><span>@domus.armorum</span><ArrowUpRight size={18} /></a></div></section>
+      <CompanyContact t={t} />
     </main>
-    <footer className="shell"><div className="footer-top"><a className="footer-brand" href="#inicio">DOMUS ARMORUM<span>EST. 2017 · CASCAVEL, BRASIL</span></a><a className="footer-home" href="#inicio">{t.back}<ArrowUpRight size={16} /></a></div><div className="footer-bottom"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><span className="footer-motto">{t.footer}</span><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span></WhatsAppLink></div></footer>
+    <footer className="shell"><div className="footer-top"><a className="footer-brand" href="#inicio">DOMUS ARMORUM<span>EST. 2017 · CASCAVEL, BRASIL</span></a><a className="footer-home" href="#inicio">{t.back}</a></div><div className="footer-bottom"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p><p className="footer-address">{company.street} · {company.suite} · {company.district}<br />{company.city}–{company.stateCode} · CEP {company.postalCode}</p></div><span className="footer-motto">{t.footer}</span><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span></WhatsAppLink></div></footer>
     <WhatsAppLink copy={t} className="floating-whatsapp" floating><img className="whatsapp-original" src="/brand/whatsapp.svg" width="54" height="54" alt="" aria-hidden="true" /></WhatsAppLink>
   </div>;
 }

@@ -13,6 +13,7 @@
     "test:journey": "node scripts/check-journey.mjs",
     "test:handoff": "node scripts/check-handoff.mjs",
     "test:scroll": "node scripts/check-scroll-flow.mjs",
+    "test:partners": "node scripts/check-partners.mjs",
     "prepare:map": "node scripts/prepare-journey-map.mjs"
   },
   "dependencies": {

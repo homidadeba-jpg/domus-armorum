@@ -1,0 +1,112 @@
+[
+  {
+    "id": "ghost",
+    "source": "https://ghostinternational.com/",
+    "url": "https://ghostinternational.com/wp-content/uploads/2021/06/logo-bianco-vettoriale.png",
+    "width": 600,
+    "height": 88,
+    "size": 5614
+  },
+  {
+    "id": "konus",
+    "source": "https://www.konus.com/en/",
+    "url": "https://www.konus.com/wp-content/uploads/logo.webp",
+    "width": 400,
+    "height": 81,
+    "size": 5696
+  },
+  {
+    "id": "sightron",
+    "source": "https://sightron.com/",
+    "url": "https://sightron.com/cdn/shop/files/sightron-logo-black-500.png?v=1614823494",
+    "width": 500,
+    "height": 71,
+    "size": 3910
+  },
+  {
+    "id": "hornady",
+    "source": "https://www.hornady.com/",
+    "url": "https://www.hornady.com/assets/templates/hmc/images/h-logo.png",
+    "width": 140,
+    "height": 115,
+    "size": 3044
+  },
+  {
+    "id": "cbc",
+    "source": "https://www.cbc.com.br/",
+    "url": "https://www.cbc.com.br/wp-content/uploads/2023/09/logo_completov2.png",
+    "width": 99,
+    "height": 124,
+    "size": 1956
+  },
+  {
+    "id": "federal",
+    "source": "https://www.federalpremium.com/",
+    "url": "https://www.federalpremium.com/on/demandware.static/Sites-VistaFederal-Site/-/default/dwa12d85dc/images/svg-icons/icon-logo-desktop.svg",
+    "width": 600,
+    "height": 96,
+    "size": 6894
+  },
+  {
+    "id": "cci",
+    "source": "https://www.cci-ammunition.com/",
+    "url": "https://www.cci-ammunition.com/on/demandware.static/Sites-VistaCCI-Site/-/default/dw742c1449/images/svg-icons/icon-logo-desktop.svg",
+    "width": 220,
+    "height": 220,
+    "size": 24244
+  },
+  {
+    "id": "fiocchi",
+    "source": "https://www.fiocchiusa.com/",
+    "url": "https://www.fiocchiusa.com/on/demandware.static/Sites-fiocchi-Site/-/default/dw73076c0a/images/svg-icons/icon-logo-desktop-white.svg",
+    "width": 230,
+    "height": 220,
+    "size": 2952
+  },
+  {
+    "id": "dfa",
+    "source": "https://dfadefense.com/sobre-nos/",
+    "url": "https://dfadefense.com/wp-content/uploads/2022/03/Logo-para-site-DFA-1.png",
+    "width": 512,
+    "height": 132,
+    "size": 1816
+  },
+  {
+    "id": "fireeagle",
+    "source": "https://fireeagle-armory.com/",
+    "url": "https://fireeagle-armory.com/assets/logo-white-D_umg79W.svg",
+    "width": 499,
+    "height": 220,
+    "size": 6820
+  },
+  {
+    "id": "topgun",
+    "source": "https://www.topgun.ind.br/",
+    "url": "https://images.tcdn.com.br/files/1348900/themes/3/img/settings/Logo-prata-topgun.png",
+    "width": 239,
+    "height": 118,
+    "size": 5228
+  },
+  {
+    "id": "raoni",
+    "source": "https://raonitac.com.br/",
+    "url": "https://raonitac.com.br/ecommerce/logos/dRlJUDRhbMuXIQODoQdD.png",
+    "width": 311,
+    "height": 220,
+    "size": 9658
+  },
+  {
+    "id": "ghost-detail",
+    "source": "https://ghostinternational.com/wp-content/uploads/2026/03/Ghost2-21-scaled.jpg",
+    "url": "https://ghostinternational.com/wp-content/uploads/2026/03/Ghost2-21-scaled.jpg",
+    "width": 1500,
+    "height": 2250
+  },
+  {
+    "id": "konus-outdoor",
+    "source": "https://www.konus.com/wp-content/uploads/outdoor-homepage.webp",
+    "url": "https://www.konus.com/wp-content/uploads/outdoor-homepage.webp",
+    "width": 1500,
+    "height": 366
+  }
+]

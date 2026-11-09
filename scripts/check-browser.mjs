@@ -74,6 +74,11 @@ try {
       const location = page.locator('.store-location');
       assert.match(await location.innerText(), /Cascavel/);
       assert.match(await location.innerText(), /Paraná/);
+      assert.match(await location.innerText(), /Rua Souza Naves, 3983/);
+      assert.match(await location.innerText(), /Sala 605/);
+      assert.match(await location.innerText(), /85810-070/);
+      assert.equal(await page.locator('.brand-index button').count(), 12);
+      assert.match(await page.locator('#marcas').innerText(), /Ghost Holster/);
       assert.match(await page.locator('.company-facts').innerText(), /AWM Armas e Munições LTDA/);
       assert.match(await page.locator('.company-facts').innerText(), /28\.698\.049\/0001-89/);
       assert.doesNotMatch(await page.locator('body').innerText(), /Gardone|Alessandro Volta|25063/);

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { translations } from './translations.js';
-const COMPANY = { whatsapp: 'https://wa.me/5545999794330' };
+import { company } from './company.js';
 export function WhatsAppLink({ children, className = '', author = false, floating = false, copy = translations.it }) {
   const [opening, setOpening] = useState(false);
   const timer = useRef();
@@ -12,7 +12,7 @@ export function WhatsAppLink({ children, className = '', author = false, floatin
     document.addEventListener('visibilitychange', visible);
     return () => { reset(); window.removeEventListener('focus', reset); window.removeEventListener('pageshow', reset); document.removeEventListener('visibilitychange', visible); };
   }, []);
-  return <a className={`whatsapp-link ${className} ${opening ? 'is-opening' : ''}`} href={author ? 'https://wa.me/5585999745534' : `${COMPANY.whatsapp}?text=${encodeURIComponent(copy.greeting)}`} target="_blank" rel="noopener noreferrer" aria-label={floating ? (opening ? copy.whatsappOpening : copy.whatsappContact) : undefined} onClick={event => {
+  return <a className={`whatsapp-link ${className} ${opening ? 'is-opening' : ''}`} href={author ? 'https://wa.me/5585999745534' : `${company.whatsapp}?text=${encodeURIComponent(copy.greeting)}`} target="_blank" rel="noopener noreferrer" aria-label={floating ? (opening ? copy.whatsappOpening : copy.whatsappContact) : undefined} onClick={event => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     setOpening(true);
     window.clearTimeout(timer.current);
