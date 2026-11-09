@@ -15,6 +15,7 @@ import { WhatsAppLink } from './contact.jsx';
 import { BrandScene } from './BrandScene.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
 import { ItalyExperiences } from './ItalyExperiences.jsx';
+import { StoreShowcase } from './StoreShowcase.jsx';
 import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
@@ -138,11 +139,7 @@ function App() {
       </section>
       <section className="activities shell" id="atuacao" aria-labelledby="activities-heading">
         <div className="section-heading"><div><p className="eyebrow" data-reveal>{t.shopLabel}</p><h2 id="activities-heading" data-reveal><TextLines value={t.shopHeading} /></h2></div><p data-reveal>{t.shopIntro}</p></div>
-        <div className="department-grid">{[
-          { image: 'armas-contexto-a29f18f3.webp', alt: t.armsPhoto, title: t.arms, text: t.armsFirst },
-          { image: 'municoes-contexto-e32bdbf6.webp', alt: t.ammunitionPhoto, title: t.ammunition, text: t.ammunitionFirst },
-          { image: 'equipamentos-taticos-b8b5a79e.webp', alt: t.equipmentPhoto, title: t.equipment, text: t.equipmentFirst },
-        ].map(({ image, alt, title, text }) => <article className="department" key={image}><figure className="department-photo" data-photo><img src={'/brand/' + image} alt={alt} width={image.startsWith('equip') ? 1000 : 1600} height={image.startsWith('equip') ? 1503 : 1067} loading="lazy" /></figure><div className="department-copy" data-reveal><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+        <StoreShowcase t={t} />
         <div className="section-tail"><span className="small-cross" aria-hidden="true" /><p>{t.shopNote}</p><span className="micro">DOMUS ARMORUM</span></div>
       </section>
       <section className="italy" id="italia" aria-labelledby="italy-heading">

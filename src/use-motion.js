@@ -11,15 +11,16 @@ export function useSmoothScroll() {
   useEffect(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      const lenis = new Lenis({ autoRaf: false, lerp: .105, smoothWheel: true, syncTouch: false, anchors: true });
+      // Preserve the browser's wheel/touch speed. Lenis only animates explicit anchor navigation.
+      const lenis = new Lenis({ autoRaf: false, lerp: .105, smoothWheel: false, syncTouch: false, anchors: true });
       const tick = seconds => lenis.raf(seconds * 1000);
       const sync = () => ScrollTrigger.update();
       lenis.on('scroll', sync);
       gsap.ticker.add(tick);
-      document.documentElement.dataset.smoothScroll = 'active';
+      document.documentElement.dataset.scrollMode = 'native';
       return () => {
         gsap.ticker.remove(tick); lenis.off('scroll', sync); lenis.destroy();
-        delete document.documentElement.dataset.smoothScroll;
+        delete document.documentElement.dataset.scrollMode;
       };
     });
     return () => media.revert();

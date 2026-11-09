@@ -17,18 +17,20 @@ export function JourneyMap({ t }) {
       const route = root.current.querySelector('.connection-route');
       const traveller = root.current.querySelector('.connection-traveller');
       const length = route.getTotalLength();
+      // Sample once; scrolling only interpolates cached coordinates and updates the small marker.
+      const points = Array.from({ length: 181 }, (_, i) => route.getPointAtLength(length * i / 180));
       const progress = { value: 0 };
       const move = () => {
-        const p = route.getPointAtLength(length * progress.value);
-        traveller.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ')');
+        const position = progress.value * 180;
+        const index = Math.min(179, Math.floor(position));
+        const a = points[index], b = points[index + 1], mix = position - index;
+        traveller.setAttribute('transform', 'translate(' + (a.x + (b.x - a.x) * mix) + ' ' + (a.y + (b.y - a.y) * mix) + ')');
       };
       const timeline = gsap.timeline({
         defaults: { ease: 'power2.out' },
-        scrollTrigger: { id: 'domus-journey', trigger: root.current.querySelector('.journey-cartography'), start: 'clamp(top 86%)', end: 'clamp(top 32%)', scrub: .4 },
+        scrollTrigger: { id: 'domus-journey', trigger: root.current.querySelector('.journey-cartography'), start: 'clamp(top 86%)', end: 'clamp(top 32%)', scrub: true },
       });
       timeline
-        .fromTo('.map-geography', { opacity: .35 }, { opacity: 1, duration: 1.5 }, 0)
-        .fromTo('.journey-editorial', { y: 20 }, { y: 0, duration: 1.3 }, 0)
         .fromTo('.origin-label', { opacity: .3, y: 8 }, { opacity: 1, y: 0, duration: .8 }, .15)
         .fromTo('.map-origin-country', { opacity: .18 }, { opacity: 1, duration: .8 }, .15)
         .fromTo('.origin-ring', { scale: .55, opacity: .1, svgOrigin: ox + ' ' + oy }, { scale: 1, opacity: .7, duration: .8 }, .15)

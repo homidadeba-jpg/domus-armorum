@@ -4,15 +4,16 @@ Source: https://images.unsplash.com/photo-1516483638261-f4dbaf036963
 License: Unsplash License — https://unsplash.com/license
 Downloaded 2026-11-09, resized to 1800px and converted to WebP.
 
-Training photograph: Remy Gieling, Unsplash.
-Source: https://unsplash.com/photos/two-women-are-aiming-a-gun-at-a-target-AHK7uOwb4Aw
-Image: https://images.unsplash.com/photo-1643538254828-c895f157cc9c
-License: Unsplash License — https://unsplash.com/license
-Illustrative sport shooting session, not a Domus tour, client, instructor or confirmed partner.
+Training photograph: Kaboompics.com, Pexels.
+Source: https://www.pexels.com/photo/a-man-aiming-a-rifle-5202396/
+Image: https://images.pexels.com/photos/5202396/pexels-photo-5202396.jpeg
+License: Pexels License — https://www.pexels.com/license/
+Illustrative man at a shooting range wearing hearing and eye protection; not a Domus participant or partner.
 
-Gastronomy photograph: Faezeh Taheri, Unsplash.
-Source: https://unsplash.com/photos/a-table-topped-with-lots-of-different-types-of-pasta-eoBK17T7QTQ
-Image: https://images.unsplash.com/photo-1714385988516-85f063e4fcdb
-License: Unsplash License — https://unsplash.com/license
-Illustrative culinary ingredients, not a confirmed restaurant or tour activity.
-Both downloaded 2026-11-09, resized to 1600px wide, converted to WebP.
+Gastronomy photograph: Valentina Bešker, Pexels.
+Source: https://www.pexels.com/photo/authentic-italian-pasta-dishes-in-rome-eatery-36495569/
+Image: https://images.pexels.com/photos/36495569/pexels-photo-36495569.jpeg
+Location listed by photographer: Rome, Italy.
+License: Pexels License — https://www.pexels.com/license/
+Illustrative restaurant dishes, not a confirmed Domus restaurant partner or tour activity.
+Downloaded 2026-11-09. Training resized to 1600px wide; gastronomy to 1000px wide. Converted to WebP.

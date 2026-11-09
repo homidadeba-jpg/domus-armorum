@@ -18,7 +18,7 @@ try {
     await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.scene === 'ready');
     await page.waitForTimeout(2600);
     assert.equal(await page.locator('.scene-canvas canvas').count(), 1, 'One live WebGL canvas');
-    assert.equal(await page.locator('html').getAttribute('data-smooth-scroll'), 'active');
+    assert.equal(await page.locator('html').getAttribute('data-scroll-mode'), 'native');
     assert.equal(await page.locator('#atuacao').isVisible(), true);
     assert.equal(await page.locator('#italia').isVisible(), true);
     assert.match(await page.locator('#italia').innerText(), /tours|Tours/);
@@ -36,7 +36,7 @@ try {
     await page.screenshot({ path: `artifacts/motion-${width}-hero.png` });
     await page.mouse.wheel(0, 700);
     await page.waitForFunction(() => scrollY > 300);
-    assert.equal(Math.round(await page.locator('header').evaluate(el => el.getBoundingClientRect().top)), 0, 'Header remains fixed while Lenis scrolls');
+    assert.equal(Math.round(await page.locator('header').evaluate(el => el.getBoundingClientRect().top)), 0, 'Header remains fixed during native scrolling');
     const target = page.locator('.world-links a[href="#italia"]');
     await target.click();
     await page.waitForFunction(() => Math.abs(document.querySelector('#italia').getBoundingClientRect().top - parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)) < 12);
@@ -46,7 +46,7 @@ try {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.scene === 'reduced');
     assert.equal(await page.locator('.scene-canvas canvas').count(), 0, 'Reduced motion disposes WebGL');
-    assert.equal(await page.locator('html').getAttribute('data-smooth-scroll'), null, 'Reduced motion restores native scrolling');
+    assert.equal(await page.locator('html').getAttribute('data-scroll-mode'), null, 'Reduced motion removes the anchor animation controller');
     await page.evaluate(() => scrollTo(0, 0));
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.scene === 'ready');
@@ -56,7 +56,7 @@ try {
     await page.waitForFunction(() => document.querySelector('[data-scene]')?.dataset.scene === 'fallback');
     assert.equal(await page.locator('.scene-fallback').evaluate(el => el.complete && el.naturalWidth > 0), true);
     assert.deepEqual(errors, []);
-    report.push({ width, pointerDifference: difference / a.length, checks: ['live Three.js scene', 'pointer response', 'Lenis wheel and anchors', 'fixed header', 'Italy photograph', 'live reduced-motion cleanup', 'context-loss fallback'], result: 'passed' });
+    report.push({ width, pointerDifference: difference / a.length, checks: ['live Three.js scene', 'pointer response', 'native wheel and Lenis anchors', 'fixed header', 'Italy photograph', 'live reduced-motion cleanup', 'context-loss fallback'], result: 'passed' });
     await context.close();
   }
   const context = await browser.newContext({ reducedMotion: 'reduce' });

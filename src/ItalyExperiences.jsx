@@ -17,7 +17,7 @@ export function ItalyExperiences({ t }) {
     </div></div>
     <div className="experience-list">
       <figure className="experience-photo experience-photo--training">
-        <img src="/experiences/treinamento.webp" alt={t.trainingPhoto} width="1600" height="1067" loading="lazy" decoding="async" />
+        <img src="/experiences/treinamento-fuzil.webp" alt={t.trainingPhoto} width="1600" height="1067" loading="lazy" decoding="async" />
         <figcaption><span>{t.trainingTitle}</span><span>{t.experiencePhotoNote}</span></figcaption>
       </figure>
       <ExperienceText title={t.trainingTitle} text={t.trainingText} className="experience-training-copy" />
@@ -25,7 +25,7 @@ export function ItalyExperiences({ t }) {
       <div className="experience-table">
         <ExperienceText title={t.foodTitle} text={t.foodText} />
         <figure className="experience-photo experience-photo--food">
-          <img src="/experiences/gastronomia.webp" alt={t.foodPhoto} width="1600" height="2132" loading="lazy" decoding="async" />
+          <img src="/experiences/gastronomia-roma-1000.webp" alt={t.foodPhoto} width="1000" height="1333" loading="lazy" decoding="async" />
           <figcaption>{t.experiencePhotoNote}</figcaption>
         </figure>
       </div>

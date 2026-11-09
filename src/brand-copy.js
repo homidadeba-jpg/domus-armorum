@@ -41,8 +41,8 @@ export const brandCopy = {
     "description": "Conheça a Domus Armorum em Cascavel, Paraná, e seus tours na Itália: cursos e treinamentos, visitas a fábricas de armas e munições, gastronomia e cultura.",
     "trainingTitle": "Cursos e treinamentos",
     "trainingText": "Os parceiros na Itália oferecem cursos e treinamentos para praticantes de tiro esportivo. As atividades integram a experiência conforme a programação de cada tour.",
-    "trainingPhoto": "Praticante de tiro esportivo acompanhada por uma instrutora em estande ao ar livre, com proteção auditiva e ocular",
-    "foodPhoto": "Massas, pesto e ingredientes da culinária italiana sobre uma mesa de madeira",
+    "trainingPhoto": "Homem com óculos de proteção e protetor auricular utilizando um fuzil em estande de tiro",
+    "foodPhoto": "Pratos de massa italiana servidos em uma osteria em Roma, Itália",
     "experiencePhotoNote": "Imagem ilustrativa"
   },
   "it": {
@@ -86,8 +86,8 @@ export const brandCopy = {
     "description": "Scopri Domus Armorum a Cascavel, Paraná, Brasile, e i suoi tour in Italia: corsi e formazione, visite a fabbriche di armi e munizioni, gastronomia e cultura.",
     "trainingTitle": "Corsi e formazione",
     "trainingText": "I partner in Italia propongono corsi e formazione per chi pratica il tiro sportivo. Le attività fanno parte dell’esperienza secondo il programma di ciascun tour.",
-    "trainingPhoto": "Praticante di tiro sportivo con un’istruttrice in un poligono all’aperto, con protezioni acustiche e oculari",
-    "foodPhoto": "Pasta, pesto e ingredienti della cucina italiana su un tavolo di legno",
+    "trainingPhoto": "Uomo con occhiali protettivi e cuffie antirumore con una carabina in un poligono di tiro",
+    "foodPhoto": "Piatti di pasta italiana serviti in un’osteria a Roma, Italia",
     "experiencePhotoNote": "Immagine illustrativa"
   },
   "en": {
@@ -131,8 +131,8 @@ export const brandCopy = {
     "description": "Discover Domus Armorum in Cascavel, Paraná, Brazil, and its tours in Italy: courses and training, firearms and ammunition factory visits, gastronomy and culture.",
     "trainingTitle": "Courses and training",
     "trainingText": "Partners in Italy offer courses and training for sport shooting participants. Activities form part of the experience according to each tour’s programme.",
-    "trainingPhoto": "Sport shooting participant with an instructor at an outdoor range, wearing hearing and eye protection",
-    "foodPhoto": "Pasta, pesto and Italian cooking ingredients on a wooden table",
+    "trainingPhoto": "Man wearing safety glasses and hearing protection using a rifle at a shooting range",
+    "foodPhoto": "Italian pasta dishes served at an osteria in Rome, Italy",
     "experiencePhotoNote": "Illustrative image"
   },
   "es": {
@@ -176,8 +176,8 @@ export const brandCopy = {
     "description": "Conozca Domus Armorum en Cascavel, Paraná, Brasil, y sus tours en Italia: cursos y formación, visitas a fábricas de armas y municiones, gastronomía y cultura.",
     "trainingTitle": "Cursos y formación",
     "trainingText": "Los socios en Italia ofrecen cursos y formación para quienes practican tiro deportivo. Las actividades forman parte de la experiencia según el programa de cada tour.",
-    "trainingPhoto": "Practicante de tiro deportivo acompañada de una instructora en un campo al aire libre, con protección auditiva y ocular",
-    "foodPhoto": "Pasta, pesto e ingredientes de la cocina italiana sobre una mesa de madera",
+    "trainingPhoto": "Hombre con gafas de protección y protectores auditivos utilizando un rifle en un campo de tiro",
+    "foodPhoto": "Platos de pasta italiana servidos en una osteria en Roma, Italia",
     "experiencePhotoNote": "Imagen ilustrativa"
   }
 };
