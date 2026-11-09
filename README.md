@@ -1,10 +1,10 @@
 # Domus Armorum
 
-Site institucional em italiano, inglês, espanhol e português feito com React, Vite e GSAP ScrollTrigger. Apresenta a história, a identidade e as informações institucionais da empresa. Não possui catálogo, preços, pedidos ou fluxo de compra.
+Site institucional em italiano, inglês, espanhol e português, feito com React, Vite, Three.js, GSAP e Lenis. Apresenta a identidade da Domus Armorum, a loja em Cascavel e os projetos de conexões e experiências culturais na Itália.
 
-A seção de atuação descreve de forma neutra os três segmentos informados: armas, munições e equipamentos táticos. Cada área de atuação é acompanhada por uma fotografia real correspondente, sem repetição em outras seções. Os textos ocupam colunas amplas no desktop e toda a largura no celular. A história e os dados institucionais ficam em blocos tipográficos. O hero apresenta o emblema original sem painel ou halo. O conteúdo apresenta as três áreas de atuação e seu contexto, sem afirmar modelos ou estoque disponível. A seção educativa sobre proteção foi retirada a pedido do responsável. Os recortes diagonais remetem à espada do emblema e se abrem com deslocamento e zoom vinculados ao scroll, reversíveis na subida. Dois desenhos vetoriais ampliados (cartuchos e mira) compõem uma camada de fundo, parcialmente recortada nas bordas das seções. O parallax GSAP desloca essa camada em velocidade diferente do conteúdo, com percurso menor no celular e reversão contínua. A camada fica atrás do conteúdo, em baixo contraste, não recebe cliques e permanece estática quando há preferência por movimento reduzido. O botão geral de WhatsApp preenche somente “Olá, vim pelo site.”.
+A identidade visual utiliza grafite, oliva e latão, tipografia editorial e uma textura discreta. O emblema original é a fonte do relevo da cena 3D: os pixels alpha formam uma malha sobre uma base metálica com bordas chanfradas. Materiais, luzes, perspectiva e movimento são renderizados com Three.js, sem imagem gerada ou alteração do arquivo original. O modelo responde ao ponteiro e à rolagem. A cena é carregada separadamente e só renderiza quando está visível.
 
-Os símbolos com aparência de ícones foram retirados do layout e substituídos pelas fotografias reais já aprovadas. Nenhuma imagem gerada foi utilizada.
+A loja e as conexões na Itália têm seções próprias e acessos equivalentes. O conteúdo internacional se baseia nas conversas fornecidas pelo responsável, com foco institucional em cultura, encontros e gastronomia. Não são anunciados pacotes, valores, datas, parceiros identificados ou disponibilidade. Endereço completo não é publicado. As fotografias são ilustrativas.
 
 ## Desenvolvimento
 
@@ -30,6 +30,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - Foto de armas e equipamentos em uma bancada: [Kaboompics / Pexels, 5202438](https://www.pexels.com/photo/weapons-on-a-table-5202438/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
 - Foto de munições: [Pexels, 6091294](https://www.pexels.com/photo/a-row-of-bullets-6091294/). Foto real, redimensionada em WebP. Licença Pexels, sem obrigação de crédito visual na página.
 - Foto de equipamentos táticos: Dan Galvani Sommavilla / [Pexels, 7393146](https://www.pexels.com/photo/backpack-with-gloves-on-wall-7393146/). Composição real com mochila, luvas, óculos e acessórios; otimizada em WebP, sem geração de imagem. Licença Pexels, sem crédito visual obrigatório. Substitui a foto de proteção na bancada rejeitada pelo responsável.
+- Paisagem italiana: imagem de atmosfera do Unsplash, arquivo `public/experiences/italia.webp`. Origem e licença em `public/experiences/NOTICE.txt`; não representa um roteiro confirmado.
 - As fotos são ilustrativas e não representam a estrutura, o estoque ou a equipe da empresa.
 - A logo original recebida permanece em `public/brand/original-enviado.jpg`. As versões WebP são otimizações da mesma marca.
 - Instagram: https://www.instagram.com/domus.armorum/
@@ -48,7 +49,7 @@ npm run dev
 npm run test:browser
 ```
 
-O teste usa Playwright para desktop/celular, temas, menu, rolagem, imagens, feedback do WhatsApp e movimento reduzido. Os artefatos ficam em `artifacts/` (não versionados).
+Os testes usam Playwright para desktop/celular, os quatro idiomas, temas, menu, rolagem, imagens e feedback do WhatsApp. A verificação de movimento cobre a cena WebGL, resposta visual ao ponteiro, Lenis e âncoras, cabeçalho fixo, mudanças dinâmicas de movimento reduzido, descarte do canvas e fallback sem GPU ou com perda de contexto. Use `TEST_BROWSER_CHANNEL=msedge` para testar com o Edge instalado, ou instale Chromium com Playwright. Os artefatos ficam em `artifacts/` (não versionados).
 
 ## Prévia de compartilhamento
 
@@ -59,6 +60,10 @@ Capa própria com emblema original e tipografia do site, em JPEG 1200 × 630. Op
 Italiano, inglês, espanhol e português, com seletor nativo ao lado do tema. A seleção inicial segue esta ordem: idioma válido no parâmetro `?lang=it|en|es|pt`, escolha manual salva no navegador, primeiro idioma compatível da lista de preferências do navegador e italiano como padrão quando não houver correspondência. Não há solicitação de localização nem consulta externa por IP. Somente escolhas manuais ficam salvas; parâmetros e âncoras do link são preservados. Textos, rótulos acessíveis, descrições das imagens, título, descrição e feedback do WhatsApp acompanham o idioma. A troca atualiza o ScrollTrigger sem reiniciar as animações. A prévia social no HTML inicial e a capa de compartilhamento usam italiano e a localização em Cascavel, Paraná, Brasil. O crédito “Desenvolvido por Jonas Jr” permanece visível com o link do autor.
 
 Verificação da resolução de idiomas e integridade das traduções: `npm run test:languages`. O teste de navegador também cobre os quatro idiomas em desktop e celular, persistência, precedência da URL, navegação pelo histórico, armazenamento indisponível, localização em Cascavel e dados da empresa.
+
+## Histórico de versões anteriores
+
+As notas abaixo registram decisões anteriores à reformulação de 09/11/2026; detalhes de layout e movimento foram substituídos pela implementação descrita acima.
 
 ## Revisão visual de 04/11/2026
 

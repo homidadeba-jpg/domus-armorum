@@ -1,3 +1,5 @@
+import { brandCopy } from './brand-copy.js';
+
 export const languages = [
   { code: 'it', tag: 'it-IT', name: 'Italiano' },
   { code: 'en', tag: 'en', name: 'English' },
@@ -20,6 +22,7 @@ export const translations = {
     companyLabel: 'LA DOMUS ARMORUM', companyHeading: 'SERVIZIO\nSPECIALIZZATO.', company: 'Un’azienda di Cascavel, in Brasile, attiva nel settore delle armi, delle munizioni, delle attrezzature e degli accessori tattici. Il rapporto diretto e l’attenzione a ogni persona fanno parte dell’identità del marchio.', companyHistory: 'Dal 2017, Domus Armorum valorizza il servizio personalizzato. La sua identità e il suo modo di accogliere le persone fanno parte della stessa storia.', legalName: 'Ragione sociale', taxId: 'Codice fiscale brasiliano (CNPJ)', founded: 'Fondazione', foundingDate: '21 settembre 2017', city: 'Città', equipmentPhoto: 'Composizione di attrezzature tattiche con zaino, guanti, occhiali e accessori',
     contactLabel: 'INFORMAZIONI E CONTATTI', contactHeading: 'IL DIALOGO\nINIZIA QUI.', contact: 'Informazioni sull’azienda, orari e assistenza generale tramite il pulsante WhatsApp nell’angolo dello schermo.', location: 'Dove siamo', country: 'Paraná, Brasile', inPerson: 'Visita in negozio', visit: 'Contattaci per conoscere l’indirizzo aggiornato del negozio e gli orari di apertura.',
     back: 'Torna all’inizio', footer: 'Storia. Identità. Presenza.', developed: 'Sviluppato da', whatsappOpening: 'Apertura di WhatsApp…', whatsappContact: 'Contatto generale tramite WhatsApp', greeting: 'Ciao, vi contatto dal sito.', pageTitle: 'Domus Armorum | Storia, identità e servizio', description: 'Scopri Domus Armorum a Cascavel, Paraná, Brasile. La nostra storia, identità e le informazioni di contatto in un unico posto.',
+    ...brandCopy.it,
   },
   pt: {
     language: 'Selecionar idioma', skip: 'Pular para o conteúdo', home: 'Domus Armorum, início', navigation: 'Navegação principal',
@@ -35,6 +38,7 @@ export const translations = {
     companyLabel: 'A DOMUS ARMORUM', companyHeading: 'ATENDIMENTO\nESPECIALIZADO.', company: 'Uma empresa de Cascavel com atuação em armas, munições e equipamentos e acessórios táticos. O contato próximo e a atenção a cada pessoa fazem parte da identidade da marca.', companyHistory: 'Desde 2017, a Domus Armorum valoriza o atendimento personalizado. Sua origem e sua maneira de atender fazem parte da mesma história.', legalName: 'Razão social', taxId: 'CNPJ', founded: 'Fundação', foundingDate: '21 de setembro de 2017', city: 'Cidade', equipmentPhoto: 'Composição de equipamentos táticos com mochila, luvas, óculos e acessórios',
     contactLabel: 'INFORMAÇÕES E CONTATO', contactHeading: 'A CONVERSA\nCOMEÇA AQUI.', contact: 'Informações institucionais, horários e atendimento geral pelo WhatsApp no canto da tela.', location: 'Estamos em', country: 'Paraná, Brasil', inPerson: 'Atendimento presencial', visit: 'Consulte o endereço atual e os horários pelo nosso canal de contato.',
     back: 'Voltar ao início', footer: 'História. Identidade. Presença.', developed: 'Desenvolvido por', whatsappOpening: 'Abrindo WhatsApp…', whatsappContact: 'Contato geral pelo WhatsApp', greeting: 'Olá, vim pelo site.', pageTitle: 'Domus Armorum | História, identidade e atendimento', description: 'Conheça a Domus Armorum, em Cascavel, Paraná. Nossa história, identidade e informações de atendimento em um só lugar.',
+    ...brandCopy.pt,
   },
   en: {
     language: 'Select language', skip: 'Skip to content', home: 'Domus Armorum, home', navigation: 'Main navigation',
@@ -50,6 +54,7 @@ export const translations = {
     companyLabel: 'ABOUT DOMUS ARMORUM', companyHeading: 'SPECIALIZED\nSERVICE.', company: 'A company based in Cascavel, working in firearms, ammunition, and tactical equipment and accessories. Personal connections and attention to each individual are part of the brand’s identity.', companyHistory: 'Since 2017, Domus Armorum has valued personal service. Its origins and its approach to service are part of the same story.', legalName: 'Legal name', taxId: 'Brazilian tax ID (CNPJ)', founded: 'Founded', foundingDate: 'September 21, 2017', city: 'City', equipmentPhoto: 'Arrangement of tactical equipment with a backpack, gloves, eyewear and accessories',
     contactLabel: 'INFORMATION AND CONTACT', contactHeading: 'THE CONVERSATION\nSTARTS HERE.', contact: 'Company information, opening hours and general assistance through the WhatsApp button in the corner of the screen.', location: 'Based in', country: 'Paraná, Brazil', inPerson: 'In-person service', visit: 'Check the current address and opening hours through our contact channel.',
     back: 'Back to top', footer: 'History. Identity. Presence.', developed: 'Developed by', whatsappOpening: 'Opening WhatsApp…', whatsappContact: 'General contact via WhatsApp', greeting: 'Hello, I came from the website.', pageTitle: 'Domus Armorum | History, identity and service', description: 'Discover Domus Armorum in Cascavel, Paraná, Brazil. Our history, identity and contact information in one place.',
+    ...brandCopy.en,
   },
   es: {
     language: 'Seleccionar idioma', skip: 'Saltar al contenido', home: 'Domus Armorum, inicio', navigation: 'Navegación principal',
@@ -65,6 +70,7 @@ export const translations = {
     companyLabel: 'SOBRE DOMUS ARMORUM', companyHeading: 'ATENCIÓN\nESPECIALIZADA.', company: 'Una empresa de Cascavel dedicada al sector de armas, municiones y equipos y accesorios tácticos. La cercanía y la atención a cada persona forman parte de la identidad de la marca.', companyHistory: 'Desde 2017, Domus Armorum valora la atención personalizada. Su origen y su forma de atender son parte de una misma historia.', legalName: 'Razón social', taxId: 'Registro fiscal (CNPJ)', founded: 'Fundación', foundingDate: '21 de septiembre de 2017', city: 'Ciudad', equipmentPhoto: 'Composición de equipos tácticos con mochila, guantes, gafas y accesorios',
     contactLabel: 'INFORMACIÓN Y CONTACTO', contactHeading: 'LA CONVERSACIÓN\nEMPIEZA AQUÍ.', contact: 'Información institucional, horarios y atención general a través del botón de WhatsApp en la esquina de la pantalla.', location: 'Estamos en', country: 'Paraná, Brasil', inPerson: 'Atención presencial', visit: 'Consulte la dirección actual y los horarios a través de nuestro canal de contacto.',
     back: 'Volver al inicio', footer: 'Historia. Identidad. Presencia.', developed: 'Desarrollado por', whatsappOpening: 'Abriendo WhatsApp…', whatsappContact: 'Contacto general por WhatsApp', greeting: 'Hola, vengo del sitio web.', pageTitle: 'Domus Armorum | Historia, identidad y atención', description: 'Conozca Domus Armorum, en Cascavel, Paraná, Brasil. Nuestra historia, identidad e información de atención en un solo lugar.',
+    ...brandCopy.es,
   },
 };
 

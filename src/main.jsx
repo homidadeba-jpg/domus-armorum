@@ -1,7 +1,8 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { ArrowUpRight, ArrowDown, InstagramLogo, WhatsappLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
@@ -10,262 +11,150 @@ import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/600.css';
 import './styles.css';
 import { languages, translations, initialLanguage } from './translations.js';
-import { readingProgressState } from './reading-progress.js';
+import { WhatsAppLink } from './contact.jsx';
+import { BrandScene } from './BrandScene.jsx';
+import { useSmoothScroll } from './use-motion.js';
 
-gsap.registerPlugin(ScrollTrigger);
-const COMPANY = {
-  whatsapp: 'https://wa.me/5545999794330', instagram: 'https://www.instagram.com/domus.armorum/',
-  city: 'Cascavel', region: 'Paraná',
-};
-
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+const INSTAGRAM = 'https://www.instagram.com/domus.armorum/';
 function TextLines({ value }) {
-  return value.split('\n').map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{line}</React.Fragment>);
+  return value.split('\n').map((line, i) => <React.Fragment key={line}>{i > 0 && <br />}{line}</React.Fragment>);
 }
-
-function SegmentAccent({ sight = false }) {
-  return <svg className={`segment-accent ${sight ? 'segment-accent--sight' : ''}`} data-accent viewBox="0 0 88 56" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-    {sight ? <><circle cx="44" cy="28" r="17" /><circle cx="44" cy="28" r="5" /><path d="M44 3v14m0 22v14M19 28h14m22 0h14M4 9h9M75 47h9" /></> : <><path d="M25 43V22l4-5v-5l3-7 3 7v5l4 5v21zm-2 0h18v5H23zM49 43V27l4-5v-5l3-7 3 7v5l4 5v16zm-2 0h18v5H47zM25 25h14M49 30h14M8 37h7m58-17h7" /></>}
-  </svg>;
+function BrandContour({ className = '' }) {
+  return <svg className={className} viewBox="0 0 240 310" fill="none" aria-hidden="true"><path d="M120 8C97 8 83 34 26 54C13 59 10 64 10 83V223C10 244 80 283 120 302C160 283 230 244 230 223V83C230 64 227 59 214 54C157 34 143 8 120 8Z" stroke="currentColor" strokeWidth=".7" /><path d="M120 22C98 22 83 46 35 63C24 67 22 74 22 87V218C22 238 82 270 120 289C158 270 218 238 218 218V87C218 74 216 67 205 63C157 46 142 22 120 22Z" stroke="currentColor" strokeWidth=".5" /></svg>;
 }
-
-function ReadingProgress() {
-  return <div className="reading-progress" aria-hidden="true">
-    <div className="reading-trail" />
-    <div className="reading-cartridge">
-      <svg viewBox="0 0 120 24" fill="none" focusable="false">
-        <defs>
-          <linearGradient id="progress-brass" x1="0" y1="3" x2="0" y2="21" gradientUnits="userSpaceOnUse"><stop stopColor="#b99d67" /><stop offset=".3" stopColor="#e0c38b" /><stop offset=".56" stopColor="#a88a52" /><stop offset="1" stopColor="#725a32" /></linearGradient>
-          <linearGradient id="progress-copper" x1="0" y1="7" x2="0" y2="17" gradientUnits="userSpaceOnUse"><stop stopColor="#d2aa7e" /><stop offset=".5" stopColor="#aa7b4e" /><stop offset="1" stopColor="#795434" /></linearGradient>
-        </defs>
-        <path d="M6 4H68L80 8H88V16H80L68 20H6Z" fill="url(#progress-brass)" />
-        <path d="M88 8H95C102 8 110 10 118 12C110 14 102 16 95 16H88Z" fill="url(#progress-copper)" />
-        <path d="M2 3H7V21H2Z" fill="url(#progress-brass)" />
-        <path d="M10 5V19M67 5V19M83 9V15" stroke="#544021" strokeOpacity=".55" />
-        <path d="M14 6H65M83 9H94" stroke="#f0dbad" strokeOpacity=".55" strokeWidth=".7" />
-      </svg>
-    </div>
-    <svg className="reading-exit" viewBox="0 0 20 28" fill="none" focusable="false"><path d="M12 14L5 10L8 5M12 14L3 16L5 23M12 14L14 4M12 14L15 24" stroke="currentColor" strokeWidth="1" strokeLinecap="round" /></svg>
-  </div>;
-}
-
-function WhatsAppLink({ children, className = '', author = false, floating = false, copy = translations.it }) {
-  const [opening, setOpening] = useState(false);
-  const timer = useRef();
-  useEffect(() => {
-    const reset = () => { setOpening(false); window.clearTimeout(timer.current); };
-    const visible = () => { if (document.visibilityState === 'visible') reset(); };
-    window.addEventListener('focus', reset);
-    window.addEventListener('pageshow', reset);
-    document.addEventListener('visibilitychange', visible);
-    return () => { reset(); window.removeEventListener('focus', reset); window.removeEventListener('pageshow', reset); document.removeEventListener('visibilitychange', visible); };
-  }, []);
-  return <a className={`whatsapp-link ${className} ${opening ? 'is-opening' : ''}`} href={author ? 'https://wa.me/5585999745534' : `${COMPANY.whatsapp}?text=${encodeURIComponent(copy.greeting)}`} target="_blank" rel="noopener noreferrer" aria-label={floating ? (opening ? copy.whatsappOpening : copy.whatsappContact) : undefined} onClick={event => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    setOpening(true);
-    window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => setOpening(false), 5000);
-  }}>
-    <span className="wa-normal">{children}</span>
-    <span className="wa-pending" aria-hidden={!opening}><span className="spinner" />{!floating && copy.whatsappOpening}</span>
-    <span className="sr-only" role="status">{opening ? copy.whatsappOpening : ''}</span>
-  </a>;
-}
-
 function App() {
-  const root = useRef();
-  const menuButton = useRef();
+  const root = useRef(null), menuButton = useRef(null), header = useRef(null);
   const [menu, setMenu] = useState(false);
   const [language, setLanguage] = useState(initialLanguage);
+  const [light, setLight] = useState(() => {
+    try { return localStorage.getItem('domus-theme') === 'light'; } catch { return false; }
+  });
   const t = translations[language];
+  useSmoothScroll();
   useEffect(() => {
     document.documentElement.lang = languages.find(item => item.code === language).tag;
     document.title = t.pageTitle;
-    document.querySelector('meta[name="description"]').content = t.description;
     const locale = { it: 'it_IT', en: 'en_US', es: 'es_ES', pt: 'pt_BR' }[language];
     for (const [selector, content] of [
-      ['meta[property="og:locale"]', locale], ['meta[property="og:title"]', t.pageTitle],
-      ['meta[property="og:description"]', t.description], ['meta[name="twitter:title"]', t.pageTitle],
-      ['meta[name="twitter:description"]', t.description],
+      ['meta[name="description"]', t.description], ['meta[property="og:locale"]', locale],
+      ['meta[property="og:title"]', t.pageTitle], ['meta[property="og:description"]', t.description],
+      ['meta[name="twitter:title"]', t.pageTitle], ['meta[name="twitter:description"]', t.description],
     ]) document.querySelector(selector).content = content;
-    const url = new URL(window.location.href);
-    url.searchParams.set('lang', language);
-    window.history.replaceState(window.history.state, '', url);
+    const url = new URL(location.href); url.searchParams.set('lang', language);
+    history.replaceState(history.state, '', url);
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(frame);
   }, [language, t]);
   useEffect(() => {
     const restore = () => setLanguage(initialLanguage());
-    window.addEventListener('popstate', restore);
-    return () => window.removeEventListener('popstate', restore);
+    addEventListener('popstate', restore);
+    return () => removeEventListener('popstate', restore);
   }, []);
-  const [light, setLight] = useState(() => {
-    try { const saved = localStorage.getItem('domus-theme'); return saved ? saved === 'light' : matchMedia('(prefers-color-scheme: light)').matches; } catch { return false; }
-  });
   useEffect(() => {
     document.documentElement.dataset.theme = light ? 'light' : 'dark';
-    document.querySelector('meta[name="theme-color"]').content = light ? '#f0f1ed' : '#151715';
-    try { localStorage.setItem('domus-theme', light ? 'light' : 'dark'); } catch { /* The selected theme still works without storage. */ }
+    document.querySelector('meta[name="theme-color"]').content = light ? '#eeeee5' : '#111410';
+    try { localStorage.setItem('domus-theme', light ? 'light' : 'dark'); } catch { /* Theme still works without storage. */ }
   }, [light]);
   useEffect(() => {
-    const close = event => { if (event.key === 'Escape' && menu) { setMenu(false); menuButton.current?.focus(); } };
-    document.addEventListener('keydown', close);
-    return () => document.removeEventListener('keydown', close);
+    const escape = e => { if (e.key === 'Escape' && menu) { setMenu(false); menuButton.current?.focus(); } };
+    document.addEventListener('keydown', escape);
+    return () => document.removeEventListener('keydown', escape);
   }, [menu]);
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const context = gsap.context(() => {
-        gsap.timeline({ defaults: { ease: 'power2.out' } })
-          .from('.hero-copy .hero-enter', { y: 24, opacity: 0, stagger: 0.09, duration: 0.85, clearProps: 'all' }, 0)
-          .from('.hero-art', { x: 20, opacity: 0, scale: 0.97, duration: 1.05, clearProps: 'all' }, 0.12);
-        gsap.to('.hero-emblem', { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.85 } });
-        gsap.utils.toArray('[data-reveal]').forEach(el => {
-          gsap.fromTo(el, { y: 24 }, { y: 0, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'clamp(top 92%)', end: 'clamp(top 54%)', scrub: 0.55 } });
-        });
-        gsap.utils.toArray('.manifesto-line').forEach(el => {
-          gsap.fromTo(el, { opacity: 0.5, y: 22 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: el, start: 'clamp(top 88%)', end: 'clamp(top 50%)', scrub: 0.55 } });
-        });
-        gsap.utils.toArray('[data-photo]').forEach((frame, index) => {
-          const scene = frame.closest('figure') || frame.parentElement;
-          gsap.timeline({ scrollTrigger: { trigger: scene, start: 'clamp(top 94%)', end: 'clamp(top 40%)', scrub: 0.65, invalidateOnRefresh: true } })
-            .fromTo(frame, { y: () => window.innerWidth < 768 ? 30 : 46, x: () => window.innerWidth < 768 ? 0 : (index % 2 ? -18 : 18) }, { y: 0, x: 0, ease: 'power2.out' }, 0)
-            .fromTo(frame.querySelector('img'), { scale: 1.07, yPercent: -2 }, { scale: 1, yPercent: 0, ease: 'power1.out' }, 0)
-            .fromTo(scene, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask-entry').trim() || 'inset(0%)' }, { clipPath: getComputedStyle(scene).getPropertyValue('--photo-mask').trim() || 'inset(0%)', ease: 'none' }, 0);
-        });
-        gsap.utils.toArray('[data-accent]').forEach(accent => {
-          const depth = () => window.innerWidth < 768 ? 48 : 110;
-          const isSight = accent.classList.contains('segment-accent--sight');
-          gsap.fromTo(accent, { y: () => depth(), x: () => isSight ? -16 : 14, rotation: isSight ? -14 : 9 }, { y: () => -depth(), x: () => isSight ? 20 : -18, rotation: isSight ? 10 : -7, ease: 'none', scrollTrigger: { trigger: accent.closest('section'), start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: 1.1, invalidateOnRefresh: true } });
-        });
-        const track = root.current.querySelector('.reading-progress');
-        const marker = track.querySelector('.reading-cartridge');
-        const trail = track.querySelector('.reading-trail');
-        const exitMark = track.querySelector('.reading-exit');
-        const setPosition = gsap.quickSetter(marker, 'x', 'px');
-        const setTrail = gsap.quickSetter(trail, 'scaleX');
-        const setImpact = gsap.quickSetter(exitMark, 'opacity');
-        let trackWidth = track.clientWidth;
-        let markerWidth = marker.offsetWidth;
-        const renderProgress = progress => {
-          const state = readingProgressState(progress, trackWidth, markerWidth);
-          setPosition(state.x);
-          setTrail(state.trailScale);
-          setImpact(state.impactOpacity);
-        };
-        ScrollTrigger.create({
-          start: 0,
-          end: 'max',
-          onUpdate: self => renderProgress(self.progress),
-          onRefresh: self => {
-            trackWidth = track.clientWidth;
-            markerWidth = marker.offsetWidth;
-            renderProgress(self.progress);
-          },
-        });
-        renderProgress(window.scrollY / Math.max(1, ScrollTrigger.maxScroll(window)));
-      }, root);
-      return () => context.revert();
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => header.current?.classList.toggle('is-scrolled', !entry.isIntersecting));
+    observer.observe(root.current.querySelector('.top-sentinel'));
+    return () => observer.disconnect();
+  }, []);
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('.hero-title-line', { yPercent: 110, rotation: 3, duration: 1.2, stagger: .12 }, .10)
+        .from('.hero-kicker,.hero-description,.hero-link', { y: 18, autoAlpha: 0, duration: .9, stagger: .09, clearProps: 'all' }, .55)
+        .from('.hero-art', { autoAlpha: 0, y: 22, duration: 1.4, clearProps: 'all' }, .15)
+        .from('.hero-bottom', { autoAlpha: 0, y: 10, duration: .8, clearProps: 'all' }, .9);
+      gsap.to('.hero-copy', { y: -36, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .8 } });
+      gsap.utils.toArray('[data-reveal]').forEach(element => {
+        gsap.from(element, { y: 28, duration: .85, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'clamp(top 91%)', once: true } });
+      });
+      gsap.utils.toArray('.manifesto-line').forEach(element => {
+        gsap.fromTo(element, { opacity: .25, y: 20 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top 90%)', end: 'clamp(top 53%)', scrub: .65 } });
+      });
+      gsap.utils.toArray('[data-photo]').forEach(element => {
+        gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1, yPercent: 3, ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: .8 } });
+      });
+      gsap.fromTo('.italy-word', { xPercent: -4 }, { xPercent: 4, ease: 'none', scrollTrigger: { trigger: '.italy-landscape', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      gsap.from('.journey-path', { strokeDashoffset: 1, ease: 'none', scrollTrigger: { trigger: '.journey-route', start: 'clamp(top 90%)', end: 'clamp(bottom 65%)', scrub: 1 } });
+      gsap.to('.reading-trail', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+    });
+    media.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+      ScrollTrigger.create({ trigger: '.italy-body', start: 'top 130px', end: 'bottom bottom', pin: '.italy-intro-inner', pinSpacing: false });
     });
     let alive = true;
     document.fonts.ready.then(() => { if (alive) ScrollTrigger.refresh(); });
-    return () => { alive = false; mm.revert(); };
-  }, []);
-
+    return () => { alive = false; media.revert(); };
+  }, { scope: root });
+  const nav = (target, label) => <a href={target} onClick={() => setMenu(false)}>{label}</a>;
   return <div ref={root}>
+    <div className="top-sentinel" aria-hidden="true" />
     <a href="#conteudo" className="skip-link">{t.skip}</a>
-    <header>
+    <header ref={header}>
       <div className="header-inner shell">
         <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
-        <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation}>
-          <a href="#essencia" onClick={() => setMenu(false)}>{t.essence}</a>
-          <a href="#historia" onClick={() => setMenu(false)}>{t.about}</a>
-          <a href="#atuacao" onClick={() => setMenu(false)}>{t.areas}</a>
-          <a href="#contato" onClick={() => setMenu(false)}>{t.information} <ArrowUpRight size={15} /></a>
+        <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
+          {nav('#historia', t.about)}{nav('#atuacao', t.shopNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
         <div className="header-actions">
-          <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={19} /> : <Sun size={19} />}</button>
+          <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={18} /> : <Sun size={18} />}</button>
           <label className="language-switch"><select aria-label={t.language} value={language} onChange={event => {
             const selected = event.target.value;
             try { localStorage.setItem('domus-language', selected); } catch { /* Manual selection works without storage. */ }
             setLanguage(selected); setMenu(false);
           }}>{languages.map(item => <option key={item.code} value={item.code} lang={item.tag}>{item.name}</option>)}</select><span aria-hidden="true">{language.toUpperCase()}</span><CaretDown size={10} aria-hidden="true" /></label>
-          <a className="instagram-nav" href={COMPANY.instagram} target="_blank" rel="noopener noreferrer" aria-label={t.instagram}><InstagramLogo size={22} /></a>
-          <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button>
+          <a className="instagram-nav" href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label={t.instagram}><InstagramLogo size={21} /></a>
+          <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={() => setMenu(!menu)}>{menu ? <X size={24} /> : <List size={24} />}</button>
         </div>
       </div>
-      <ReadingProgress />
+      <div className="reading-progress" aria-hidden="true"><div className="reading-trail" /></div>
     </header>
-
     <main id="conteudo">
       <section className="hero shell" id="inicio">
         <div className="hero-copy">
-          <p className="eyebrow hero-enter">{t.since}</p>
-          <h1 className="hero-enter">DOMUS<br /><span>ARMORUM.</span></h1>
-          <p className="hero-description hero-enter">{t.hero}</p>
-          <a href="#essencia" className="button hero-enter">{t.discover} <ArrowDown size={20} /></a>
+          <p className="hero-kicker eyebrow"><span />{t.heroKicker}</p>
+          <h1><span className="title-mask"><span className="hero-title-line">DOMUS</span></span><span className="title-mask"><span className="hero-title-line">ARMORUM<span className="title-dot">.</span></span></span></h1>
+          <p className="hero-description">{t.hero}</p>
+          <a href="#essencia" className="hero-link">{t.exploreBrand}<span className="link-icon"><ArrowDown size={19} /></span></a>
         </div>
-        <div className="hero-art hero-enter" aria-label={t.emblem}>
-          <img className="hero-emblem" src="/brand/domus-transparente-de24c017.webp" alt={t.emblemAlt} width="683" height="984" fetchPriority="high" />
-        </div>
-        <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--sight"><SegmentAccent sight /></div></div>
+        <div className="hero-art"><span className="scene-caption scene-caption--top">DOMUS ARMORUM <span>EST. 2017</span></span><BrandScene light={light} alt={t.emblemAlt} /><span className="scene-caption scene-caption--bottom">{t.signature}</span></div>
+        <div className="hero-bottom"><span>{t.since}</span><span className="hero-bottom-line" /><span>{t.heroFoot}</span></div>
       </section>
-
       <section className="manifesto shell" id="essencia">
-        <div className="section-overflow"><p className="section-note" data-reveal>{t.essence}</p></div>
-        <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line outline-text">{t.manifestoSecond}</span></h2>
-        <div className="manifesto-bottom"><p data-reveal>{t.manifesto}</p></div>
+        <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
+        <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>
+        <div className="manifesto-bottom"><BrandContour className="manifesto-seal" /><p data-reveal>{t.manifesto}</p></div>
+        <div className="world-links" data-reveal><a href="#atuacao"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.shopNav}<ArrowDown size={18} /></span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}<ArrowDown size={18} /></span></a></div>
       </section>
-
-      <section className="story shell" id="historia">
-        <div className="story-heading"><h2 data-reveal><TextLines value={t.storyHeading} /></h2></div>
-        <div className="story-copy">
-          <p data-reveal>{t.story}</p>
-          <p className="muted" data-reveal>{t.storyIdentity}</p>
-          <div className="story-year" data-reveal><div><p>{t.sinceLabel}</p><span>2017</span></div><p>{COMPANY.city},<br />{t.country}.</p></div>
-        </div>
+      <section className="activities shell" id="atuacao" aria-labelledby="activities-heading">
+        <div className="section-heading"><div><p className="eyebrow" data-reveal>{t.shopLabel}</p><h2 id="activities-heading" data-reveal><TextLines value={t.shopHeading} /></h2></div><p data-reveal>{t.shopIntro}</p></div>
+        <div className="department-grid">{[
+          { image: 'armas-contexto-a29f18f3.webp', alt: t.armsPhoto, title: t.arms, text: t.armsFirst },
+          { image: 'municoes-contexto-e32bdbf6.webp', alt: t.ammunitionPhoto, title: t.ammunition, text: t.ammunitionFirst },
+          { image: 'equipamentos-taticos-b8b5a79e.webp', alt: t.equipmentPhoto, title: t.equipment, text: t.equipmentFirst },
+        ].map(({ image, alt, title, text }) => <article className="department" key={image}><figure className="department-photo" data-photo><img src={'/brand/' + image} alt={alt} width={image.startsWith('equip') ? 1000 : 1600} height={image.startsWith('equip') ? 1503 : 1067} loading="lazy" /></figure><div className="department-copy" data-reveal><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+        <div className="section-tail"><span className="small-cross" aria-hidden="true" /><p>{t.shopNote}</p><span className="micro">DOMUS ARMORUM</span></div>
       </section>
-
-      <section className="values activities shell" id="atuacao" aria-labelledby="activities-heading">
-        <div className="values-intro"><h2 id="activities-heading" data-reveal><TextLines value={t.areasHeading} /></h2><p data-reveal>{t.areasIntro}</p></div>
-        <div className="values-list activity-list">
-          <article>
-            <figure className="activity-photo photo-scene photo-cut photo-cut--arms"><div className="photo-frame" data-photo><img src="/brand/armas-contexto-a29f18f3.webp" alt={t.armsPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><h3>{t.arms}</h3><p>{t.armsFirst}</p><p>{t.armsSecond}</p></div>
-          </article>
-          <article>
-            <figure className="activity-photo photo-scene photo-cut photo-cut--ammunition"><div className="photo-frame" data-photo><img src="/brand/municoes-contexto-e32bdbf6.webp" alt={t.ammunitionPhoto} width="1600" height="1067" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><h3>{t.ammunition}</h3><p>{t.ammunitionFirst}</p><p>{t.ammunitionSecond}</p></div>
-          </article>
-          <article>
-            <figure className="activity-photo activity-photo--equipment photo-scene photo-cut photo-cut--equipment"><div className="photo-frame" data-photo><img src="/brand/equipamentos-taticos-b8b5a79e.webp" alt={t.equipmentPhoto} width="1000" height="1503" loading="lazy" /></div></figure>
-            <div className="activity-copy" data-reveal><h3>{t.equipment}</h3><p>{t.equipmentFirst}</p><p>{t.equipmentSecond}</p></div>
-          </article>
-        </div>
-        <div className="ambient-field" aria-hidden="true"><div className="ambient-mark ambient-mark--cartridges"><SegmentAccent /></div></div>
+      <section className="italy" id="italia" aria-labelledby="italy-heading">
+        <div className="journey-route shell" aria-hidden="true"><span>CASCAVEL, BR</span><svg viewBox="0 0 700 90" fill="none"><path className="journey-path" pathLength="1" strokeDasharray="1" d="M8 70C160 70 200 8 350 8S540 70 692 70" /><circle cx="8" cy="70" r="3" /><circle cx="692" cy="70" r="3" /></svg><span>ITALIA</span></div>
+        <figure className="italy-landscape" data-photo><img src="/experiences/italia.webp" alt={t.italyPhoto} width="1800" height="1200" loading="lazy" /><div className="landscape-shade" /><span className="italy-word" aria-hidden="true">{t.italyCountry.toUpperCase()}.</span><figcaption><span>{t.italyCaption}</span><span>DOMUS · {t.italyCountry.toUpperCase()}</span></figcaption></figure>
+        <div className="italy-body shell"><div className="italy-intro"><div className="italy-intro-inner"><p className="eyebrow" data-reveal>{t.italyLabel}</p><h2 id="italy-heading" data-reveal><TextLines value={t.italyHeading} /></h2><p data-reveal>{t.italyIntro}</p><div className="italy-signature"><span className="italian-flag" aria-hidden="true"><i /><i /><i /></span><span>{t.world}</span></div></div></div><div className="experience-list">{[[t.cultureTitle, t.cultureText], [t.foodTitle, t.foodText], [t.connectionTitle, t.connectionText]].map(([title, text]) => <article key={title} data-reveal><span className="experience-diamond" aria-hidden="true" /><h3>{title}</h3><p>{text}</p></article>)}<p className="experience-note">{t.italyNote}</p></div></div>
+        <div className="italy-pull shell"><span className="pull-rule" /><p data-reveal>{t.italyPull}</p><span className="pull-rule" /></div>
       </section>
-
-      <section className="company-profile company-layout shell" aria-labelledby="company-heading">
-        <div className="company-intro"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 id="company-heading" data-reveal><TextLines value={t.companyHeading} /></h2><p data-reveal>{t.company}</p><p data-reveal>{t.companyHistory}</p></div>
-        <dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>{COMPANY.city}, {COMPANY.region}</dd></div></dl>
-      </section>
-
-      <section className="contact shell" id="contato">
-        <div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div>
-        <div className="contact-details" data-reveal>
-          <div className="store-location"><span className="detail-label">{t.location}</span><p>{COMPANY.city}<span>{t.country}</span></p></div>
-          <div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div>
-          <div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div>
-          <a className="social-link" href={COMPANY.instagram} target="_blank" rel="noopener noreferrer"><InstagramLogo size={23} /><span>@domus.armorum</span><ArrowUpRight size={20} /></a>
-        </div>
-      </section>
+      <section className="story shell" id="historia"><div className="story-heading"><p className="eyebrow" data-reveal>{t.companyLabel}</p><h2 data-reveal><TextLines value={t.storyHeading} /></h2><span className="story-date" aria-hidden="true">2017</span></div><div className="story-copy"><p data-reveal>{t.story}</p><p className="muted" data-reveal>{t.storyIdentity}</p><dl className="company-facts" data-reveal><div><dt>{t.legalName}</dt><dd>AWM Armas e Munições LTDA</dd></div><div><dt>{t.taxId}</dt><dd>28.698.049/0001-89</dd></div><div><dt>{t.founded}</dt><dd>{t.foundingDate}</dd></div><div><dt>{t.city}</dt><dd>Cascavel, Paraná</dd></div></dl></div></section>
+      <section className="contact shell" id="contato"><div className="contact-title"><p className="eyebrow">{t.contactLabel}</p><h2 data-reveal><TextLines value={t.contactHeading} /></h2><p>{t.contact}</p></div><div className="contact-details" data-reveal><div className="store-location"><span className="detail-label">{t.location}</span><p>Cascavel<span>{t.country}</span></p></div><div><span className="detail-label">WhatsApp</span><p>(45) 99979-4330</p></div><div><span className="detail-label">{t.inPerson}</span><p className="detail-small">{t.visit}</p></div><a className="social-link" href={INSTAGRAM} target="_blank" rel="noopener noreferrer"><InstagramLogo size={22} /><span>@domus.armorum</span><ArrowUpRight size={18} /></a></div></section>
     </main>
-
-    <footer>
-      <div className="footer-top shell"><a className="footer-home" href="#inicio">{t.back} <ArrowUpRight size={20} /></a><span>{t.footer}</span></div>
-      <div className="footer-bottom shell"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span> <ArrowUpRight size={13} /></WhatsAppLink></div>
-    </footer>
-    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={32} weight="fill" aria-hidden="true" /></WhatsAppLink>
+    <footer className="shell"><div className="footer-top"><a className="footer-brand" href="#inicio">DOMUS ARMORUM<span>EST. 2017 · CASCAVEL, BRASIL</span></a><a className="footer-home" href="#inicio">{t.back}<ArrowUpRight size={16} /></a></div><div className="footer-bottom"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p></div><span className="footer-motto">{t.footer}</span><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span></WhatsAppLink></div></footer>
+    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsappLogo size={28} weight="fill" aria-hidden="true" /></WhatsAppLink>
   </div>;
 }
-
 createRoot(document.getElementById('root')).render(<App />);

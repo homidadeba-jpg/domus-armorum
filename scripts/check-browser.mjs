@@ -66,6 +66,9 @@ try {
       assert.equal(await page.locator('.language-switch select').inputValue(), code);
       assert.equal(await page.title(), translations[code].pageTitle);
       assert.equal(await page.locator('.language-switch option').count(), 4);
+      assert.match(await page.locator('#italia').innerText(), /Italia|Itália|Italy/);
+      assert.ok((await page.locator('#italy-heading').innerText()).trim(), 'Translated Italy heading');
+      assert.equal(await page.locator('.experience-list article').count(), 3);
       assert.equal(await page.evaluate(() => localStorage.getItem('domus-language')), null, 'Automatic detection must not save a manual preference');
       const location = page.locator('.store-location');
       assert.match(await location.innerText(), /Cascavel/);
