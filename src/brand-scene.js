@@ -2,59 +2,50 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { gsap } from 'gsap';
 
-function shieldShape(scale = 1) {
-  const s = new THREE.Shape();
-  s.moveTo(0, 2.36);
-  s.bezierCurveTo(-.35, 2.32, -.46, 2.01, -1.45, 1.70);
-  s.bezierCurveTo(-1.61, 1.64, -1.64, 1.52, -1.64, 1.28);
-  s.lineTo(-1.64, -1.26);
-  s.bezierCurveTo(-1.62, -1.60, -.58, -2.14, 0, -2.40);
-  s.bezierCurveTo(.58, -2.14, 1.62, -1.60, 1.64, -1.26);
-  s.lineTo(1.64, 1.28);
-  s.bezierCurveTo(1.64, 1.52, 1.61, 1.64, 1.45, 1.70);
-  s.bezierCurveTo(.46, 2.01, .35, 2.32, 0, 2.36);
-  if (scale !== 1) {
-    const points = s.getPoints(64).map(p => p.multiplyScalar(scale));
-    return new THREE.Shape(points);
-  }
-  return s;
-}
-
-// The relief is sampled from the original supplied mark, not a replacement drawing.
-async function originalRelief() {
-  const img = new Image();
-  img.src = '/brand/domus-transparente-de24c017.webp';
-  await img.decode();
-  const width = 320, height = 461;
+// Use the actual image as the face, including its original positive/negative spaces.
+// Only the outside silhouette is extracted, so the mark is never redrawn or inverted.
+async function originalMark() {
+  const image = new Image();
+  image.src = '/brand/domus-original.webp';
+  await image.decode();
+  const width = image.naturalWidth, height = image.naturalHeight;
   const canvas = document.createElement('canvas');
   canvas.width = width; canvas.height = height;
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  ctx.drawImage(img, 0, 0, width, height);
+  ctx.drawImage(image, 0, 0);
   const pixels = ctx.getImageData(0, 0, width, height).data;
-  const geometry = new THREE.PlaneGeometry(3.08, 4.44, width - 1, height - 1);
-  const position = geometry.attributes.position;
-  const indices = [], opacity = new Float32Array(width * height);
-  for (let i = 0; i < position.count; i++) {
-    const a = pixels[i * 4 + 3] / 255;
-    opacity[i] = a;
-    position.setZ(i, .10 + THREE.MathUtils.smoothstep(a, 0, .85) * .105);
+  const mask = document.createElement('canvas');
+  mask.width = width; mask.height = height;
+  const maskContext = mask.getContext('2d');
+  maskContext.fillStyle = '#000'; maskContext.fillRect(0, 0, width, height);
+  maskContext.fillStyle = '#fff';
+  const left = [], right = [];
+  for (let y = 0; y < height; y++) {
+    let low = width, high = -1;
+    for (let x = 0; x < width; x++) {
+      if (pixels[(y * width + x) * 4] < 110) { low = Math.min(low, x); high = x; }
+    }
+    if (high < low) continue;
+    maskContext.fillRect(low, y, high - low + 1, 1);
+    if (y % 3 === 0 || y === height - 1) {
+      left.push(new THREE.Vector2((low / (width - 1) - .5) * 3.08, (.5 - y / (height - 1)) * 4.44));
+      right.push(new THREE.Vector2((high / (width - 1) - .5) * 3.08, (.5 - y / (height - 1)) * 4.44));
+    }
   }
-  for (let y = 0; y < height - 1; y++) for (let x = 0; x < width - 1; x++) {
-    const a = y * width + x, b = a + 1, c = a + width, d = c + 1;
-    if (Math.min(opacity[a], opacity[b], opacity[c]) > .18) indices.push(a, c, b);
-    if (Math.min(opacity[b], opacity[c], opacity[d]) > .18) indices.push(b, c, d);
-  }
-  geometry.setIndex(indices);
-  geometry.computeVertexNormals();
-  return geometry;
+  const shape = new THREE.Shape([...left, ...right.reverse()]);
+  const mapTexture = new THREE.Texture(image);
+  mapTexture.colorSpace = THREE.SRGBColorSpace;
+  mapTexture.needsUpdate = true;
+  const maskTexture = new THREE.CanvasTexture(mask);
+  return { shape, mapTexture, maskTexture };
 }
 
 export async function createBrandScene(container, { light = false, onReady, onUnavailable } = {}) {
-  const reliefGeometry = await originalRelief();
+  const mark = await originalMark();
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' });
-  } catch (error) { reliefGeometry.dispose(); throw error; }
+  } catch (error) { mark.mapTexture.dispose(); mark.maskTexture.dispose(); throw error; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.35 : 1.75));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -75,28 +66,22 @@ export async function createBrandScene(container, { light = false, onReady, onUn
   room.dispose(); pmrem.dispose();
   const assembly = new THREE.Group();
   scene.add(assembly);
-  const darkMetal = new THREE.MeshStandardMaterial({ color: 0x252a23, metalness: .88, roughness: .38, envMapIntensity: .36 });
-  const brass = new THREE.MeshStandardMaterial({ color: 0xbda478, metalness: .93, roughness: .29, envMapIntensity: .8 });
-  const face = new THREE.MeshStandardMaterial({ color: 0x252b22, metalness: .72, roughness: .55, envMapIntensity: .26 });
-  const reliefMaterial = new THREE.MeshStandardMaterial({ color: 0xb4ac91, metalness: .91, roughness: .36, envMapIntensity: .85 });
-  const back = new THREE.Mesh(new THREE.ExtrudeGeometry(shieldShape(), { depth: .16, bevelEnabled: true, bevelThickness: .055, bevelSize: .035, bevelSegments: 3, steps: 1, curveSegments: 24 }), darkMetal);
-  back.position.z = -.30;
+  const darkMetal = new THREE.MeshStandardMaterial({ color: 0x171c16, metalness: .72, roughness: .38, envMapIntensity: .4 });
+  const backGeometry = new THREE.ExtrudeGeometry(mark.shape, { depth: .15, bevelEnabled: true, bevelThickness: .012, bevelSize: .008, bevelSegments: 3, steps: 1 });
+  const back = new THREE.Mesh(backGeometry, darkMetal);
+  back.position.z = -.16;
   assembly.add(back);
-  const rim = new THREE.Mesh(new THREE.ExtrudeGeometry(shieldShape(.974), { depth: .035, bevelEnabled: true, bevelThickness: .02, bevelSize: .015, bevelSegments: 2, curveSegments: 24 }), brass);
-  rim.position.z = -.09;
-  assembly.add(rim);
-  const inset = new THREE.Mesh(new THREE.ExtrudeGeometry(shieldShape(.96), { depth: .07, bevelEnabled: true, bevelThickness: .018, bevelSize: .012, bevelSegments: 2, curveSegments: 24 }), face);
-  inset.position.z = -.055;
-  assembly.add(inset);
-  const relief = new THREE.Mesh(reliefGeometry, reliefMaterial);
-  assembly.add(relief);
-
-  // Machined contour lines echo the shield instead of surrounding the mark with generic particles.
-  const contourMaterial = new THREE.LineBasicMaterial({ color: 0x8f997e, transparent: true, opacity: .18 });
-  for (const scale of [1.17, 1.30, 1.43]) {
-    const points = shieldShape(scale).getPoints(90).map(p => new THREE.Vector3(p.x, p.y, -.72 - scale * .05));
-    assembly.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), contourMaterial));
-  }
+  mark.mapTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+  mark.maskTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+  const faceMaterial = new THREE.MeshStandardMaterial({
+    map: mark.mapTexture, alphaMap: mark.maskTexture,
+    color: 0xe0dfd7, metalness: .48, roughness: .4, envMapIntensity: .55,
+    bumpMap: mark.mapTexture, bumpScale: .026,
+    transparent: true, alphaTest: .45,
+  });
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(3.08, 4.44), faceMaterial);
+  face.position.z = .012;
+  assembly.add(face);
   const key = new THREE.DirectionalLight(0xffe3b6, 2.3);
   key.position.set(-4, 4, 6); scene.add(key);
   const fill = new THREE.DirectionalLight(0xc8d9e6, 1.1);
@@ -115,20 +100,19 @@ export async function createBrandScene(container, { light = false, onReady, onUn
     camera.updateProjectionMatrix();
   }
   function setTheme(isLight) {
-    darkMetal.color.set(isLight ? 0x5d6558 : 0x252a23);
-    face.color.set(isLight ? 0x525b45 : 0x252b22);
-    contourMaterial.opacity = isLight ? .23 : .18;
+    darkMetal.color.set(isLight ? 0x30372a : 0x171c16);
+    faceMaterial.envMapIntensity = isLight ? .7 : .55;
   }
   function draw(time) {
     if (!active || !contextAvailable || document.hidden || disposed || time - last < 1 / 45) return;
     const dt = Math.min(time - last || .016, .05); last = time;
     const bounds = container.closest('.hero').getBoundingClientRect();
     state.scroll = THREE.MathUtils.clamp(-bounds.top / bounds.height, 0, 1);
-    const goalX = -.045 + pointer.y * .07 + state.scroll * .10;
-    const goalY = -.20 + pointer.x * .14 + (1 - state.reveal) * -.48 + state.scroll * .16;
+    const goalX = -.025 + pointer.y * .055 + state.scroll * .07;
+    const goalY = -.11 + pointer.x * .12 + (1 - state.reveal) * -.32 + state.scroll * .11;
     assembly.rotation.x = THREE.MathUtils.damp(assembly.rotation.x, goalX, 5, dt);
     assembly.rotation.y = THREE.MathUtils.damp(assembly.rotation.y, goalY, 5, dt);
-    assembly.rotation.z = -.055 + state.scroll * .06;
+    assembly.rotation.z = -.025 + state.scroll * .035;
     assembly.position.y = (1 - state.reveal) * -.18 + state.scroll * .25;
     assembly.scale.setScalar(.94 + state.reveal * .06);
     lightStrip.position.x = -3 + state.reveal * 4.5 + pointer.x;
@@ -158,6 +142,7 @@ export async function createBrandScene(container, { light = false, onReady, onUn
       const materials = new Set(), geometries = new Set();
       scene.traverse(object => { if (object.geometry) geometries.add(object.geometry); if (object.material) materials.add(object.material); });
       geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); env.dispose();
+      mark.mapTexture.dispose(); mark.maskTexture.dispose();
       renderer.dispose(); renderer.domElement.remove();
       renderer.domElement.removeEventListener('webglcontextlost', contextLost);
     },

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import outline from './data/brand-outline.json';
 
 export function BrandScene({ light, alt }) {
   const host = useRef(null), controller = useRef(null), currentLight = useRef(light);
@@ -29,7 +30,7 @@ export function BrandScene({ light, alt }) {
   }, []);
   return <div className={`brand-scene is-${status}`} data-scene={status}>
     <div className="scene-orbit" aria-hidden="true" />
-    <img className="scene-fallback" src="/brand/domus-transparente-de24c017.webp" width="683" height="984" alt={alt} fetchPriority="high" />
+    <img className="scene-fallback" src="/brand/domus-original.webp" style={{ clipPath: outline.clip }} width="683" height="984" alt={alt} fetchPriority="high" />
     <div className="scene-canvas" ref={host} aria-hidden="true" />
   </div>;
 }

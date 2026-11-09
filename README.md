@@ -2,7 +2,7 @@
 
 Site institucional em italiano, inglês, espanhol e português, feito com React, Vite, Three.js, GSAP e Lenis. Apresenta a identidade da Domus Armorum, a loja em Cascavel e os projetos de conexões e experiências culturais na Itália.
 
-A identidade visual utiliza grafite, oliva e latão, tipografia editorial e uma textura discreta. O emblema original é a fonte do relevo da cena 3D: os pixels alpha formam uma malha sobre uma base metálica com bordas chanfradas. Materiais, luzes, perspectiva e movimento são renderizados com Three.js, sem imagem gerada ou alteração do arquivo original. O modelo responde ao ponteiro e à rolagem. A cena é carregada separadamente e só renderiza quando está visível.
+A identidade visual utiliza grafite, oliva e latão, tipografia editorial e uma textura discreta. A face da cena 3D usa os pixels do emblema original, preservando o desenho e os espaços positivos e negativos. O contorno da base é extraído da própria imagem, com espessura e chanfro discretos; a textura original também fornece o relevo de iluminação. Materiais, luzes, perspectiva e movimento são renderizados com Three.js, sem imagem gerada ou alteração do arquivo original. O modelo responde ao ponteiro e à rolagem. A base aproximada e os contornos decorativos adicionais foram removidos após a revisão de fidelidade; o fallback usa a mesma imagem original com recorte do contorno extraído por `scripts/prepare-brand-outline.mjs`. A cena é carregada separadamente e só renderiza quando está visível.
 
 A loja e as conexões na Itália têm seções próprias e acessos equivalentes. O conteúdo internacional se baseia nas conversas fornecidas pelo responsável, com foco institucional em cultura, encontros e gastronomia. Não são anunciados pacotes, valores, datas, parceiros identificados ou disponibilidade. Endereço completo não é publicado. As fotografias são ilustrativas.
 
@@ -21,6 +21,7 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 - Repositório: https://github.com/homidadeba-jpg/domus-armorum
 - Branch de produção: `main`
 - Reformulação 3D em revisão: `codex/domus-identidade-3d`
+- Barra de revisão da Vercel desativada nesta branch com `VERCEL_PREVIEW_FEEDBACK_ENABLED=0`, configurada no ambiente Preview da Vercel.
 - Prévia da reformulação: https://domus-armorum-git-codex-domus-identidade-3d-jonas-jr.vercel.app/ (protegida pelo login da Vercel). A produção continua em `main`.
 - Painel Vercel: https://vercel.com/jonas-jr/domus-armorum
 - URL de produção: https://domus-armorum.vercel.app/
