@@ -63,6 +63,14 @@ Italiano, inglês, espanhol e português, com seletor nativo ao lado do tema. A 
 
 Verificação da resolução de idiomas e integridade das traduções: `npm run test:languages`. O teste de navegador também cobre os quatro idiomas em desktop e celular, persistência, precedência da URL, navegação pelo histórico, armazenamento indisponível, localização em Cascavel e dados da empresa.
 
+## Conexão Brasil–Itália
+
+Cartografia ortográfica com geografia real do Natural Earth, de domínio público. Brasil e Itália são destacados, com marcador em Cascavel e um ponto representativo do país de destino. O arco é uma conexão visual ilustrativa; não é uma rota aérea, programação ou endereço de parceiro.
+
+Uma timeline GSAP acompanha a rolagem: origem, desenho gradual do arco, deslocamento do ponto de luz e chegada ao destino. O movimento reverte ao subir e não usa loops. Com movimento reduzido, o mapa aparece completo e estático. Textos e descrição acessível estão nos quatro idiomas.
+
+Os caminhos são preparados com `npm run prepare:map` e versionados em `src/data/journey-map.json`; `d3-geo` é usado somente na preparação, sem biblioteca de mapas ou requisições externas durante a visita. Fonte e licença estão no JSON. Verificação específica: `npm run test:journey`.
+
 ## Histórico de versões anteriores
 
 As notas abaixo registram decisões anteriores à reformulação de 09/11/2026; detalhes de layout e movimento foram substituídos pela implementação descrita acima.

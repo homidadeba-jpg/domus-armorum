@@ -9,7 +9,9 @@
     "preview": "vite preview --host 0.0.0.0",
     "test:browser": "node scripts/check-browser.mjs",
     "test:languages": "node scripts/check-languages.mjs",
-    "test:motion": "node scripts/check-motion.mjs"
+    "test:motion": "node scripts/check-motion.mjs",
+    "test:journey": "node scripts/check-journey.mjs",
+    "prepare:map": "node scripts/prepare-journey-map.mjs"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
+    "d3-geo": "^3.1.2",
     "playwright": "^1.64.1",
     "sharp": "^0.35.5",
     "vite": "^8.3.5"

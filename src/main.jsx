@@ -13,6 +13,7 @@ import './styles.css';
 import { languages, translations, initialLanguage } from './translations.js';
 import { WhatsAppLink } from './contact.jsx';
 import { BrandScene } from './BrandScene.jsx';
+import { JourneyMap } from './JourneyMap.jsx';
 import { useSmoothScroll } from './use-motion.js';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -85,7 +86,6 @@ function App() {
         gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1, yPercent: 3, ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: .8 } });
       });
       gsap.fromTo('.italy-word', { xPercent: -4 }, { xPercent: 4, ease: 'none', scrollTrigger: { trigger: '.italy-landscape', start: 'top bottom', end: 'bottom top', scrub: 1 } });
-      gsap.from('.journey-path', { strokeDashoffset: 1, ease: 'none', scrollTrigger: { trigger: '.journey-route', start: 'clamp(top 90%)', end: 'clamp(bottom 65%)', scrub: 1 } });
       gsap.to('.reading-trail', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
     });
     media.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
@@ -145,7 +145,7 @@ function App() {
         <div className="section-tail"><span className="small-cross" aria-hidden="true" /><p>{t.shopNote}</p><span className="micro">DOMUS ARMORUM</span></div>
       </section>
       <section className="italy" id="italia" aria-labelledby="italy-heading">
-        <div className="journey-route shell" aria-hidden="true"><span>CASCAVEL, BR</span><svg viewBox="0 0 700 90" fill="none"><path className="journey-path" pathLength="1" strokeDasharray="1" d="M8 70C160 70 200 8 350 8S540 70 692 70" /><circle cx="8" cy="70" r="3" /><circle cx="692" cy="70" r="3" /></svg><span>ITALIA</span></div>
+        <JourneyMap t={t} />
         <figure className="italy-landscape" data-photo><img src="/experiences/italia.webp" alt={t.italyPhoto} width="1800" height="1200" loading="lazy" /><div className="landscape-shade" /><span className="italy-word" aria-hidden="true">{t.italyCountry.toUpperCase()}.</span><figcaption><span>{t.italyCaption}</span><span>DOMUS · {t.italyCountry.toUpperCase()}</span></figcaption></figure>
         <div className="italy-body shell"><div className="italy-intro"><div className="italy-intro-inner"><p className="eyebrow" data-reveal>{t.italyLabel}</p><h2 id="italy-heading" data-reveal><TextLines value={t.italyHeading} /></h2><p data-reveal>{t.italyIntro}</p><div className="italy-signature"><span className="italian-flag" aria-hidden="true"><i /><i /><i /></span><span>{t.world}</span></div></div></div><div className="experience-list">{[[t.cultureTitle, t.cultureText], [t.foodTitle, t.foodText], [t.connectionTitle, t.connectionText]].map(([title, text]) => <article key={title} data-reveal><span className="experience-diamond" aria-hidden="true" /><h3>{title}</h3><p>{text}</p></article>)}<p className="experience-note">{t.italyNote}</p></div></div>
         <div className="italy-pull shell"><span className="pull-rule" /><p data-reveal>{t.italyPull}</p><span className="pull-rule" /></div>
