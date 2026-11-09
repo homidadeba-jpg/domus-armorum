@@ -20,6 +20,8 @@ Vercel detecta Vite. Comando de build: `npm run build`. Diretório publicado: `d
 
 - Repositório: https://github.com/homidadeba-jpg/domus-armorum
 - Branch de produção: `main`
+- Reformulação 3D em revisão: `codex/domus-identidade-3d`
+- Prévia da reformulação: https://domus-armorum-git-codex-domus-identidade-3d-jonas-jr.vercel.app/ (protegida pelo login da Vercel). A produção continua em `main`.
 - Painel Vercel: https://vercel.com/jonas-jr/domus-armorum
 - URL de produção: https://domus-armorum.vercel.app/
 - Publicação contínua pela integração GitHub–Vercel: commit e push em `main`, seguidos da verificação do status do deploy e da URL pública. Reutilizar as conexões existentes.

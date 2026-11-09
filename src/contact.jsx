@@ -23,4 +23,3 @@ export function WhatsAppLink({ children, className = '', author = false, floatin
     <span className="sr-only" role="status">{opening ? copy.whatsappOpening : ''}</span>
   </a>;
 }
-
