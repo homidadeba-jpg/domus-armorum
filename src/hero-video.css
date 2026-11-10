@@ -45,15 +45,11 @@
  .intro-stage{inset:0}
  .intro-video,.intro-still{object-fit:cover}
  .hero-video::after{content:'';position:absolute;inset:85% 0 0;z-index:1;pointer-events:none;background:linear-gradient(transparent,#0009)}
- .intro-caption{left:20px;bottom:max(15px,env(safe-area-inset-bottom));width:calc(100% - 105px)}
- .intro-caption .intro-location{font-size:7px;letter-spacing:1.2px;margin-bottom:7px}
- .intro-caption>p:not(.intro-location){font-size:11px;max-width:265px;line-height:1.75}
- .intro-playback{font-size:9px;margin-top:4px}
+ .intro-caption{left:20px;bottom:max(15px,env(safe-area-inset-bottom));width:auto;max-width:calc(100% - 105px)}
+ .intro-caption>p{display:none}
+ .intro-playback{font-size:9px;margin-top:0}
  .intro-scroll{right:20px;bottom:max(12px,env(safe-area-inset-bottom))}
  .site-header.is-hero .navigation{padding-inline:20px}
-}
-@media(max-width:767px) and (max-height:700px){
- .intro-caption>p{display:none}
 }
 @media(max-height:600px) and (min-width:768px){
  .hero.hero-video{min-height:100svh}.intro-stage{inset:0 0 25px}.intro-caption{bottom:12px;max-width:180px}.intro-caption>p:not(.intro-location){font-size:11px}.intro-caption .intro-location{margin-bottom:5px}.intro-scroll{bottom:24px}
