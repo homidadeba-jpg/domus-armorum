@@ -71,7 +71,7 @@ try{
    Object.defineProperty(HTMLMediaElement.prototype,'src',{configurable:true,get:source.get,set(value){source.set.call(this,missing(value));}});
   });
   await page.goto(base+'/?lang=pt',{waitUntil:'networkidle'});
-  await page.waitForFunction(mode=>document.querySelector('.hero-video')?.dataset.playback===(mode==='reduce'?'static':mode),mode);
+  await page.waitForFunction(mode=>document.querySelector('.hero-video')?.dataset.playback===(mode==='reduce'?'static':mode),mode).catch(async error=>{console.log('Hero fallback failure',engine,mode,await page.locator('video').evaluate(video=>({state:video.closest('section').dataset.playback,source:video.currentSrc,error:video.error?.code,paused:video.paused})));throw error;});
   assert.equal(await page.locator('.intro-video').evaluate(v=>getComputedStyle(v).opacity),'0', mode + ': ' + await page.locator('.hero-video').getAttribute('data-playback'));
   assert.equal(await page.locator('.intro-still').evaluate(i=>i.complete&&i.naturalWidth>0),true);
   if(mode==='reduce')assert.deepEqual(videos,[],'Reduced motion avoids downloading the video');

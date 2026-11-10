@@ -114,3 +114,10 @@ Verificação das relações institucionais, logos agrupadas sem duplicação e 
 `npm run test:responsive` verifica 56 combinações: quatro idiomas e 14 larguras entre 320 e 2560 px, além de menus em retrato (320×568) e paisagem (844×390). A checagem inclui texto ultrapassando o próprio bloco, sobreposições, controles de toque com área mínima de 44 px e links do rodapé livres do WhatsApp flutuante. A imagem panorâmica Konus conserva seu enquadramento; o rodapé reserva o espaço do botão flutuante nas larguras em que os créditos ficam à direita. Regras transversais em src/responsive.css.
 
 A seção genérica de armas, munições e equipamentos foi retirada para priorizar as marcas. A navegação e os atalhos levam diretamente às marcas e aos tours. O identificador antigo #atuacao permanece como alias de localização para links anteriores.
+
+
+## Acabamento das interações
+
+Revisão com os playbooks polish e animate do Impeccable oficial (pbakaus/impeccable, skill 4.8.2), preservando a identidade existente. A seta fica próxima da borda inferior, sem círculo, com área de toque de 44 px e indicação curta na entrada e no final do filme. Menu com entrada/saída reversíveis em CSS, pequeno encadeamento entre os links e ícone que se transforma em X. O menu fechado usa inert, leva o foco ao primeiro link quando abre e fecha por Escape, foco externo ou clique fora. As transições de pressão e hover mantêm o desenho original dos controles e do WhatsApp. Movimento reduzido mantém o estado legível sem deslocamentos.
+
+`npm run test:interactions` verifica mouse, teclado, fechamento, alternância rápida, alvo da seta, pressão e movimento reduzido em celular e desktop. TEST_ENGINE=webkit seleciona WebKit, e TEST_BROWSER_CHANNEL=msedge usa Edge. O detector Impeccable foi executado uma vez nos três arquivos de interface alterados e retornou uma lista vazia de achados.

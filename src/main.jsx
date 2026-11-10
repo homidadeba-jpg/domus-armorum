@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { InstagramLogo, List, X, Sun, Moon, CaretDown } from '@phosphor-icons/react';
+import { InstagramLogo, Sun, Moon, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -19,6 +19,7 @@ import { Representations, OwnerArchive } from './Representations.jsx';
 import { CompanyContact } from './CompanyContact.jsx';
 import { company } from './company.js';
 import './responsive.css';
+import './interactions.css';
 import brandOutline from './data/brand-outline.json';
 import { useSmoothScroll } from './use-motion.js';
 
@@ -33,6 +34,7 @@ function BrandContour({ className = '' }) {
 function App() {
   const root = useRef(null), menuButton = useRef(null), header = useRef(null);
   const [menu, setMenu] = useState(false);
+  const [compactNavigation, setCompactNavigation] = useState(() => matchMedia('(max-width: 980px)').matches);
   const [pastHero, setPastHero] = useState(false);
   const [language, setLanguage] = useState(initialLanguage);
   const [light, setLight] = useState(() => {
@@ -70,6 +72,22 @@ function App() {
     return () => document.removeEventListener('keydown', escape);
   }, [menu]);
   useEffect(() => {
+    const media = matchMedia('(max-width: 980px)');
+    const sync = () => setCompactNavigation(media.matches);
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
+  useEffect(() => {
+    if (pastHero && !compactNavigation) setMenu(false);
+  }, [pastHero, compactNavigation]);
+  useEffect(() => {
+    if (!menu) return;
+    const outside = event => { if (!header.current.contains(event.target)) setMenu(false); };
+    document.addEventListener('pointerdown', outside);
+    document.addEventListener('focusin', outside);
+    return () => { document.removeEventListener('pointerdown', outside); document.removeEventListener('focusin', outside); };
+  }, [menu]);
+  useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => setPastHero(entry.boundingClientRect.bottom <= header.current.offsetHeight), { rootMargin: `-${header.current.offsetHeight}px 0px 0px 0px` });
     observer.observe(root.current.querySelector('.hero'));
     return () => observer.disconnect();
@@ -97,12 +115,18 @@ function App() {
     return () => { alive = false; media.revert(); };
   }, { scope: root });
   const nav = (target, label) => <a href={target} onClick={() => setMenu(false)}>{label}</a>;
+  const toggleMenu = () => {
+    setMenu(open => !open);
+    if (!menu) requestAnimationFrame(() => {
+      if (menuButton.current?.getAttribute('aria-expanded') === 'true') header.current.querySelector('nav a')?.focus({ preventScroll: true });
+    });
+  };
   return <div ref={root} className={'site' + (pastHero ? ' is-past-hero' : '')}>
     <a href="#conteudo" className="skip-link">{t.skip}</a>
     <header ref={header} className={'site-header ' + (pastHero ? 'is-past-hero is-scrolled' : 'is-hero') + (menu ? ' is-menu-open' : '')}>
       <div className="header-inner shell">
         <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" style={{ clipPath: brandOutline.clip }} width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
-        <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
+        <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-collapsible={compactNavigation || !pastHero ? 'true' : undefined} inert={!menu && (compactNavigation || !pastHero) ? true : undefined} data-lenis-prevent>
           {nav('#historia', t.about)}{nav('#marcas', t.brandsNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
         <div className="header-actions">
@@ -113,7 +137,7 @@ function App() {
             setLanguage(selected); setMenu(false);
           }}>{languages.map(item => <option key={item.code} value={item.code} lang={item.tag}>{item.name}</option>)}</select><span aria-hidden="true">{language.toUpperCase()}</span><CaretDown size={10} aria-hidden="true" /></label>
           <a className="instagram-nav" href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label={t.instagram}><InstagramLogo size={21} /></a>
-          <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={() => setMenu(!menu)}>{menu ? <X size={24} /> : <List size={24} />}</button>
+          <button ref={menuButton} className="menu-toggle" aria-expanded={menu} aria-controls="main-navigation" aria-label={menu ? t.closeMenu : t.openMenu} onClick={toggleMenu}><span className="menu-glyph" aria-hidden="true"><i /><i /></span></button>
         </div>
       </div>
       <div className="reading-progress" aria-hidden="true"><div className="reading-trail" /></div>
