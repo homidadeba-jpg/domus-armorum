@@ -95,16 +95,66 @@ function App() {
   useGSAP(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.utils.toArray('[data-reveal]').forEach(element => {
-        gsap.from(element, { y: 28, duration: .85, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'clamp(top 91%)', once: true } });
+      const select = gsap.utils.selector(root);
+      const compact = matchMedia('(max-width: 767px)').matches;
+      const enter = trigger => ({ trigger, start: 'clamp(top 88%)', once: true });
+      const sequence = (trigger, targets, gap = .075) => {
+        if (!targets.length) return;
+        gsap.from(targets, { y: compact ? 18 : 30, opacity: .12, duration: .85,
+          stagger: gap, ease: 'power3.out', scrollTrigger: enter(trigger) });
+      };
+
+      // Each editorial block has a short, coordinated entrance of its own.
+      select('.representations-heading, .italy-intro-inner, .story-heading, .contact-title').forEach(block => {
+        const heading = block.querySelector('h2');
+        const lines = heading ? [...heading.children].filter(node => node.tagName === 'SPAN') : [];
+        const targets = [...block.children].flatMap(node => node === heading && lines.length ? lines : [node])
+          .filter(node => !node.classList.contains('story-date'));
+        sequence(block, targets, .11);
       });
-      gsap.utils.toArray('.manifesto-line').forEach(element => {
-        gsap.fromTo(element, { opacity: .25, y: 20 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top 90%)', end: 'clamp(top 53%)', scrub: .65 } });
+      select('.ghost-identity, .konus-feature, .sightron-feature, .brand-network-heading, .archive-intro').forEach(block => {
+        sequence(block, [...block.children], .085);
       });
-      gsap.utils.toArray('[data-photo]').forEach(element => {
-        gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1, yPercent: 3, ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: .8 } });
+      select('.supply-group').forEach(group => {
+        const timeline = gsap.timeline({ scrollTrigger: enter(group), defaults: { ease: 'power3.out' } });
+        timeline.from(group.querySelector('.supply-heading'), { y: 18, opacity: .2, duration: .65 })
+          .from(group.querySelectorAll('.partner-card'), { y: compact ? 20 : 32, opacity: .08, scale: .97,
+            duration: .75, stagger: .09 }, .15);
       });
-      gsap.fromTo('.italy-word', { xPercent: -4 }, { xPercent: 4, ease: 'none', scrollTrigger: { trigger: '.italy-landscape', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      select('.archive-photo, .ghost-institutional, .konus-material, .experience-photo').forEach(figure => {
+        const image = figure.querySelector('img'), caption = figure.querySelector('figcaption');
+        const timeline = gsap.timeline({ scrollTrigger: enter(figure) });
+        if (image) timeline.fromTo(image, { clipPath: 'inset(0% 0% 16% 0%)', opacity: .45 },
+          { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.1, ease: 'power3.out', clearProps: 'clipPath,opacity' });
+        if (caption) timeline.from(caption, { y: 9, opacity: 0, duration: .55, ease: 'power2.out' }, .35);
+      });
+      select('.experience-list article').forEach(article => sequence(article, [...article.querySelectorAll('h3,p')], .1));
+      select('.story-copy').forEach(block => sequence(block, [...block.children], .12));
+      select('.contact-details').forEach(block => sequence(block, [...block.children], .09));
+      select('.world-links').forEach(block => sequence(block, [...block.children], .14));
+      select('footer').forEach(block => sequence(block, [...block.children], .14));
+
+      // Do not animate a parent and its editorial children on the same axis.
+      const composed = '.representations-heading, .italy-intro-inner, .story-heading, .contact-title, .ghost-identity, .konus-feature, .sightron-feature, .brand-network-heading, .archive-intro, .archive-photo, .ghost-institutional, .konus-material, .experience-list article, .story-copy, .contact-details, .world-links';
+      select('[data-reveal]').filter(element => !element.closest(composed)).forEach(element => {
+        sequence(element, [element]);
+      });
+      select('.manifesto-line').forEach(element => {
+        gsap.fromTo(element, { opacity: .25, y: compact ? 18 : 30 }, { opacity: 1, y: 0, ease: 'none',
+          scrollTrigger: { trigger: element, start: 'clamp(top 92%)', end: 'clamp(top 57%)', scrub: true } });
+      });
+      select('.manifesto-seal path').forEach(path => {
+        const length = path.getTotalLength();
+        gsap.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0,
+          duration: 1.5, ease: 'power2.inOut', scrollTrigger: enter(path.closest('svg')) });
+      });
+      gsap.from('.story-date', { y: 35, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: enter('.story-heading') });
+      select('[data-photo]').forEach(element => {
+        gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1.08, yPercent: 3,
+          ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: true } });
+      });
+      gsap.fromTo('.italy-word', { xPercent: -4 }, { xPercent: 4, ease: 'none',
+        scrollTrigger: { trigger: '.italy-landscape', start: 'top bottom', end: 'bottom top', scrub: true } });
       gsap.to('.reading-trail', { scaleX: 1, transformOrigin: 'left', ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
     });
     media.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
