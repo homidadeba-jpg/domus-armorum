@@ -11,7 +11,7 @@ import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/600.css';
 import './styles.css';
 import { languages, translations, initialLanguage } from './translations.js';
-import { WhatsAppLink } from './contact.jsx';
+import { WhatsAppLink, WhatsAppMark } from './contact.jsx';
 import { HeroVideo } from './HeroVideo.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
 import { ItalyExperiences } from './ItalyExperiences.jsx';
@@ -162,7 +162,7 @@ function App() {
       <CompanyContact t={t} />
     </main>
     <footer className="shell"><div className="footer-top"><a className="footer-brand" href="#inicio">DOMUS ARMORUM<span>EST. 2017 · CASCAVEL, BRASIL</span></a><a className="footer-home" href="#inicio">{t.back}</a></div><div className="footer-bottom"><div><p>© {new Date().getFullYear()} Domus Armorum</p><p>AWM Armas e Munições LTDA · CNPJ 28.698.049/0001-89</p><p className="footer-address">{company.street} · {company.suite} · {company.district}<br />{company.city}–{company.stateCode} · CEP {company.postalCode}</p></div><span className="footer-motto">{t.footer}</span><WhatsAppLink copy={t} author className="author-credit"><span lang="pt-BR">Desenvolvido por <strong>Jonas Jr</strong></span></WhatsAppLink></div></footer>
-    <WhatsAppLink copy={t} className="floating-whatsapp" floating><img className="whatsapp-original" src="/brand/whatsapp.svg" width="54" height="54" alt="" aria-hidden="true" /></WhatsAppLink>
+    <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsAppMark /></WhatsAppLink>
   </div>;
 }
 createRoot(document.getElementById('root')).render(<App />);
