@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { InstagramLogo, Sun, Moon, CaretDown } from '@phosphor-icons/react';
+import { InstagramLogo, CaretDown } from '@phosphor-icons/react';
 import '@fontsource/barlow-condensed/500.css';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/manrope/400.css';
@@ -34,9 +34,6 @@ function App() {
   const [compactNavigation, setCompactNavigation] = useState(() => matchMedia('(max-width: 980px)').matches);
   const [pastHero, setPastHero] = useState(false);
   const [language, setLanguage] = useState(initialLanguage);
-  const [light, setLight] = useState(() => {
-    try { return localStorage.getItem('domus-theme') === 'light'; } catch { return false; }
-  });
   const t = translations[language];
   useSmoothScroll();
   useEffect(() => {
@@ -54,11 +51,6 @@ function App() {
     addEventListener('popstate', restore);
     return () => removeEventListener('popstate', restore);
   }, []);
-  useEffect(() => {
-    document.documentElement.dataset.theme = light ? 'light' : 'dark';
-    document.querySelector('meta[name="theme-color"]').content = light ? '#eeeee5' : '#111410';
-    try { localStorage.setItem('domus-theme', light ? 'light' : 'dark'); } catch { /* Theme still works without storage. */ }
-  }, [light]);
   useEffect(() => {
     const escape = e => { if (e.key === 'Escape' && menu) { setMenu(false); menuButton.current?.focus(); } };
     document.addEventListener('keydown', escape);
@@ -169,7 +161,6 @@ function App() {
           {nav('#historia', t.about)}{nav('#marcas', t.brandsNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
         <div className="header-actions">
-          <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={18} /> : <Sun size={18} />}</button>
           <label className="language-switch"><select aria-label={t.language} value={language} onChange={event => {
             const selected = event.target.value;
             try { localStorage.setItem('domus-language', selected); } catch { /* Manual selection works without storage. */ }
