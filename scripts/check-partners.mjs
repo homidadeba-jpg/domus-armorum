@@ -17,8 +17,15 @@ try {
   assert.match(await page.locator('.konus-feature').innerText(), /representação exclusiva/);
   assert.doesNotMatch(await page.locator('.sightron-feature').innerText(), /exclusiv/i);
   assert.doesNotMatch(await page.locator('body').innerText(), /Sabatti|foto em breve/i);
-  assert.equal(ownerArchive.length, 3);
-  assert.equal(await page.locator('.archive-photo').count(), 0, 'Only actual owner photographs may fill the archive slots');
+  const suppliedPhotos = ownerArchive.filter(photo => photo.image);
+  assert.equal(await page.locator('[data-archive-id]').count(), suppliedPhotos.length, 'Only supplied owner photographs fill the archive');
+  for (const photo of suppliedPhotos) {
+    const image = page.locator('[data-archive-id="' + photo.id + '"] img');
+    assert.equal(await image.getAttribute('src'), photo.image);
+    await image.evaluate(async image => { image.loading = 'eager'; await image.decode(); });
+    assert.deepEqual(await image.evaluate(image => [image.naturalWidth, image.naturalHeight]), [photo.width, photo.height]);
+  }
+  assert.equal(await page.locator('[data-archive-id="italy-fair"]').count(), 0, 'The unidentified fair slot stays omitted');
   assert.deepEqual(await page.locator('[data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), partners.map(brand => brand.id));
   for (const [group, ids] of Object.entries({ components: ['hornady', 'cbc', 'federal', 'cci', 'fiocchi'], brazil: ['dfa', 'fireeagle'], accessories: ['topgun', 'raoni'] })) {
     assert.deepEqual(await page.locator('.supply-group--' + group + ' [data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), ids);
@@ -50,5 +57,23 @@ try {
     await compact.close();
   }
   assert.deepEqual(errors, []);
+  const delayed = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  let releaseImages;
+  const imageGate = new Promise(resolve => { releaseImages = resolve; });
+  const photoPaths = ownerArchive.filter(photo => photo.image).map(photo => photo.image);
+  await delayed.route('**/experiences/*.webp', async route => {
+    if (photoPaths.includes(new URL(route.request().url()).pathname)) await imageGate;
+    await route.continue();
+  });
+  await delayed.goto(base + '/?lang=pt', { waitUntil: 'domcontentloaded' });
+  await delayed.locator('[data-archive-id] img').first().waitFor();
+  await delayed.locator('[data-archive-id] img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
+  await delayed.evaluate(() => document.fonts.ready);
+  const mapPosition = () => delayed.locator('.journey-cartography').evaluate(element => element.getBoundingClientRect().top + scrollY);
+  const reservedPosition = await mapPosition();
+  releaseImages();
+  await delayed.locator('[data-archive-id] img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
+  assert.ok(Math.abs(await mapPosition() - reservedPosition) < 1, 'Loading the archive must not shift the globe or invalidate its scroll timing');
+  await delayed.close();
   console.log('Partner group memberships, twelve unique logos, image bounds, headquarters/schema and internal links passed in four languages.');
 } finally { await browser.close(); }

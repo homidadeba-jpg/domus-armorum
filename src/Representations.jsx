@@ -1,11 +1,20 @@
 import { partners, ownerArchive } from './data/partners.js';
 import './representations.css';
 import './brand-directory.css';
+import './owner-photos.css';
 
 function Mark({ id, className = '' }) {
   return <img className={'partner-mark ' + className} src={'/partners/' + id + '.webp'} alt="" width="600" height="180" loading="lazy" decoding="async" />;
 }
 function Lines({ text }) { return text.split('\n').map((line, i) => <span key={i}>{line}</span>); }
+
+function ArchivePhoto({ photo, t, className = '' }) {
+  if (!photo?.image) return null;
+  return <figure className={'archive-photo ' + className} data-archive-id={photo.id} data-reveal>
+    <img src={photo.image} width={photo.width} height={photo.height} style={{ aspectRatio: `${photo.width} / ${photo.height}` }} alt={t[photo.alt] || t[photo.caption]} loading="lazy" decoding="async" />
+    <figcaption>{t[photo.caption]}</figcaption>
+  </figure>;
+}
 
 function BrandCard({ brand, t, showLine = false }) {
   return <figure className="partner-card" data-brand-id={brand.id}>
@@ -29,22 +38,22 @@ function BrandDirectory({ t }) {
 
 export function Representations({ t }) {
   const factory = ownerArchive.find(item => item.id === 'factory-wide');
-  const detail = ownerArchive.find(item => item.id === 'factory-detail');
+  const detail = ownerArchive.find(item => item.id === 'ghost-accessories');
+  const meeting = ownerArchive.find(item => item.id === 'partner-meeting');
   return <section className="representations" id="marcas" aria-labelledby="representations-heading"><span id="atuacao" className="section-alias" aria-hidden="true" />
     <div className="representations-heading shell"><div><p className="eyebrow" data-reveal>{t.partnersLabel}</p><h2 id="representations-heading" data-reveal><Lines text={t.partnersHeading} /></h2></div><p data-reveal>{t.partnersIntro}</p></div>
     <article className="ghost-feature shell" data-brand-id="ghost">
       <div className="ghost-identity"><div className="partner-identity tone-dark"><Mark id="ghost" /></div><p className="partner-status">{t.exclusiveBrazil}</p><h3>Ghost Holster<span>{t.italyOrigin}</span></h3><p>{t.ghostText}</p><a className="quiet-link" href="https://ghostinternational.com/dealers/" target="_blank" rel="noopener noreferrer">{t.officialRegistry}</a></div>
-      <figure className={'ghost-image' + (factory.image ? ' is-visit' : '')}><img src={factory.image || '/partners/ghost-detail.webp'} width="1500" height={factory.image ? 1000 : 2250} alt={factory.image ? t[factory.caption] : t.ghostPhotoAlt} loading="lazy" decoding="async" /><figcaption>{factory.image ? t[factory.caption] : t.ghostCaption}</figcaption></figure>
+      <div className="ghost-visuals"><ArchivePhoto photo={factory} t={t} className="ghost-image is-visit" /><ArchivePhoto photo={detail} t={t} className="ghost-accessory" /></div>
     </article>
-    <div className={'optics-editorial shell' + (detail.image ? ' has-archive' : '')}>
+    <div className="optics-editorial shell">
       <article className="konus-feature" data-brand-id="konus"><p className="eyebrow">{t.opticsLabel}</p><div className="partner-identity tone-dark"><Mark id="konus" /></div><h3>Konus Optics</h3><p className="partner-status">{t.exclusiveBrazil}</p><p>{t.konusText}</p></article>
-      <figure className="konus-image"><img src="/partners/konus-outdoor.webp" width="1500" height="366" alt={t.konusPhotoAlt} loading="lazy" decoding="async" /><figcaption>{t.konusCaption}</figcaption></figure>
+      <ArchivePhoto photo={meeting} t={t} className="konus-image konus-meeting" />
       <article className="sightron-feature" data-brand-id="sightron"><div className="partner-identity tone-light"><Mark id="sightron" /></div><div><p className="partner-status">{t.representationLabel} · {t.usaOrigin}</p><h3>Sightron</h3><p>{t.sightronText}</p></div></article>
-      {detail.image && <figure className="archive-photo archive-photo--portrait"><img src={detail.image} width="800" height="1000" alt={t[detail.caption]} loading="lazy" /><figcaption>{t[detail.caption]}</figcaption></figure>}
     </div>
     <div className="brand-network shell"><div className="brand-network-heading"><p className="eyebrow">{t.brandNetworkLabel}</p><h3><Lines text={t.brandNetworkHeading} /></h3><p>{t.brandNetworkIntro}</p></div><BrandDirectory t={t} /></div>
-    <div className="owner-archive shell"><p className="eyebrow">{t.archiveLabel}</p><h3><Lines text={t.archiveHeading} /></h3><p>{t.archiveText}</p>
-      {ownerArchive.filter(item => item.image && item.id === 'italy-fair').map(item => <figure key={item.id} className={'archive-photo archive-photo--' + item.format}><img src={item.image} width="1600" height="900" alt={t[item.caption]} loading="lazy" /><figcaption>{t[item.caption]}</figcaption></figure>)}
+    <div className="owner-archive shell"><div className="archive-intro"><p className="eyebrow">{t.archiveLabel}</p><h3><Lines text={t.archiveHeading} /></h3><p>{t.archiveText}</p></div>
+      <div className="archive-collection">{ownerArchive.filter(item => item.image && ['ghost-group', 'italy-fair'].includes(item.id)).map(item => <ArchivePhoto key={item.id} photo={item} t={t} className={'archive-photo--' + item.format} />)}</div>
     </div>
   </section>;
 }
