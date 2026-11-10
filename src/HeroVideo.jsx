@@ -26,12 +26,19 @@ export function HeroVideo({ t }) {
 
   useEffect(() => {
     const element = video.current, preference = matchMedia('(prefers-reduced-motion: reduce)');
-    let live = true, visible = true, failedMedia = false;
+    let live = true, visible = true, failedMedia = false, pendingPlay = false, needsGesture = false;
+    // Set both attributes and properties: Safari must see a muted inline video.
+    element.setAttribute('muted', '');
+    element.setAttribute('playsinline', '');
+    element.setAttribute('webkit-playsinline', '');
+    element.muted = element.defaultMuted = true;
+    element.playsInline = true;
     let snapshot = handoff.current;
     handoff.current = null;
     let restoring = Boolean(snapshot);
     const canResume = () => !document.hidden && visible && !control.current.manuallyPaused && !restoring && !failedMedia && !element.error && !completed.current && !element.ended && (!reduced || control.current.manuallyStarted);
     const play = (manual = false) => {
+      if (pendingPlay) return;
       if (manual) {
         control.current.manuallyPaused = false; control.current.manuallyStarted = true;
         if (failedMedia || element.error) { failedMedia = false; element.load(); }
@@ -43,9 +50,14 @@ export function HeroVideo({ t }) {
       element.defaultMuted = true;
       element.playsInline = true;
       setStatus('loading');
+      pendingPlay = true;
       const result = element.play();
-      result?.catch(error => {
-        if (live && error.name !== 'AbortError') setStatus(error.name === 'NotAllowedError' && !element.error && !failedMedia ? 'blocked' : 'error');
+      result?.then(() => { pendingPlay = false; needsGesture = false; }, error => {
+        pendingPlay = false;
+        if (live && error.name !== 'AbortError') {
+          needsGesture = error.name === 'NotAllowedError' && !element.error && !failedMedia;
+          setStatus(needsGesture ? 'blocked' : 'error');
+        }
       });
     };
     actions.current.toggle = () => {
@@ -77,12 +89,20 @@ export function HeroVideo({ t }) {
       if (document.hidden) element.pause();
       else if (canResume()) play();
     };
+    const ready = () => { if (element.paused && canResume() && !needsGesture) play(); };
+    const gesture = event => {
+      if (needsGesture && canResume() && !event.target.closest?.('button,a,input,select,textarea')) play();
+    };
     const changePreference = () => { control.current.manuallyStarted = false; setReduced(preference.matches || navigator.connection?.saveData === true); };
     element.addEventListener('playing', playing);
     element.addEventListener('pause', pause);
     element.addEventListener('ended', ended);
     element.addEventListener('error', failed);
     element.addEventListener('loadedmetadata', restore);
+    element.addEventListener('canplay', ready);
+    window.addEventListener('pageshow', visibility);
+    document.addEventListener('touchend', gesture, { passive: true });
+    document.addEventListener('keydown', gesture);
     document.addEventListener('visibilitychange', visibility);
     preference.addEventListener('change', changePreference);
     const observer = new IntersectionObserver(([entry]) => {
@@ -105,6 +125,10 @@ export function HeroVideo({ t }) {
       element.removeEventListener('ended', ended);
       element.removeEventListener('error', failed);
       element.removeEventListener('loadedmetadata', restore);
+      element.removeEventListener('canplay', ready);
+      window.removeEventListener('pageshow', visibility);
+      document.removeEventListener('touchend', gesture);
+      document.removeEventListener('keydown', gesture);
       document.removeEventListener('visibilitychange', visibility);
       preference.removeEventListener('change', changePreference);
       element.pause();
