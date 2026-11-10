@@ -27,7 +27,7 @@ export function JourneyMap({ t }) {
         traveller.setAttribute('transform', 'translate(' + (a.x + (b.x - a.x) * mix) + ' ' + (a.y + (b.y - a.y) * mix) + ')');
       };
       const timeline = gsap.timeline({
-        defaults: { ease: 'power2.out' },
+        defaults: { ease: 'none' },
         scrollTrigger: { id: 'domus-journey', trigger: root.current.querySelector('.journey-cartography'), start: 'clamp(top 86%)', end: 'clamp(top 32%)', scrub: true },
       });
       timeline

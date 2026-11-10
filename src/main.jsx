@@ -97,14 +97,14 @@ function App() {
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const select = gsap.utils.selector(root);
       const compact = matchMedia('(max-width: 767px)').matches;
-      const enter = trigger => ({ trigger, start: 'clamp(top 88%)', once: true });
+      const followScroll = trigger => ({ trigger, start: 'clamp(top 88%)', end: 'clamp(top 58%)', scrub: true });
       const sequence = (trigger, targets, gap = .075) => {
         if (!targets.length) return;
         gsap.from(targets, { y: compact ? 18 : 30, opacity: .12, duration: .85,
-          stagger: gap, ease: 'power3.out', scrollTrigger: enter(trigger) });
+          stagger: gap, ease: 'none', scrollTrigger: followScroll(trigger) });
       };
 
-      // Each editorial block has a short, coordinated entrance of its own.
+      // Scroll position controls progress in both directions; nothing restarts on re-entry.
       select('.representations-heading, .italy-intro-inner, .story-heading, .contact-title').forEach(block => {
         const heading = block.querySelector('h2');
         const lines = heading ? [...heading.children].filter(node => node.tagName === 'SPAN') : [];
@@ -116,17 +116,17 @@ function App() {
         sequence(block, [...block.children], .085);
       });
       select('.supply-group').forEach(group => {
-        const timeline = gsap.timeline({ scrollTrigger: enter(group), defaults: { ease: 'power3.out' } });
+        const timeline = gsap.timeline({ scrollTrigger: followScroll(group), defaults: { ease: 'none' } });
         timeline.from(group.querySelector('.supply-heading'), { y: 18, opacity: .2, duration: .65 })
           .from(group.querySelectorAll('.partner-card'), { y: compact ? 20 : 32, opacity: .08, scale: .97,
             duration: .75, stagger: .09 }, .15);
       });
       select('.archive-photo, .ghost-institutional, .konus-material, .experience-photo').forEach(figure => {
         const image = figure.querySelector('img'), caption = figure.querySelector('figcaption');
-        const timeline = gsap.timeline({ scrollTrigger: enter(figure) });
+        const timeline = gsap.timeline({ scrollTrigger: followScroll(figure) });
         if (image) timeline.fromTo(image, { clipPath: 'inset(0% 0% 16% 0%)', opacity: .45 },
-          { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.1, ease: 'power3.out', clearProps: 'clipPath,opacity' });
-        if (caption) timeline.from(caption, { y: 9, opacity: 0, duration: .55, ease: 'power2.out' }, .35);
+          { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.1, ease: 'none' });
+        if (caption) timeline.from(caption, { y: 9, opacity: 0, duration: .55, ease: 'none' }, .35);
       });
       select('.experience-list article').forEach(article => sequence(article, [...article.querySelectorAll('h3,p')], .1));
       select('.story-copy').forEach(block => sequence(block, [...block.children], .12));
@@ -146,9 +146,9 @@ function App() {
       select('.manifesto-seal path').forEach(path => {
         const length = path.getTotalLength();
         gsap.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0,
-          duration: 1.5, ease: 'power2.inOut', scrollTrigger: enter(path.closest('svg')) });
+          duration: 1.5, ease: 'none', scrollTrigger: followScroll(path.closest('svg')) });
       });
-      gsap.from('.story-date', { y: 35, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: enter('.story-heading') });
+      gsap.from('.story-date', { y: 35, opacity: 0, duration: 1.2, ease: 'none', scrollTrigger: followScroll('.story-heading') });
       select('[data-photo]').forEach(element => {
         gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1.08, yPercent: 3,
           ease: 'none', scrollTrigger: { trigger: element, start: 'clamp(top bottom)', end: 'clamp(bottom top)', scrub: true } });
