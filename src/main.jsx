@@ -42,12 +42,8 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = languages.find(item => item.code === language).tag;
     document.title = t.pageTitle;
-    const locale = { it: 'it_IT', en: 'en_US', es: 'es_ES', pt: 'pt_BR' }[language];
-    for (const [selector, content] of [
-      ['meta[name="description"]', t.description], ['meta[property="og:locale"]', locale],
-      ['meta[property="og:title"]', t.pageTitle], ['meta[property="og:description"]', t.description],
-      ['meta[name="twitter:title"]', t.pageTitle], ['meta[name="twitter:description"]', t.description],
-    ]) document.querySelector(selector).content = content;
+    // Link previews stay in Portuguese; the page itself follows the selected language.
+    document.querySelector('meta[name="description"]').content = t.description;
     const url = new URL(location.href); url.searchParams.set('lang', language);
     history.replaceState(history.state, '', url);
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
