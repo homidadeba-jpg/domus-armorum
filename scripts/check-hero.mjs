@@ -14,6 +14,7 @@ try{
   const media=page.locator('.intro-video');
   const attributes=await media.evaluate(v=>({muted:v.muted,defaultMuted:v.defaultMuted,inline:v.playsInline,autoplay:v.autoplay,loop:v.loop,controls:v.controls,fit:getComputedStyle(v).objectFit}));
   assert.deepEqual(attributes,{muted:true,defaultMuted:true,inline:true,autoplay:true,loop:false,controls:false,fit:width<768?'cover':'contain'});
+  assert.equal(await media.getAttribute('src'),width<768?'/media/domus-intro-v2.mp4':'/media/domus-intro-desktop-v1.mp4');
   const coverage=await media.evaluate(v=>{
    const hero=v.closest('section').getBoundingClientRect(),frame=v.getBoundingClientRect();
    return Math.abs(frame.left-hero.left)<1 && Math.abs(frame.top-hero.top)<1 && Math.abs(frame.width-hero.width)<1 && Math.abs(frame.height-hero.height)<1;

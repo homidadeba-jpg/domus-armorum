@@ -2,3 +2,8 @@ Video correto fornecido pelo responsavel em 10/11/2026: VID_20261110090107.mp4.
 Substitui a primeira versao enviada. Cerca de 9 segundos, H.264 720x1280, 24 fps, sem audio, faststart.
 Imagens de abertura e final extraidas deste mesmo video, sem redesenhar a marca.
 Arquivos v2 para evitar reutilizacao da versao anterior em cache.
+
+Desktop: DOMUS_ARMORUM_hero_desktop_original_nitido-1~2.mp4, fornecido pelo responsavel.
+H.264 1624x914, 24 fps, cerca de 9 segundos. Faixa de video preservada sem recompressao;
+audio retirado, metadados removidos e faststart aplicado. Posters extraidos do mesmo arquivo.
+O arquivo vertical v2 permanece inalterado para o celular.

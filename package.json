@@ -9,6 +9,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "test:browser": "node scripts/check-browser.mjs",
     "test:hero": "node scripts/check-hero.mjs",
+    "test:hero-sources": "node scripts/check-hero-sources.mjs",
     "test:interactions": "node scripts/check-interactions.mjs",
     "test:languages": "node scripts/check-languages.mjs",
     "test:motion": "node scripts/check-motion.mjs",

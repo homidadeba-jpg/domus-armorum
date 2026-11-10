@@ -1,4 +1,4 @@
-/* Full-bleed on phones; preserve the complete vertical film on desktop. */
+/* Dedicated films preserve the desktop frame and fill phone screens. */
 #root{padding-top:0}
 .hero.hero-video{display:block;width:100%;height:100svh;min-height:560px;max-height:none;padding:0;overflow:hidden;background:#000;color:#e7e9df;isolation:isolate}
 .hero-video h1{font:inherit;margin:0;letter-spacing:normal;line-height:1}
