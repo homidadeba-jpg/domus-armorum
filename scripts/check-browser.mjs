@@ -34,11 +34,15 @@ try {
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(900);
     assert.equal(await page.locator('h1').evaluate(el => getComputedStyle(el).opacity), '1');
-    await page.getByRole('button', { name: 'Ativar tema claro' }).click();
+    const themeButton = page.getByRole('button', { name: 'Ativar tema claro' });
+    if (!await themeButton.isVisible()) await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+    await themeButton.click();
+    await page.keyboard.press('Escape');
     assert.equal(await page.locator('html').getAttribute('data-theme'), 'light');
     await page.reload({ waitUntil: 'networkidle' });
     assert.equal(await page.locator('html').getAttribute('data-theme'), 'light', 'Theme persistence');
     await page.screenshot({ path: `artifacts/${viewport.width}-light.png`, fullPage: true });
+    await page.locator('.store-location').scrollIntoViewIfNeeded();
     await page.locator('.floating-whatsapp').evaluate(el => el.addEventListener('click', event => event.preventDefault()));
     await page.locator('.floating-whatsapp').click();
     const whatsappUrl = new URL(await page.locator('.floating-whatsapp').getAttribute('href'));
@@ -108,6 +112,7 @@ try {
   await fallbackPage.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('Storage disabled'); } }); });
   await fallbackPage.goto(`${baseUrl}/?lang=unknown`, { waitUntil: 'networkidle' });
   assert.equal(await fallbackPage.locator('html').getAttribute('lang'), 'it-IT');
+  await fallbackPage.getByRole('button', { name: 'Apri il menu', exact: true }).click();
   await fallbackPage.locator('.language-switch select').selectOption('es');
   assert.equal(await fallbackPage.locator('html').getAttribute('lang'), 'es');
   await fallbackContext.close();

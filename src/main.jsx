@@ -12,7 +12,7 @@ import '@fontsource/manrope/600.css';
 import './styles.css';
 import { languages, translations, initialLanguage } from './translations.js';
 import { WhatsAppLink } from './contact.jsx';
-import { BrandScene } from './BrandScene.jsx';
+import { HeroVideo } from './HeroVideo.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
 import { ItalyExperiences } from './ItalyExperiences.jsx';
 import { Representations } from './Representations.jsx';
@@ -33,6 +33,7 @@ function BrandContour({ className = '' }) {
 function App() {
   const root = useRef(null), menuButton = useRef(null), header = useRef(null);
   const [menu, setMenu] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [language, setLanguage] = useState(initialLanguage);
   const [light, setLight] = useState(() => {
     try { return localStorage.getItem('domus-theme') === 'light'; } catch { return false; }
@@ -69,18 +70,13 @@ function App() {
     return () => document.removeEventListener('keydown', escape);
   }, [menu]);
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => header.current?.classList.toggle('is-scrolled', !entry.isIntersecting));
-    observer.observe(root.current.querySelector('.top-sentinel'));
+    const observer = new IntersectionObserver(([entry]) => setPastHero(entry.boundingClientRect.bottom <= header.current.offsetHeight), { rootMargin: `-${header.current.offsetHeight}px 0px 0px 0px` });
+    observer.observe(root.current.querySelector('.hero'));
     return () => observer.disconnect();
   }, []);
   useGSAP(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .from('.hero-title-line', { y: 12, opacity: .5, duration: .8, stagger: .08, clearProps: 'all' }, .10)
-        .from('.hero-kicker,.hero-description,.hero-link', { y: 18, autoAlpha: 0, duration: .9, stagger: .09, clearProps: 'all' }, .55)
-        .from('.hero-bottom', { autoAlpha: 0, y: 10, duration: .8, clearProps: 'all' }, .9);
-      gsap.to('.hero-copy', { y: -36, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .8 } });
       gsap.utils.toArray('[data-reveal]').forEach(element => {
         gsap.from(element, { y: 28, duration: .85, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'clamp(top 91%)', once: true } });
       });
@@ -101,10 +97,9 @@ function App() {
     return () => { alive = false; media.revert(); };
   }, { scope: root });
   const nav = (target, label) => <a href={target} onClick={() => setMenu(false)}>{label}</a>;
-  return <div ref={root}>
-    <div className="top-sentinel" aria-hidden="true" />
+  return <div ref={root} className={'site' + (pastHero ? ' is-past-hero' : '')}>
     <a href="#conteudo" className="skip-link">{t.skip}</a>
-    <header ref={header}>
+    <header ref={header} className={'site-header ' + (pastHero ? 'is-past-hero is-scrolled' : 'is-hero') + (menu ? ' is-menu-open' : '')}>
       <div className="header-inner shell">
         <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" style={{ clipPath: brandOutline.clip }} width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
         <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
@@ -124,16 +119,7 @@ function App() {
       <div className="reading-progress" aria-hidden="true"><div className="reading-trail" /></div>
     </header>
     <main id="conteudo">
-      <section className="hero shell" id="inicio">
-        <div className="hero-copy">
-          <p className="hero-kicker eyebrow"><span />{t.heroKicker}</p>
-          <h1><span className="title-mask"><span className="hero-title-line">DOMUS</span></span><span className="title-mask"><span className="hero-title-line">ARMORUM<span className="title-dot">.</span></span></span></h1>
-          <p className="hero-description">{t.hero}</p>
-          <a href="#essencia" className="hero-link">{t.exploreBrand}</a>
-        </div>
-        <div className="hero-art"><span className="scene-caption scene-caption--top">DOMUS ARMORUM <span>EST. 2017</span></span><BrandScene light={light} alt={t.emblemAlt} /><span className="scene-caption scene-caption--bottom">{t.signature}</span></div>
-        <div className="hero-bottom"><span>{t.since}</span><span className="hero-bottom-line" /><span>{t.heroFoot}</span></div>
-      </section>
+      <HeroVideo t={t} />
       <section className="manifesto shell" id="essencia">
         <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>

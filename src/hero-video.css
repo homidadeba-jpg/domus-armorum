@@ -1,0 +1,56 @@
+/* The supplied vertical film remains whole, including its final wordmark. */
+#root{padding-top:0}
+.hero.hero-video{display:block;width:100%;height:100svh;min-height:560px;max-height:none;padding:0;overflow:hidden;background:#000;color:#e7e9df;isolation:isolate}
+.hero-video h1{font:inherit;margin:0;letter-spacing:normal;line-height:1}
+.intro-stage{position:absolute;inset:0;display:grid;place-items:center}
+.intro-video,.intro-still{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center;display:block}
+.intro-video{z-index:1;pointer-events:none}
+.intro-video::-webkit-media-controls-start-playback-button{display:none!important}
+.hero-video[data-playback=static] .intro-video,.hero-video[data-playback=blocked] .intro-video,.hero-video[data-playback=error] .intro-video{opacity:0}
+.intro-caption{position:absolute;z-index:2;left:max(64px,calc((100vw - 1376px)/2));bottom:55px;width:260px}
+.intro-caption .intro-location{font-size:8px;letter-spacing:1.6px;color:#a2aa98;line-height:1.7;margin-bottom:17px}
+.intro-caption>p:not(.intro-location){font-size:13px;line-height:1.85;color:#c0c5b8;max-width:250px}
+.intro-playback{font-size:10px;min-height:44px;display:flex;align-items:center;gap:10px;padding:8px 0;margin-top:14px;color:#a2aa98;text-align:left}
+.intro-playback:hover{color:#fff}
+.intro-pause-icon{width:9px;height:11px;border-inline:2px solid currentColor;flex:none}
+.intro-play-icon{width:0;height:0;border-left:8px solid currentColor;border-block:5px solid transparent;flex:none}
+.intro-scroll{position:absolute;right:max(64px,calc((100vw - 1376px)/2));bottom:61px;z-index:2;display:flex;align-items:center;gap:20px;max-width:230px;min-height:48px}
+.intro-scroll>span:first-child{font-size:10px;line-height:1.8;text-align:right;max-width:140px;color:#c0c5b8}
+.intro-scroll-icon{display:grid;place-items:center;width:46px;height:46px;border:1px solid #ffffff36;border-radius:50%;flex:none}
+.intro-scroll-icon svg{width:23px;height:23px;animation:intro-invite 2.8s ease-in-out 1.5s 3}
+@keyframes intro-invite{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.site-header{transition:background .4s,border-color .4s}
+.site-header.is-hero:not(.is-menu-open){background:transparent;border-color:transparent;color:#e7e9df}
+.site-header.is-hero:not(.is-menu-open) .header-inner{justify-content:flex-end}
+.site-header.is-hero:not(.is-menu-open) :is(.brand,.navigation,.theme-toggle,.language-switch,.instagram-nav,.reading-progress){display:none}
+.site-header.is-hero .menu-toggle{display:flex;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.site-header.is-menu-open{background:var(--bg);border-color:var(--line)}
+.site-header.is-hero .navigation.is-open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:22px max(64px,calc((100vw - 1376px)/2)) 30px;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100dvh - var(--header-height));overflow-y:auto;overscroll-behavior:contain}
+.site-header.is-hero .navigation.is-open a{font-size:15px;padding:15px 0}
+.site-header.is-hero .navigation a::after{display:none}
+.site.is-past-hero .brand,.site.is-past-hero .navigation:not(.is-open),.site.is-past-hero .header-actions{animation:intro-header .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes intro-header{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.site:not(.is-past-hero) .floating-whatsapp{visibility:hidden;opacity:0;pointer-events:none}
+@media(max-width:1199px){
+ .intro-caption{left:40px;width:220px}.intro-scroll{right:40px;max-width:200px}
+}
+@media(max-width:980px){
+ .intro-caption{bottom:32px;width:210px}.intro-scroll{bottom:38px;gap:14px;max-width:180px}
+ .intro-stage{inset:0 0 190px}
+}
+@media(max-width:767px){
+ .hero.hero-video{min-height:520px}
+ .intro-stage{inset:38px 0 158px}
+ .intro-caption{left:20px;bottom:max(15px,env(safe-area-inset-bottom));width:calc(100% - 105px)}
+ .intro-caption .intro-location{font-size:7px;letter-spacing:1.2px;margin-bottom:7px}
+ .intro-caption>p:not(.intro-location){font-size:11px;max-width:265px;line-height:1.75}
+ .intro-playback{font-size:9px;margin-top:4px}
+ .intro-scroll{right:20px;bottom:max(37px,env(safe-area-inset-bottom));gap:0}
+ .intro-scroll>span:first-child{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .intro-scroll-icon{width:44px;height:44px}
+ .site-header.is-hero .navigation.is-open{padding-inline:20px}
+}
+@media(max-height:600px) and (min-width:768px){
+ .hero.hero-video{min-height:100svh}.intro-stage{inset:0 0 25px}.intro-caption{bottom:12px;max-width:180px}.intro-caption>p:not(.intro-location){font-size:11px}.intro-caption .intro-location{margin-bottom:5px}.intro-scroll{bottom:24px}
+}
+@media(prefers-reduced-motion:reduce){.intro-scroll-icon svg{animation:none}.site.is-past-hero :is(.brand,.navigation,.header-actions){animation:none}}
