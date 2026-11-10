@@ -13,11 +13,11 @@ export const partners = [
   { id: 'raoni', name: 'Raoni Tactical', relation: 'distribution', tone: 'light', line: 'raoniLine' },
 ];
 
-// Only supplied archive images are published. The fair slot awaits an identified record.
+// Pending records stay omitted until the owner confirms their context.
 export const ownerArchive = [
   { id: 'factory-wide', image: '/experiences/ghost-visita-fabrica.webp', caption: 'archiveFactory', alt: 'archiveFactoryAlt', width: 1280, height: 960, format: 'landscape' },
   { id: 'ghost-accessories', image: '/experiences/ghost-acessorios-acervo.webp', caption: 'archiveAccessories', alt: 'archiveAccessoriesAlt', width: 960, height: 1280, format: 'portrait' },
   { id: 'ghost-group', image: '/experiences/ghost-encontro-acervo.webp', caption: 'archivePeople', alt: 'archivePeopleAlt', width: 1280, height: 1008, format: 'group' },
-  { id: 'partner-meeting', image: '/experiences/encontro-parceiros-acervo.webp', caption: 'archiveMeeting', alt: 'archiveMeetingAlt', width: 1280, height: 804, format: 'meeting' },
+  { id: 'partner-meeting', image: null, caption: 'archiveMeeting', alt: 'archiveMeetingAlt', width: 1280, height: 804, format: 'meeting' },
   { id: 'italy-fair', image: null, caption: 'archiveFair', format: 'panorama' },
 ];

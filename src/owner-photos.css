@@ -13,6 +13,7 @@
 .konus-imagery .konus-image{margin:0}
 .konus-meeting img{height:auto;object-fit:contain;filter:none}
 .konus-material{width:78%;margin:26px 0 0 auto}
+.konus-imagery.is-institutional .konus-material{width:100%;margin:0}
 .owner-archive{--partner-edge:max(64px,calc((100vw - 1376px)/2));grid-template-columns:1.25fr .75fr;gap:80px;align-items:center}
 .archive-intro{grid-column:2;grid-row:1}
 .archive-intro h3{font-size:39px;line-height:1.12;margin-top:22px}

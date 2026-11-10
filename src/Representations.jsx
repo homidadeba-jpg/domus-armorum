@@ -48,7 +48,7 @@ export function Representations({ t }) {
     </article>
     <div className="optics-editorial shell">
       <article className="konus-feature" data-brand-id="konus"><p className="eyebrow">{t.opticsLabel}</p><div className="partner-identity tone-dark"><Mark id="konus" /></div><h3>Konus Optics</h3><p className="partner-status">{t.exclusiveBrazil}</p><p>{t.konusText}</p></article>
-      <div className="konus-imagery"><ArchivePhoto photo={meeting} t={t} className="konus-image konus-meeting" /><figure className="konus-material" data-reveal><img src="/partners/konus-outdoor.webp" width="1500" height="366" style={{ aspectRatio: '1500 / 366' }} alt={t.konusPhotoAlt} loading="lazy" decoding="async" /><figcaption>{t.konusCaption}</figcaption></figure></div>
+      <div className={'konus-imagery' + (meeting?.image ? '' : ' is-institutional')}><ArchivePhoto photo={meeting} t={t} className="konus-image konus-meeting" /><figure className="konus-material" data-reveal><img src="/partners/konus-outdoor.webp" width="1500" height="366" style={{ aspectRatio: '1500 / 366' }} alt={t.konusPhotoAlt} loading="lazy" decoding="async" /><figcaption>{t.konusCaption}</figcaption></figure></div>
       <article className="sightron-feature" data-brand-id="sightron"><div className="partner-identity tone-light"><Mark id="sightron" /></div><div><p className="partner-status">{t.representationLabel} · {t.usaOrigin}</p><h3>Sightron</h3><p>{t.sightronText}</p></div></article>
     </div>
     <div className="brand-network shell"><div className="brand-network-heading"><p className="eyebrow">{t.brandNetworkLabel}</p><h3><Lines text={t.brandNetworkHeading} /></h3><p>{t.brandNetworkIntro}</p></div><BrandDirectory t={t} /></div>
