@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './hero-video.css';
 
-const SOURCE = '/media/domus-intro.mp4';
+const SOURCE = '/media/domus-intro-v2.mp4';
 
 export function HeroVideo({ t }) {
   const video = useRef(null), actions = useRef({});
@@ -79,8 +79,8 @@ export function HeroVideo({ t }) {
   return <section className="hero hero-video" id="inicio" aria-labelledby="hero-heading" data-playback={status}>
     <h1 className="sr-only" id="hero-heading">DOMUS ARMORUM</h1>
     <div className="intro-stage">
-      <img className="intro-still" src="/media/domus-final.webp" width="720" height="1280" alt="" fetchPriority="high" />
-      <video ref={video} className="intro-video" src={reduced ? undefined : SOURCE} poster="/media/domus-start.webp" width="720" height="1280" muted playsInline autoPlay={!reduced} preload={reduced ? 'none' : 'auto'} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
+      <img className="intro-still" src="/media/domus-final-v2.webp" width="720" height="1280" alt="" fetchPriority="high" />
+      <video ref={video} className="intro-video" src={reduced ? undefined : SOURCE} poster="/media/domus-start-v2.webp" width="720" height="1280" muted playsInline autoPlay={!reduced} preload={reduced ? 'none' : 'auto'} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
     </div>
     <div className="intro-caption"><p className="intro-location">{t.since}</p><p>{t.heroIntro}</p><button className="intro-playback" onClick={() => actions.current.toggle?.()}><span className={status === 'playing' ? 'intro-pause-icon' : 'intro-play-icon'} aria-hidden="true" />{button}</button></div>
     <a className="intro-scroll" href="#essencia"><span>{t.exploreBrand}</span><span className="intro-scroll-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v15m-5-5 5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span></a>

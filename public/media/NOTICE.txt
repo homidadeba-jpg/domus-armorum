@@ -1,3 +1,4 @@
-Video original fornecido pelo responsavel da Domus Armorum em 10/11/2026.
-MP4 H.264 720x1280, 24 fps, sem faixa de audio, faststart.
-Imagens de abertura e final extraidas do mesmo video, sem redesenhar a marca.
+Video correto fornecido pelo responsavel em 10/11/2026: VID_20261110090107.mp4.
+Substitui a primeira versao enviada. Cerca de 9 segundos, H.264 720x1280, 24 fps, sem audio, faststart.
+Imagens de abertura e final extraidas deste mesmo video, sem redesenhar a marca.
+Arquivos v2 para evitar reutilizacao da versao anterior em cache.

@@ -13,7 +13,12 @@ try{
   await page.waitForFunction(()=>document.querySelector('.hero-video')?.dataset.playback==='playing');
   const media=page.locator('.intro-video');
   const attributes=await media.evaluate(v=>({muted:v.muted,defaultMuted:v.defaultMuted,inline:v.playsInline,autoplay:v.autoplay,loop:v.loop,controls:v.controls,fit:getComputedStyle(v).objectFit}));
-  assert.deepEqual(attributes,{muted:true,defaultMuted:true,inline:true,autoplay:true,loop:false,controls:false,fit:'contain'});
+  assert.deepEqual(attributes,{muted:true,defaultMuted:true,inline:true,autoplay:true,loop:false,controls:false,fit:width<768?'cover':'contain'});
+  const coverage=await media.evaluate(v=>{
+   const hero=v.closest('section').getBoundingClientRect(),frame=v.getBoundingClientRect();
+   return Math.abs(frame.left-hero.left)<1 && Math.abs(frame.top-hero.top)<1 && Math.abs(frame.width-hero.width)<1 && Math.abs(frame.height-hero.height)<1;
+  });
+  if(width<768)assert.equal(coverage,true,'On mobile the video covers the full hero without reserved black margins');
   assert.equal(await page.locator('header').getAttribute('class').then(c=>c.includes('is-hero')),true);
   assert.equal(await page.locator('.brand').isVisible(),false);
   await page.getByRole('button',{name:'Abrir menu',exact:true}).click();
@@ -59,7 +64,7 @@ try{
   });
   if(mode==='error')await page.addInitScript(()=>{
    // WebKit's native media fetch can bypass Playwright routing. Fail the source itself.
-   const missing=value=>String(value).includes('domus-intro.mp4')?'/media/unavailable-test.mp4':value;
+   const missing=value=>String(value).includes('domus-intro')?'/media/unavailable-test.mp4':value;
    const setAttribute=Element.prototype.setAttribute;
    Element.prototype.setAttribute=function(name,value){return setAttribute.call(this,name,this instanceof HTMLMediaElement && name.toLowerCase()==='src'?missing(value):value);};
    const source=Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype,'src');
