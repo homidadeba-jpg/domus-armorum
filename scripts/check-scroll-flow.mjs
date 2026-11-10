@@ -10,7 +10,7 @@ try {
     const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 1000 }, locale: 'pt-BR' });
     await page.goto((process.env.TEST_URL || 'http://127.0.0.1:5187') + '/?lang=pt', { waitUntil: 'networkidle' });
     await page.waitForTimeout(2400);
-    for (const [section, selector] of [['store', '.store-showcase'], ['globe', '.journey-cartography'], ['after', '.italy-landscape']]) {
+    for (const [section, selector] of [['brands', '.ghost-feature'], ['globe', '.journey-cartography'], ['after', '.italy-landscape']]) {
       await page.evaluate(s => scrollTo(0, document.querySelector(s).getBoundingClientRect().top + scrollY - innerHeight * .6), selector);
       await page.waitForTimeout(500);
       await page.evaluate(() => {

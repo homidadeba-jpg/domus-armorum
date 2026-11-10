@@ -6,7 +6,7 @@ import { partners, ownerArchive } from '../src/data/partners.js';
 const browser = await chromium.launch({ ...(process.env.TEST_BROWSER_CHANNEL ? { channel: process.env.TEST_BROWSER_CHANNEL } : {}), headless: true });
 const base = process.env.TEST_URL || 'http://127.0.0.1:5187';
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, locale: 'pt-BR' });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, locale: 'pt-BR', reducedMotion: 'reduce' });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto(base + '/?lang=pt', { waitUntil: 'networkidle' });
   assert.deepEqual(JSON.parse(await page.locator('#company-schema').textContent()), companySchema);
@@ -18,56 +18,37 @@ try {
   assert.doesNotMatch(await page.locator('.sightron-feature').innerText(), /exclusiv/i);
   assert.doesNotMatch(await page.locator('body').innerText(), /Sabatti|foto em breve/i);
   assert.equal(ownerArchive.length, 3);
-  assert.equal(await page.locator('.archive-photo').count(), 0, 'No fake visit photographs or empty frames');
-  await page.locator('.brand-carousel').scrollIntoViewIfNeeded();
-  await page.mouse.move(1, 1);
-  const active = () => page.locator('.brand-carousel-caption h3').textContent();
-  await page.waitForFunction(() => document.querySelector('.brand-carousel-caption h3')?.textContent !== 'Ghost Holster', undefined, { timeout: 8000 });
-  await page.getByRole('button', { name: 'Pausar movimento', exact: true }).click();
-  const stopped = await active();
-  await page.waitForTimeout(5700);
-  assert.equal(await active(), stopped, 'The pause control stops automatic changes');
-  for (const brand of partners) {
-    await page.getByRole('button', { name: 'Conhecer ' + brand.name, exact: true }).click();
-    assert.equal(await active(), brand.name);
-    assert.equal(await page.locator('.brand-orbit-slide[data-active=true] img').getAttribute('src'), '/partners/' + brand.id + '.webp');
-    await page.locator('.brand-orbit-slide[data-active=true] img').evaluate(image => image.decode());
+  assert.equal(await page.locator('.archive-photo').count(), 0, 'Only actual owner photographs may fill the archive slots');
+  assert.deepEqual(await page.locator('[data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), partners.map(brand => brand.id));
+  for (const [group, ids] of Object.entries({ components: ['hornady', 'cbc', 'federal', 'cci', 'fiocchi'], brazil: ['dfa', 'fireeagle'], accessories: ['topgun', 'raoni'] })) {
+    assert.deepEqual(await page.locator('.supply-group--' + group + ' [data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), ids);
   }
-  await page.getByRole('button', { name: 'Próxima', exact: true }).click();
-  assert.equal(await active(), partners[0].name, 'The carousel wraps continuously');
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.reload({ waitUntil: 'networkidle' });
-  await page.locator('.brand-carousel').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(5700);
-  assert.equal(await active(), partners[0].name, 'Reduced motion disables automatic rotation');
-  assert.equal(await page.getByRole('button', { name: 'Pausar movimento', exact: true }).count(), 0);
-  assert.deepEqual(errors, []);
+  for (const brand of partners) {
+    const card = page.locator('[data-brand-id="' + brand.id + '"]');
+    const logo = card.locator('img.partner-mark');
+    assert.equal(await logo.getAttribute('src'), '/partners/' + brand.id + '.webp');
+    await logo.evaluate(async image => { image.loading = 'eager'; await image.decode(); });
+  }
+  assert.equal(await page.locator('.brand-index,.brand-relations,.brand-carousel,.store-showcase,#activities-heading').count(), 0, 'The duplicate lists and generic shop block are removed');
+  assert.deepEqual(await page.locator('a[href^="#"]').evaluateAll(links => links.map(link => link.getAttribute('href')).filter(href => href.length > 1 && !document.getElementById(href.slice(1)))), [], 'Internal links still have destinations');
   await page.close();
-  const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
-  await mobile.goto(base + '/?lang=pt', { waitUntil: 'networkidle' });
-  const orbit = mobile.locator('.brand-orbit');
-  await orbit.scrollIntoViewIfNeeded();
-  await orbit.dispatchEvent('pointerdown', { pointerType: 'touch', clientX: 280, clientY: 350 });
-  await orbit.dispatchEvent('pointerup', { pointerType: 'touch', clientX: 180, clientY: 355 });
-  assert.equal(await mobile.locator('.brand-carousel-caption h3').textContent(), partners[1].name, 'Touch swipe changes the brand');
-  await orbit.dispatchEvent('pointerdown', { pointerType: 'touch', clientX: 180, clientY: 355 });
-  await orbit.dispatchEvent('pointerup', { pointerType: 'touch', clientX: 190, clientY: 470 });
-  assert.equal(await mobile.locator('.brand-carousel-caption h3').textContent(), partners[1].name, 'Vertical gestures do not change the brand');
-  assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
-  await mobile.close();
   for (const language of ['pt', 'it', 'en', 'es']) {
-    const compact = await browser.newPage({ viewport: { width: 320, height: 740 }, reducedMotion: 'reduce' });
+    const compact = await browser.newPage({ reducedMotion: 'reduce' });
+    compact.on('pageerror', error => errors.push(error.message));
     await compact.goto(base + '/?lang=' + language, { waitUntil: 'networkidle' });
-    const heights = await compact.evaluate(async () => {
-      const measured = [];
-      for (const button of document.querySelectorAll('.brand-index button')) {
-        button.click(); await new Promise(requestAnimationFrame);
-        measured.push(document.querySelector('.brand-carousel-caption').getBoundingClientRect().height);
-      }
-      return measured;
-    });
-    assert.ok(Math.max(...heights) - Math.min(...heights) < 1, 'Changing brands must not shift the page in ' + language);
+    await compact.locator('.partner-directory img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
+    for (const width of [320, 390, 768, 1024, 1440]) {
+      await compact.setViewportSize({ width, height: 1000 });
+      const escaped = await compact.locator('.partner-card').evaluateAll(cards => cards.filter(card => {
+        const logo = card.querySelector('.partner-logo').getBoundingClientRect();
+        const image = card.querySelector('img').getBoundingClientRect();
+        const label = card.querySelector('figcaption').getBoundingClientRect();
+        return image.left < logo.left - 1 || image.right > logo.right + 1 || image.top < logo.top - 1 || image.bottom > logo.bottom + 1 || (Math.min(image.right, label.right) > Math.max(image.left, label.left) && Math.min(image.bottom, label.bottom) > Math.max(image.top, label.top));
+      }).map(card => card.dataset.brandId));
+      assert.deepEqual(escaped, [], 'Logos stay inside their frames and clear of captions: ' + language + ', ' + width);
+    }
     await compact.close();
   }
-  console.log('Partner identities, all twelve logos, headquarters/schema, autoplay/pause, reduced motion and touch controls passed.');
+  assert.deepEqual(errors, []);
+  console.log('Partner group memberships, twelve unique logos, image bounds, headquarters/schema and internal links passed in four languages.');
 } finally { await browser.close(); }

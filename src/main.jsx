@@ -15,7 +15,6 @@ import { WhatsAppLink } from './contact.jsx';
 import { BrandScene } from './BrandScene.jsx';
 import { JourneyMap } from './JourneyMap.jsx';
 import { ItalyExperiences } from './ItalyExperiences.jsx';
-import { StoreShowcase } from './StoreShowcase.jsx';
 import { Representations } from './Representations.jsx';
 import { CompanyContact } from './CompanyContact.jsx';
 import { company } from './company.js';
@@ -109,7 +108,7 @@ function App() {
       <div className="header-inner shell">
         <a className="brand" href="#inicio" aria-label={t.home}><img src="/brand/domus-original.webp" style={{ clipPath: brandOutline.clip }} width="40" height="54" alt="" /><span>DOMUS<span>ARMORUM</span></span></a>
         <nav className={menu ? 'navigation is-open' : 'navigation'} id="main-navigation" aria-label={t.navigation} data-lenis-prevent>
-          {nav('#historia', t.about)}{nav('#atuacao', t.shopNav)}{nav('#marcas', t.brandsNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
+          {nav('#historia', t.about)}{nav('#marcas', t.brandsNav)}{nav('#italia', t.toursNav)}{nav('#contato', t.information)}
         </nav>
         <div className="header-actions">
           <button className="theme-toggle" aria-label={light ? t.dark : t.light} onClick={() => setLight(!light)}>{light ? <Moon size={18} /> : <Sun size={18} />}</button>
@@ -139,12 +138,7 @@ function App() {
         <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>
         <div className="manifesto-bottom"><BrandContour className="manifesto-seal" /><p data-reveal>{t.manifesto}</p></div>
-        <div className="world-links" data-reveal><a href="#atuacao"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.shopNav}</span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}</span></a></div>
-      </section>
-      <section className="activities shell" id="atuacao" aria-labelledby="activities-heading">
-        <div className="section-heading"><div><p className="eyebrow" data-reveal>{t.shopLabel}</p><h2 id="activities-heading" data-reveal><TextLines value={t.shopHeading} /></h2></div><p data-reveal>{t.shopIntro}</p></div>
-        <StoreShowcase t={t} />
-        <div className="section-tail"><span className="small-cross" aria-hidden="true" /><p>{t.shopNote}</p><span className="micro">DOMUS ARMORUM</span></div>
+        <div className="world-links" data-reveal><a href="#marcas"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.brandsNav}</span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}</span></a></div>
       </section>
       <Representations t={t} />
       <section className="italy" id="italia" aria-labelledby="italy-heading">

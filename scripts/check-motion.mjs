@@ -19,7 +19,7 @@ try {
     await page.waitForTimeout(2600);
     assert.equal(await page.locator('.scene-canvas canvas').count(), 1, 'One live WebGL canvas');
     assert.equal(await page.locator('html').getAttribute('data-scroll-mode'), 'native');
-    assert.equal(await page.locator('#atuacao').isVisible(), true);
+    assert.equal(await page.locator('#marcas').isVisible(), true);
     assert.equal(await page.locator('#italia').isVisible(), true);
     assert.match(await page.locator('#italia').innerText(), /tours|Tours/);
     const scene = page.locator('.brand-scene');

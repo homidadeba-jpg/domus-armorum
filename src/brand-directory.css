@@ -1,0 +1,57 @@
+.brand-network{margin-top:85px;border-top:1px solid var(--line);padding-top:50px}
+.brand-network-heading{display:grid;grid-template-columns:1fr 1fr;gap:20px 100px;align-items:end;margin-bottom:48px}
+.brand-network-heading>.eyebrow{grid-column:1/-1}
+.brand-network-heading h3{font-size:clamp(40px,4.5vw,64px);line-height:1.05}
+.brand-network-heading>p:last-child{color:var(--muted);font-size:13px;max-width:400px;padding-bottom:4px}
+.supply-group{display:grid;grid-template-columns:.8fr 1.6fr;gap:80px;align-items:center;padding-block:42px;border-top:1px solid var(--line)}
+.supply-heading h4{font-family:'Barlow Condensed',sans-serif;font-size:34px;line-height:1.1;font-weight:500;margin:0;max-width:320px}
+.supply-heading>p{font-size:12px;line-height:1.9;color:var(--muted);max-width:290px;margin-top:19px}
+.supply-logos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;align-items:start}
+.partner-card{min-width:0;text-align:center}
+.partner-logo{width:100%;max-width:200px;height:120px;padding:23px 20px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);place-items:center}
+.partner-logo .partner-mark{min-width:0;min-height:0}
+.partner-card h5{font-family:Manrope,sans-serif;font-weight:500;font-size:13px;line-height:1.5;margin:18px 0 0;color:var(--ink)}
+.partner-card figcaption>p{font-size:10px;line-height:1.8;margin-top:7px;color:var(--muted)}
+.supply-group--brazil{padding-block:55px}
+.supply-group--brazil .supply-logos{grid-template-columns:1fr 1fr;gap:65px;max-width:620px;margin-left:auto;width:100%}
+.supply-group--brazil .partner-logo{max-width:260px;height:140px;padding:24px 22px}
+.supply-group--brazil .partner-card h5{font-size:16px}
+.supply-group--accessories{display:block;padding-bottom:0}
+.supply-group--accessories .supply-logos{grid-template-columns:1fr 1fr;gap:65px;max-width:1000px;margin:30px 0 0 auto}
+.supply-group--accessories .partner-card{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center;text-align:left}
+.supply-group--accessories .partner-card:last-child{margin-top:32px}
+.supply-group--accessories .partner-logo{height:145px;max-width:220px;padding:26px}
+.supply-group--accessories .partner-card h5{font-size:19px;margin-top:0}
+.supply-group--accessories .partner-card figcaption>p{font-size:11px;margin-top:10px}
+@media(max-width:1199px){
+  .brand-network-heading{gap:20px 65px}
+  .supply-group{gap:45px}
+  .supply-group--components .supply-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:27px 20px}
+  .supply-group--brazil .supply-logos{gap:30px}
+  .supply-group--accessories .supply-logos{gap:40px}
+  .supply-group--accessories .partner-card{gap:20px}
+}
+@media(max-width:767px){
+  .brand-network{margin-top:50px;padding-top:35px}
+  .brand-network-heading{grid-template-columns:1fr;gap:20px;margin-bottom:30px}
+  .brand-network-heading>.eyebrow{grid-column:1}
+  .brand-network-heading h3{font-size:39px}
+  .brand-network-heading>p:last-child{font-size:12px;max-width:100%}
+  .supply-group{grid-template-columns:1fr;gap:28px;padding-block:32px}
+  .supply-heading h4{font-size:31px}
+  .supply-heading>p{font-size:12px;max-width:100%;margin-top:15px}
+  .supply-group--components .supply-logos{grid-template-columns:1fr 1fr;gap:28px 18px}
+  .supply-group--components .partner-card:last-child{grid-column:1/-1;justify-self:center;width:calc(50% - 9px)}
+  .partner-logo{height:115px;padding:22px 17px;max-width:190px}
+  .partner-card h5{font-size:13px;margin-top:14px}
+  .partner-card figcaption>p{font-size:11px}
+  .supply-group--brazil .supply-logos{gap:24px}
+  .supply-group--brazil .partner-logo{height:130px;padding:21px 14px}
+  .supply-group--brazil .partner-card h5{font-size:14px}
+  .supply-group--accessories{padding-bottom:0}
+  .supply-group--accessories .supply-logos{grid-template-columns:1fr;gap:30px;margin-top:28px}
+  .supply-group--accessories .partner-card{grid-template-columns:.92fr 1.08fr;gap:25px}
+  .supply-group--accessories .partner-card:last-child{margin-top:0;margin-left:26px}
+  .supply-group--accessories .partner-logo{height:135px;padding:24px 18px}
+  .supply-group--accessories .partner-card h5{font-size:19px}
+}

@@ -16,14 +16,14 @@ try {
       await page.evaluate(() => new Promise(requestAnimationFrame));
       const layout = await page.evaluate(() => {
         const textOverflow = [];
-        for (const element of document.querySelectorAll('h1,h2,h3,p,address,dt,dd,.quiet-link,.brand-index button,.navigation a')) {
+        for (const element of document.querySelectorAll('h1,h2,h3,h4,h5,p,address,dt,dd,.quiet-link,.navigation a')) {
           if (!element.getClientRects().length || getComputedStyle(element).visibility === 'hidden') continue;
           const range = document.createRange(); range.selectNodeContents(element);
           const rect = range.getBoundingClientRect();
           if (rect.left < -2 || rect.right > innerWidth + 2 || element.scrollWidth > element.clientWidth + 3) textOverflow.push(element.textContent.slice(0, 65));
         }
         const collisions = [];
-        for (const [a, b] of [['.ghost-identity', '.ghost-image'], ['.journey-editorial', '.journey-cartography'], ['.konus-feature', '.konus-image'], ['.contact-title', '.contact-details'], ['.brand-network-heading', '.brand-carousel']]) {
+        for (const [a, b] of [['.ghost-identity', '.ghost-image'], ['.journey-editorial', '.journey-cartography'], ['.konus-feature', '.konus-image'], ['.contact-title', '.contact-details'], ['.supply-heading', '.supply-logos']]) {
           const x = document.querySelector(a).getBoundingClientRect(), y = document.querySelector(b).getBoundingClientRect();
           if (Math.min(x.right, y.right) - Math.max(x.left, y.left) > 3 && Math.min(x.bottom, y.bottom) - Math.max(x.top, y.top) > 3) collisions.push([a, b]);
         }
