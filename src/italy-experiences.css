@@ -13,7 +13,7 @@
 .experience-table article>p{font-size:12px}
 .experience-table .experience-diamond{display:none}
 .experience-photo--food{grid-column:1;grid-row:1}
-.experience-photo--food img{height:345px;object-position:50% 46%}
+.experience-photo--food img{height:345px;object-position:48% 65%;filter:none}
 .experience-photo--food figcaption{font-size:6px}
 @media(max-width:1199px){.italy-body{--experience-edge:40px}.experience-photo--training{margin-left:-25px}.experience-table{margin-left:-35px;margin-right:0;gap:23px}.experience-photo--food img{height:290px}}
 @media(max-width:767px){

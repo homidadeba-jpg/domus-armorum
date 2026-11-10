@@ -42,12 +42,13 @@ export const brandCopy = {
     "trainingTitle": "Cursos e treinamentos",
     "trainingText": "Os parceiros na Itália oferecem cursos e treinamentos para praticantes de tiro esportivo. As atividades integram a experiência conforme a programação de cada tour.",
     "trainingPhoto": "Homem com óculos de proteção e protetor auricular utilizando um fuzil em estande de tiro",
-    "foodPhoto": "Pratos de massa italiana servidos em uma osteria em Roma, Itália",
+    "foodPhoto": "Xícara de café e mesa de café da manhã em um ambiente com estrutura de madeira.",
     "experiencePhotoNote": "Imagem ilustrativa",
     "heroIntro": "De Cascavel à Itália. Marcas, conexões e experiências.",
     "videoPlay": "Reproduzir animação",
     "videoPause": "Pausar animação",
-    "videoReplay": "Rever animação"
+    "videoReplay": "Rever animação",
+    "foodPhotoNote": "Acervo Domus Armorum"
   },
   "it": {
     "shopNav": "Il negozio",
@@ -91,12 +92,13 @@ export const brandCopy = {
     "trainingTitle": "Corsi e formazione",
     "trainingText": "I partner in Italia propongono corsi e formazione per chi pratica il tiro sportivo. Le attività fanno parte dell’esperienza secondo il programma di ciascun tour.",
     "trainingPhoto": "Uomo con occhiali protettivi e cuffie antirumore con una carabina in un poligono di tiro",
-    "foodPhoto": "Piatti di pasta italiana serviti in un’osteria a Roma, Italia",
+    "foodPhoto": "Tazza di caffè e tavola della colazione in un ambiente con struttura in legno.",
     "experiencePhotoNote": "Immagine illustrativa",
     "heroIntro": "Da Cascavel all’Italia. Marchi, legami ed esperienze.",
     "videoPlay": "Riproduci animazione",
     "videoPause": "Pausa animazione",
-    "videoReplay": "Rivedi animazione"
+    "videoReplay": "Rivedi animazione",
+    "foodPhotoNote": "Archivio Domus Armorum"
   },
   "en": {
     "shopNav": "The store",
@@ -140,12 +142,13 @@ export const brandCopy = {
     "trainingTitle": "Courses and training",
     "trainingText": "Partners in Italy offer courses and training for sport shooting participants. Activities form part of the experience according to each tour’s programme.",
     "trainingPhoto": "Man wearing safety glasses and hearing protection using a rifle at a shooting range",
-    "foodPhoto": "Italian pasta dishes served at an osteria in Rome, Italy",
+    "foodPhoto": "Coffee cup and breakfast table in a timber-framed dining room.",
     "experiencePhotoNote": "Illustrative image",
     "heroIntro": "From Cascavel to Italy. Brands, connections and experiences.",
     "videoPlay": "Play animation",
     "videoPause": "Pause animation",
-    "videoReplay": "Replay animation"
+    "videoReplay": "Replay animation",
+    "foodPhotoNote": "Domus Armorum archive"
   },
   "es": {
     "shopNav": "La tienda",
@@ -189,11 +192,12 @@ export const brandCopy = {
     "trainingTitle": "Cursos y formación",
     "trainingText": "Los socios en Italia ofrecen cursos y formación para quienes practican tiro deportivo. Las actividades forman parte de la experiencia según el programa de cada tour.",
     "trainingPhoto": "Hombre con gafas de protección y protectores auditivos utilizando un rifle en un campo de tiro",
-    "foodPhoto": "Platos de pasta italiana servidos en una osteria en Roma, Italia",
+    "foodPhoto": "Taza de café y mesa de desayuno en un comedor con estructura de madera.",
     "experiencePhotoNote": "Imagen ilustrativa",
     "heroIntro": "De Cascavel a Italia. Marcas, conexiones y experiencias.",
     "videoPlay": "Reproducir animación",
     "videoPause": "Pausar animación",
-    "videoReplay": "Volver a ver"
+    "videoReplay": "Volver a ver",
+    "foodPhotoNote": "Archivo Domus Armorum"
   }
 };

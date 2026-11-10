@@ -10,10 +10,15 @@ Image: https://images.pexels.com/photos/5202396/pexels-photo-5202396.jpeg
 License: Pexels License — https://www.pexels.com/license/
 Illustrative man at a shooting range wearing hearing and eye protection; not a Domus participant or partner.
 
-Gastronomy photograph: Valentina Bešker, Pexels.
+Previous gastronomy photograph (replaced in the site by the supplied archive image): Valentina Bešker, Pexels.
 Source: https://www.pexels.com/photo/authentic-italian-pasta-dishes-in-rome-eatery-36495569/
 Image: https://images.pexels.com/photos/36495569/pexels-photo-36495569.jpeg
 Location listed by photographer: Rome, Italy.
 License: Pexels License — https://www.pexels.com/license/
 Illustrative restaurant dishes, not a confirmed Domus restaurant partner or tour activity.
 Downloaded 2026-11-09. Training resized to 1600px wide; gastronomy to 1000px wide. Converted to WebP.
+
+Current gastronomy photograph: 1002532331.jpg, supplied by the site's responsible person
+in the conversation on 2026-11-10 as part of the Domus Armorum photographic archive.
+Coffee cup and breakfast table; no restaurant, city or date is asserted.
+Converted to WebP at 1000 x 1230, without changing the scene or colours.

@@ -25,8 +25,8 @@ export function ItalyExperiences({ t }) {
       <div className="experience-table">
         <ExperienceText title={t.foodTitle} text={t.foodText} />
         <figure className="experience-photo experience-photo--food">
-          <img src="/experiences/gastronomia-roma-1000.webp" alt={t.foodPhoto} width="1000" height="1333" loading="lazy" decoding="async" />
-          <figcaption>{t.experiencePhotoNote}</figcaption>
+          <img src="/experiences/gastronomia-acervo-domus.webp" alt={t.foodPhoto} width="1000" height="1230" loading="lazy" decoding="async" />
+          <figcaption>{t.foodPhotoNote}</figcaption>
         </figure>
       </div>
       <ExperienceText title={t.connectionTitle} text={t.connectionText} />
