@@ -92,7 +92,6 @@ export function JourneyMap({ t }) {
       </svg>
       <div className="map-label origin-label"><span>{t.journeyOrigin}</span><strong>Cascavel</strong><small>Paraná · {t.journeyBrazil}</small></div>
       <div className="map-label destination-label"><span>{t.journeyDestination}</span><strong>{t.italyCountry}</strong><small>DOMUS ARMORUM</small></div>
-      <p className="map-footnote">{t.journeyNote}</p>
     </div>
   </div>;
 }

@@ -22,7 +22,6 @@ export const brandCopy = {
     "italyIntro": "A Domus Armorum também organiza tours para a Itália. A programação reúne cursos e treinamentos com parceiros locais, visitas a fábricas de armas e munições, gastronomia e contato com a cultura italiana.",
     "italyCountry": "Itália",
     "italyPhoto": "Vila italiana à beira-mar, com casas coloridas e arquitetura tradicional",
-    "italyCaption": "Paisagem italiana · imagem de atmosfera",
     "italyPull": "Conhecer um lugar é também conhecer suas histórias.",
     "cultureTitle": "Visitas a fábricas",
     "cultureText": "Conheça fábricas de armas e munições na Itália. As visitas fazem parte dos tours conforme a programação e a disponibilidade dos parceiros.",
@@ -43,12 +42,10 @@ export const brandCopy = {
     "trainingText": "Os parceiros na Itália oferecem cursos e treinamentos para praticantes de tiro esportivo. As atividades integram a experiência conforme a programação de cada tour.",
     "trainingPhoto": "Homem com óculos de proteção e protetor auricular utilizando um fuzil em estande de tiro",
     "foodPhoto": "Xícara de café e mesa de café da manhã em um ambiente com estrutura de madeira.",
-    "experiencePhotoNote": "Imagem ilustrativa",
     "heroIntro": "De Cascavel à Itália. Marcas, conexões e experiências.",
     "videoPlay": "Reproduzir animação",
     "videoPause": "Pausar animação",
-    "videoReplay": "Rever animação",
-    "foodPhotoNote": "Acervo Domus Armorum"
+    "videoReplay": "Rever animação"
   },
   "it": {
     "shopNav": "Il negozio",
@@ -72,7 +69,6 @@ export const brandCopy = {
     "italyIntro": "Domus Armorum organizza anche tour in Italia. Il programma comprende corsi e formazione con partner locali, visite a fabbriche di armi e munizioni, gastronomia e incontri con la cultura italiana.",
     "italyCountry": "Italia",
     "italyPhoto": "Borgo italiano sul mare, con case colorate e architettura tradizionale",
-    "italyCaption": "Paesaggio italiano · immagine d’atmosfera",
     "italyPull": "Conoscere un luogo significa conoscere anche le sue storie.",
     "cultureTitle": "Visite alle fabbriche",
     "cultureText": "Scopri fabbriche di armi e munizioni in Italia. Le visite fanno parte dei tour secondo la programmazione e la disponibilità dei partner.",
@@ -93,12 +89,10 @@ export const brandCopy = {
     "trainingText": "I partner in Italia propongono corsi e formazione per chi pratica il tiro sportivo. Le attività fanno parte dell’esperienza secondo il programma di ciascun tour.",
     "trainingPhoto": "Uomo con occhiali protettivi e cuffie antirumore con una carabina in un poligono di tiro",
     "foodPhoto": "Tazza di caffè e tavola della colazione in un ambiente con struttura in legno.",
-    "experiencePhotoNote": "Immagine illustrativa",
     "heroIntro": "Da Cascavel all’Italia. Marchi, legami ed esperienze.",
     "videoPlay": "Riproduci animazione",
     "videoPause": "Pausa animazione",
-    "videoReplay": "Rivedi animazione",
-    "foodPhotoNote": "Archivio Domus Armorum"
+    "videoReplay": "Rivedi animazione"
   },
   "en": {
     "shopNav": "The store",
@@ -122,7 +116,6 @@ export const brandCopy = {
     "italyIntro": "Domus Armorum also organises tours to Italy. The programme brings together courses and training with local partners, visits to firearms and ammunition factories, gastronomy and Italian culture.",
     "italyCountry": "Italy",
     "italyPhoto": "Italian seaside village with colourful houses and traditional architecture",
-    "italyCaption": "Italian landscape · illustrative destination image",
     "italyPull": "To know a place is also to know its stories.",
     "cultureTitle": "Factory visits",
     "cultureText": "Discover firearms and ammunition factories in Italy. Visits are part of the tours according to the programme and partner availability.",
@@ -143,12 +136,10 @@ export const brandCopy = {
     "trainingText": "Partners in Italy offer courses and training for sport shooting participants. Activities form part of the experience according to each tour’s programme.",
     "trainingPhoto": "Man wearing safety glasses and hearing protection using a rifle at a shooting range",
     "foodPhoto": "Coffee cup and breakfast table in a timber-framed dining room.",
-    "experiencePhotoNote": "Illustrative image",
     "heroIntro": "From Cascavel to Italy. Brands, connections and experiences.",
     "videoPlay": "Play animation",
     "videoPause": "Pause animation",
-    "videoReplay": "Replay animation",
-    "foodPhotoNote": "Domus Armorum archive"
+    "videoReplay": "Replay animation"
   },
   "es": {
     "shopNav": "La tienda",
@@ -172,7 +163,6 @@ export const brandCopy = {
     "italyIntro": "Domus Armorum también organiza tours a Italia. La programación reúne cursos y formación con socios locales, visitas a fábricas de armas y municiones, gastronomía y contacto con la cultura italiana.",
     "italyCountry": "Italia",
     "italyPhoto": "Pueblo italiano junto al mar, con casas de colores y arquitectura tradicional",
-    "italyCaption": "Paisaje italiano · imagen de ambiente",
     "italyPull": "Conocer un lugar también es conocer sus historias.",
     "cultureTitle": "Visitas a fábricas",
     "cultureText": "Conozca fábricas de armas y municiones en Italia. Las visitas forman parte de los tours según la programación y la disponibilidad de los socios.",
@@ -193,11 +183,9 @@ export const brandCopy = {
     "trainingText": "Los socios en Italia ofrecen cursos y formación para quienes practican tiro deportivo. Las actividades forman parte de la experiencia según el programa de cada tour.",
     "trainingPhoto": "Hombre con gafas de protección y protectores auditivos utilizando un rifle en un campo de tiro",
     "foodPhoto": "Taza de café y mesa de desayuno en un comedor con estructura de madera.",
-    "experiencePhotoNote": "Imagen ilustrativa",
     "heroIntro": "De Cascavel a Italia. Marcas, conexiones y experiencias.",
     "videoPlay": "Reproducir animación",
     "videoPause": "Pausar animación",
-    "videoReplay": "Volver a ver",
-    "foodPhotoNote": "Archivo Domus Armorum"
+    "videoReplay": "Volver a ver"
   }
 };
