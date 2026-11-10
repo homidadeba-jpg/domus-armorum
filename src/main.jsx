@@ -28,9 +28,6 @@ const INSTAGRAM = 'https://www.instagram.com/domus.armorum/';
 function TextLines({ value }) {
   return value.split('\n').map((line, i) => <React.Fragment key={line}>{i > 0 && <br />}{line}</React.Fragment>);
 }
-function BrandContour({ className = '' }) {
-  return <svg className={className} viewBox="0 0 240 310" fill="none" aria-hidden="true"><path d="M120 8C97 8 83 34 26 54C13 59 10 64 10 83V223C10 244 80 283 120 302C160 283 230 244 230 223V83C230 64 227 59 214 54C157 34 143 8 120 8Z" stroke="currentColor" strokeWidth=".7" /><path d="M120 22C98 22 83 46 35 63C24 67 22 74 22 87V218C22 238 82 270 120 289C158 270 218 238 218 218V87C218 74 216 67 205 63C157 46 142 22 120 22Z" stroke="currentColor" strokeWidth=".5" /></svg>;
-}
 function App() {
   const root = useRef(null), menuButton = useRef(null), header = useRef(null);
   const [menu, setMenu] = useState(false);
@@ -143,11 +140,6 @@ function App() {
         gsap.fromTo(element, { opacity: .25, y: compact ? 18 : 30 }, { opacity: 1, y: 0, ease: 'none',
           scrollTrigger: { trigger: element, start: 'clamp(top 92%)', end: 'clamp(top 57%)', scrub: true } });
       });
-      select('.manifesto-seal path').forEach(path => {
-        const length = path.getTotalLength();
-        gsap.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0,
-          duration: 1.5, ease: 'none', scrollTrigger: followScroll(path.closest('svg')) });
-      });
       gsap.from('.story-date', { y: 35, opacity: 0, duration: 1.2, ease: 'none', scrollTrigger: followScroll('.story-heading') });
       select('[data-photo]').forEach(element => {
         gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1.08, yPercent: 3,
@@ -197,7 +189,7 @@ function App() {
       <section className="manifesto shell" id="essencia">
         <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>
-        <div className="manifesto-bottom"><BrandContour className="manifesto-seal" /><p data-reveal>{t.manifesto}</p></div>
+        <div className="manifesto-bottom"><p data-reveal>{t.manifesto}</p></div>
         <div className="world-links" data-reveal><a href="#marcas"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.brandsNav}</span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}</span></a></div>
       </section>
       <Representations t={t} />
