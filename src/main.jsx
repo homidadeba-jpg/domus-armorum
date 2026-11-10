@@ -140,6 +140,7 @@ function App() {
         gsap.fromTo(element, { opacity: .25, y: compact ? 18 : 30 }, { opacity: 1, y: 0, ease: 'none',
           scrollTrigger: { trigger: element, start: 'clamp(top 92%)', end: 'clamp(top 57%)', scrub: true } });
       });
+      gsap.from('.manifesto-signature', { y: 14, opacity: .2, ease: 'none', scrollTrigger: followScroll('.manifesto-bottom') });
       gsap.from('.story-date', { y: 35, opacity: 0, duration: 1.2, ease: 'none', scrollTrigger: followScroll('.story-heading') });
       select('[data-photo]').forEach(element => {
         gsap.fromTo(element.querySelector('img'), { scale: 1.08, yPercent: -3 }, { scale: 1.08, yPercent: 3,
@@ -189,7 +190,7 @@ function App() {
       <section className="manifesto shell" id="essencia">
         <div className="section-meta"><span className="eyebrow">{t.institution}</span><span className="micro">{t.world}</span></div>
         <h2><span className="manifesto-line">{t.manifestoFirst}</span><span className="manifesto-line manifesto-outline">{t.manifestoSecond}</span></h2>
-        <div className="manifesto-bottom"><p data-reveal>{t.manifesto}</p></div>
+        <div className="manifesto-bottom"><span className="manifesto-signature" aria-hidden="true"><span className="manifesto-emblem" /></span><p data-reveal>{t.manifesto}</p></div>
         <div className="world-links" data-reveal><a href="#marcas"><span className="eyebrow">CASCAVEL · BRASIL</span><span>{t.brandsNav}</span></a><a href="#italia"><span className="eyebrow">{t.italyLabel}</span><span>{t.toursNav}</span></a></div>
       </section>
       <Representations t={t} />
