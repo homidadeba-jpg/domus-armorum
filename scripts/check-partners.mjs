@@ -26,6 +26,11 @@ try {
     assert.deepEqual(await image.evaluate(image => [image.naturalWidth, image.naturalHeight]), [photo.width, photo.height]);
   }
   assert.equal(await page.locator('[data-archive-id="italy-fair"]').count(), 0, 'The unidentified fair slot stays omitted');
+  assert.equal(await page.locator('#italia .owner-archive').count(), 1, 'The Italy archive belongs inside the Italy navigation section');
+  assert.equal(await page.locator('#marcas .owner-archive').count(), 0);
+  assert.equal(await page.locator('.ghost-institutional img').getAttribute('src'), '/partners/ghost-detail.webp');
+  assert.equal(await page.locator('.konus-material img').getAttribute('src'), '/partners/konus-outdoor.webp');
+  assert.equal(await page.locator('.experience-photo--training img').getAttribute('src'), '/experiences/treinamento-fuzil.webp');
   assert.deepEqual(await page.locator('[data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), partners.map(brand => brand.id));
   for (const [group, ids] of Object.entries({ components: ['hornady', 'cbc', 'federal', 'cci', 'fiocchi'], brazil: ['dfa', 'fireeagle'], accessories: ['topgun', 'raoni'] })) {
     assert.deepEqual(await page.locator('.supply-group--' + group + ' [data-brand-id]').evaluateAll(nodes => nodes.map(node => node.dataset.brandId)), ids);

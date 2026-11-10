@@ -50,8 +50,8 @@ export const partnersCopy = {
     "archiveAccessories": "Detalhes Ghost · Acervo Domus Armorum",
     "archiveAccessoriesAlt": "Coldres e porta-carregadores Ghost dispostos sobre uma mesa.",
     "archivePeopleAlt": "Três pessoas reunidas diante de um painel da Ghost Sport.",
-    "archiveMeeting": "Encontro na Konus · Acervo Domus Armorum",
-    "archiveMeetingAlt": "Encontro em um escritório com material da Konus ao fundo."
+    "archiveMeeting": "Encontro com parceiros · Acervo Domus Armorum",
+    "archiveMeetingAlt": "Duas pessoas em um escritório, com material de óptica ao fundo."
   },
   "it": {
     "brandsNav": "Marchi",
@@ -104,8 +104,8 @@ export const partnersCopy = {
     "archiveAccessories": "Dettagli Ghost · Archivio Domus Armorum",
     "archiveAccessoriesAlt": "Fondine e portacaricatori Ghost disposti su un tavolo.",
     "archivePeopleAlt": "Tre persone riunite davanti a un pannello Ghost Sport.",
-    "archiveMeeting": "Incontro presso Konus · Archivio Domus Armorum",
-    "archiveMeetingAlt": "Incontro in un ufficio con materiale Konus sullo sfondo."
+    "archiveMeeting": "Incontro con i partner · Archivio Domus Armorum",
+    "archiveMeetingAlt": "Due persone in un ufficio, con materiale di ottica sullo sfondo."
   },
   "en": {
     "brandsNav": "Brands",
@@ -158,8 +158,8 @@ export const partnersCopy = {
     "archiveAccessories": "Ghost details · Domus Armorum archive",
     "archiveAccessoriesAlt": "Ghost holsters and magazine pouches arranged on a table.",
     "archivePeopleAlt": "Three people standing in front of a Ghost Sport banner.",
-    "archiveMeeting": "Meeting at Konus · Domus Armorum archive",
-    "archiveMeetingAlt": "Meeting in an office with Konus materials in the background."
+    "archiveMeeting": "Meeting with partners · Domus Armorum archive",
+    "archiveMeetingAlt": "Two people in an office, with optical materials in the background."
   },
   "es": {
     "brandsNav": "Marcas",
@@ -212,7 +212,7 @@ export const partnersCopy = {
     "archiveAccessories": "Detalles Ghost · Archivo Domus Armorum",
     "archiveAccessoriesAlt": "Fundas y portacargadores Ghost dispuestos sobre una mesa.",
     "archivePeopleAlt": "Tres personas reunidas frente a un panel de Ghost Sport.",
-    "archiveMeeting": "Encuentro en Konus · Archivo Domus Armorum",
-    "archiveMeetingAlt": "Encuentro en una oficina con material de Konus al fondo."
+    "archiveMeeting": "Encuentro con socios · Archivo Domus Armorum",
+    "archiveMeetingAlt": "Dos personas en una oficina, con material de óptica al fondo."
   }
 };

@@ -2,29 +2,39 @@
 .ghost-visuals{min-width:0;margin-right:calc(-1 * var(--partner-edge));align-self:start}
 .ghost-visuals .ghost-image{margin:0}
 .ghost-visuals .ghost-image>img{width:100%;height:auto;object-fit:contain;filter:none}
-.ghost-visuals .ghost-image figcaption{max-width:55%;font-size:8px}
-.ghost-accessory{position:relative;z-index:1;width:37%;max-width:245px;margin:-35px 40px 0 auto;padding:10px 0 0 10px;background:var(--bg)}
+.ghost-visuals .ghost-image figcaption{font-size:8px}
+.ghost-details{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:22px;width:65%;max-width:480px;margin:26px 40px 0 auto}
+.ghost-accessory{margin:0;min-width:0}
 .ghost-accessory img{width:100%;height:auto;object-fit:contain;filter:none}
 .ghost-accessory figcaption{font-size:7px;line-height:1.8;letter-spacing:.4px;margin-top:11px}
+.ghost-institutional img,.konus-material img{display:block;width:100%;height:auto;object-fit:contain;filter:none}
+.ghost-institutional figcaption,.konus-material figcaption{font-size:7px;line-height:1.8;color:var(--muted);letter-spacing:.4px;margin-top:11px}
+.konus-imagery{grid-column:2;grid-row:1;min-width:0;margin:15px 0 0 20px}
+.konus-imagery .konus-image{margin:0}
 .konus-meeting img{height:auto;object-fit:contain;filter:none}
-.owner-archive{grid-template-columns:1.25fr .75fr;gap:80px;align-items:center}
+.konus-material{width:78%;margin:26px 0 0 auto}
+.owner-archive{--partner-edge:max(64px,calc((100vw - 1376px)/2));grid-template-columns:1.25fr .75fr;gap:80px;align-items:center}
 .archive-intro{grid-column:2;grid-row:1}
 .archive-intro h3{font-size:39px;line-height:1.12;margin-top:22px}
+.archive-intro h3>span{display:block}
 .archive-intro>p:last-child{font-size:12px;line-height:1.9;color:var(--muted);max-width:450px;margin-top:25px}
 .archive-collection{grid-column:1;grid-row:1;display:block;margin:0 0 0 calc(-1 * var(--partner-edge))}
 .archive-collection .archive-photo img{width:100%;height:auto;object-fit:contain;filter:none}
 .archive-photo--group figcaption{padding-left:var(--partner-edge)}
 .archive-collection figcaption{font-size:8px;line-height:1.8;letter-spacing:.4px}
 @media(max-width:1199px){
- .owner-archive{gap:45px}
- .ghost-accessory{margin-right:25px}
+ .owner-archive{--partner-edge:40px;gap:45px}
+ .ghost-details{margin-right:25px}
 }
 @media(max-width:767px){
  .ghost-visuals{margin-left:-20px;margin-right:-20px}
- .ghost-visuals .ghost-image figcaption{padding-left:20px;padding-right:0;max-width:58%;font-size:7px}
- .ghost-accessory{width:35%;max-width:190px;margin:-22px 20px 0 auto;padding:8px 0 0 8px}
+ .ghost-visuals .ghost-image figcaption{padding-left:20px;padding-right:20px;font-size:7px}
+ .ghost-details{width:75%;gap:16px;margin:22px 20px 0 auto}
  .ghost-accessory figcaption{font-size:6px;line-height:1.8;margin-top:8px}
- .owner-archive{grid-template-columns:1fr;gap:28px}
+ .ghost-institutional figcaption,.konus-material figcaption{font-size:6px;line-height:1.8;margin-top:8px}
+ .konus-imagery{grid-column:1;grid-row:auto;margin:0 25px 0 -20px}
+ .konus-material{width:85%;margin-top:22px}
+ .owner-archive{--partner-edge:20px;grid-template-columns:1fr;gap:28px}
  .archive-intro{grid-column:1;grid-row:auto}
  .archive-intro h3{font-size:33px;margin-top:18px}
  .archive-intro>p:last-child{margin-top:20px}
