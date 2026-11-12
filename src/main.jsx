@@ -28,12 +28,12 @@ const INSTAGRAM = 'https://www.instagram.com/domus.armorum/';
 function TextLines({ value }) {
   return value.split('\n').map((line, i) => <React.Fragment key={line}>{i > 0 && <br />}{line}</React.Fragment>);
 }
-function App() {
+export function App({ initialLocale } = {}) {
   const root = useRef(null), menuButton = useRef(null), header = useRef(null);
   const [menu, setMenu] = useState(false);
-  const [compactNavigation, setCompactNavigation] = useState(() => matchMedia('(max-width: 980px)').matches);
+  const [compactNavigation, setCompactNavigation] = useState(() => typeof window === 'undefined' || matchMedia('(max-width: 980px)').matches);
   const [pastHero, setPastHero] = useState(false);
-  const [language, setLanguage] = useState(initialLanguage);
+  const [language, setLanguage] = useState(() => initialLocale || initialLanguage());
   const t = translations[language];
   useSmoothScroll();
   useEffect(() => {
@@ -195,4 +195,4 @@ function App() {
     <WhatsAppLink copy={t} className="floating-whatsapp" floating><WhatsAppMark /></WhatsAppLink>
   </div>;
 }
-createRoot(document.getElementById('root')).render(<App />);
+if (typeof document !== 'undefined') createRoot(document.getElementById('root')).render(<App />);

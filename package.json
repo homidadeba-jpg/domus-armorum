@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5187 --strictPort",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "test:browser": "node scripts/check-browser.mjs",
     "test:hero": "node scripts/check-hero.mjs",

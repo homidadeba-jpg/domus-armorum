@@ -8,6 +8,8 @@ A loja e as conexões na Itália têm seções próprias e acessos equivalentes.
 
 ## Desenvolvimento
 
+SEO/GEO: `npm run build` também pré-renderiza os componentes existentes e gera sitemap, robots.txt, llms.txt e o grafo JSON-LD. O domínio base é definido em `src/company.js`. Decisões e próximos passos estão em `docs/SEO-GEO.md`.
+
 ```sh
 npm install
 npm run dev

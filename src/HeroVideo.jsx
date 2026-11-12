@@ -5,12 +5,13 @@ const MOBILE = { source: '/media/domus-intro-v2.mp4', start: '/media/domus-start
 const DESKTOP = { source: '/media/domus-intro-desktop-v1.mp4', start: '/media/domus-start-desktop-v1.webp', final: '/media/domus-final-desktop-v1.webp', width: 1624, height: 914 };
 
 export function HeroVideo({ t }) {
+  const server = typeof window === 'undefined';
   const video = useRef(null), actions = useRef({});
   const handoff = useRef(null), completed = useRef(false), control = useRef({ manuallyPaused: false, manuallyStarted: false });
-  const [desktop, setDesktop] = useState(() => matchMedia('(min-width: 768px)').matches);
+  const [desktop, setDesktop] = useState(() => !server && matchMedia('(min-width: 768px)').matches);
   const asset = desktop ? DESKTOP : MOBILE;
-  const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true);
-  const [status, setStatus] = useState(reduced ? 'static' : 'loading');
+  const [reduced, setReduced] = useState(() => server || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true);
+  const [status, setStatus] = useState(server ? 'loading' : reduced ? 'static' : 'loading');
 
   useEffect(() => {
     const media = matchMedia('(min-width: 768px)');
@@ -139,8 +140,8 @@ export function HeroVideo({ t }) {
   return <section className="hero hero-video" id="inicio" aria-labelledby="hero-heading" data-playback={status}>
     <h1 className="sr-only" id="hero-heading">DOMUS ARMORUM</h1>
     <div className="intro-stage">
-      <img className="intro-still" src={asset.final} width={asset.width} height={asset.height} alt="" fetchPriority="high" />
-      <video ref={video} className="intro-video" src={reduced ? undefined : asset.source} poster={completed.current ? asset.final : asset.start} width={asset.width} height={asset.height} muted playsInline autoPlay={!reduced && !completed.current && !control.current.manuallyPaused} preload={reduced ? 'none' : 'auto'} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
+      <img className="intro-still" src={server ? undefined : asset.final} width={asset.width} height={asset.height} alt="" fetchPriority="high" />
+      <video ref={video} className="intro-video" src={reduced ? undefined : asset.source} poster={server ? undefined : completed.current ? asset.final : asset.start} width={asset.width} height={asset.height} muted playsInline autoPlay={!reduced && !completed.current && !control.current.manuallyPaused} preload={reduced ? 'none' : 'auto'} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
     </div>
     <div className="intro-caption"><p className="intro-location">{t.since}</p><p>{t.heroIntro}</p><button className="intro-playback" onClick={() => actions.current.toggle?.()}><span className={status === 'playing' ? 'intro-pause-icon' : 'intro-play-icon'} aria-hidden="true" />{button}</button></div>
     <a className="intro-scroll" href="#essencia"><span>{t.exploreBrand}</span><span className="intro-scroll-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v15m-5-5 5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span></a>

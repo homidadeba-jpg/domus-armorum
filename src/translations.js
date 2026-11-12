@@ -96,6 +96,7 @@ export function resolveLanguage({ search = '', saved, preferred = [] } = {}) {
 }
 
 export function initialLanguage() {
+  if (typeof window === 'undefined') return 'pt';
   let saved;
   try { saved = localStorage.getItem('domus-language'); } catch { /* Browser preferences work without storage. */ }
   return resolveLanguage({ search: window.location.search, saved, preferred: navigator.languages?.length ? navigator.languages : [navigator.language || ''] });
