@@ -1,6 +1,6 @@
 export const company = {
   name: 'Domus Armorum', legalName: 'AWM Armas e Munições LTDA',
-  url: 'https://domus-armorum.pages.dev/',
+  url: 'https://domusarmas.com.br/',
   street: 'Rua Souza Naves, 3983', suite: 'Sala 605', district: 'Centro',
   city: 'Cascavel', state: 'Paraná', stateCode: 'PR', postalCode: '85810-070',
   phone: '+55 45 99979-4330', phoneDisplay: '(45) 99979-4330', phoneHref: 'tel:+5545999794330',

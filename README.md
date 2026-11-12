@@ -18,13 +18,13 @@ npm run build
 
 ## Publicação
 
-Cloudflare Pages é a hospedagem principal desde 11/11/2026. Projeto `domus-armorum`, conectado ao GitHub pela branch `main`, com publicação automática a cada push. Comando de build: `npm run build`; diretório publicado: `dist`; Node.js 24. Cabeçalhos estáticos ficam em `public/_headers`. O domínio próprio será conectado posteriormente. A implantação anterior na Vercel permanece disponível.
+Cloudflare Pages é a hospedagem principal desde 11/11/2026. Projeto `domus-armorum`, conectado ao GitHub pela branch `main`, com publicação automática a cada push. Comando de build: `npm run build`; diretório publicado: `dist`; Node.js 24. Cabeçalhos estáticos ficam em `public/_headers`. O domínio próprio domusarmas.com.br foi ativado manualmente pelo responsável em 12/11/2026. A implantação anterior na Vercel permanece disponível.
 
 - Repositório: https://github.com/homidadeba-jpg/domus-armorum
 - Branch de produção: `main`
 - Reformulação 3D publicada em produção em 09/11/2026; branch de trabalho: `codex/domus-identidade-3d`.
 - Barra de revisão da Vercel desativada nesta branch com `VERCEL_PREVIEW_FEEDBACK_ENABLED=0`, configurada no ambiente Preview da Vercel.
-- Link principal para acesso e próximas atualizações: https://domus-armorum.pages.dev/ . A branch `main` publica nesse endereço pelo Cloudflare Pages. A Vercel permanece como implantação anterior: https://domus-armorum.vercel.app/ .
+- Link principal para acesso e próximas atualizações: https://domusarmas.com.br/ . A branch `main` publica pelo projeto Cloudflare Pages `domus-armorum`, também disponível em https://domus-armorum.pages.dev/ . A Vercel permanece como implantação anterior: https://domus-armorum.vercel.app/ .
 - Painel Vercel: https://vercel.com/jonas-jr/domus-armorum
 - URL de produção: https://domus-armorum.vercel.app/
 - Publicação contínua pela integração GitHub–Vercel: commit e push em `main`, seguidos da verificação do status do deploy e da URL pública. Reutilizar as conexões existentes.

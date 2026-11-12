@@ -17,11 +17,11 @@ Implementação orientada pela skill `geo-seo-claude`, com as recomendações co
 - Acesso para busca e autorização de treinamento de IA são controles diferentes. As preferências de robôs da conta Cloudflare não foram alteradas.
 - Não foram adicionados `SearchAction`, avaliações, FAQ ou outras marcações que anunciem funções/conteúdos ausentes da página.
 - O sitemap lista a página real, sem tratar âncoras como páginas independentes. `hreflang` não foi anunciado: as traduções atuais são selecionadas no navegador, e não páginas traduzidas distintas servidas no primeiro HTML.
-- Não foram alterados DNS, domínios personalizados, Search Console, Bing Webmaster Tools ou cadastros externos. O domínio `domusarmas.com.br` não resolvia durante esta implementação; o endereço principal permanece `https://domus-armorum.pages.dev/`.
+- Não foram alterados DNS, domínios personalizados, Search Console, Bing Webmaster Tools ou cadastros externos. O domínio `domusarmas.com.br` não resolvia durante a implementação inicial. Em 12/11/2026, o responsável ativou manualmente o domínio principal e o `www` no Cloudflare Pages; o endereço principal do SEO foi atualizado para `https://domusarmas.com.br/`.
 
-## Após ativar o domínio próprio
+## Domínio próprio e próximos passos
 
-Concluir manualmente o domínio personalizado no projeto Cloudflare Pages. Quando ele estiver funcionando, atualizar `company.url` em `src/company.js` e publicar novamente: o build atualiza canonical, Open Graph, dados estruturados, sitemap e `llms.txt` juntos. Cadastrar o sitemap do domínio final no Google Search Console e no Bing Webmaster Tools. Manter o endereço e o contato coerentes com o perfil oficial da empresa no Google.
+Os domínios personalizados foram ativados pelo responsável. `company.url` em `src/company.js` agora usa o domínio principal, sem `www`; o build atualiza canonical, Open Graph, dados estruturados, sitemap e `llms.txt` juntos. O redirecionamento do `www` será configurado manualmente pelo responsável. Cadastrar o sitemap do domínio final no Google Search Console e no Bing Webmaster Tools. Manter o endereço e o contato coerentes com o perfil oficial da empresa no Google.
 
 ## Validação técnica
 
