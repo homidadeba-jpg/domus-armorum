@@ -17,7 +17,8 @@ export const partners = [
 export const ownerArchive = [
   { id: 'factory-wide', image: '/experiences/ghost-visita-fabrica.webp', caption: 'archiveFactory', alt: 'archiveFactoryAlt', width: 1280, height: 960, format: 'landscape' },
   { id: 'ghost-accessories', image: '/experiences/ghost-acessorios-acervo.webp', caption: 'archiveAccessories', alt: 'archiveAccessoriesAlt', width: 960, height: 1280, format: 'portrait' },
+  { id: 'italy-fair', image: '/experiences/feira-italia-encontro.webp', caption: 'archiveFair', alt: 'archiveFairMeetingAlt', width: 576, height: 1025, format: 'fair' },
+  { id: 'italy-fair-visit', image: '/experiences/feira-italia-visita.webp', alt: 'archiveFairVisitAlt', width: 576, height: 1042, format: 'fair' },
   { id: 'ghost-group', image: '/experiences/ghost-encontro-acervo.webp', caption: 'archivePeople', alt: 'archivePeopleAlt', width: 1280, height: 1008, format: 'group' },
   { id: 'partner-meeting', image: null, caption: 'archiveMeeting', alt: 'archiveMeetingAlt', width: 1280, height: 804, format: 'meeting' },
-  { id: 'italy-fair', image: null, caption: 'archiveFair', format: 'panorama' },
 ];

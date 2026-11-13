@@ -12,7 +12,7 @@ function ArchivePhoto({ photo, t, className = '' }) {
   if (!photo?.image) return null;
   return <figure className={'archive-photo ' + className} data-archive-id={photo.id} data-reveal>
     <img src={photo.image} width={photo.width} height={photo.height} style={{ aspectRatio: `${photo.width} / ${photo.height}` }} alt={t[photo.alt] || t[photo.caption]} loading="lazy" decoding="async" />
-    {photo.id !== 'ghost-accessories' && <figcaption>{t[photo.caption]}</figcaption>}
+    {photo.caption && photo.id !== 'ghost-accessories' && <figcaption>{t[photo.caption]}</figcaption>}
   </figure>;
 }
 
@@ -31,7 +31,13 @@ function BrandDirectory({ t }) {
     { id: 'accessories', title: t.careBrandsTitle, brands: ['topgun', 'raoni'] },
   ];
   return <div className="partner-directory">{groups.map(group => <section className={'supply-group supply-group--' + group.id} key={group.id} aria-labelledby={'supply-' + group.id}>
-    <div className="supply-heading"><h4 id={'supply-' + group.id}>{group.title}</h4>{group.text && <p>{group.text}</p>}</div>
+    <div className="supply-heading">
+      <h4 id={'supply-' + group.id}>{group.title}</h4>
+      {group.text && <p>{group.text}</p>}
+      {group.id === 'components' && <figure className="archive-photo cbc-editorial" data-reveal>
+        <img src="/partners/cbc-arte-editorial.webp" width="720" height="1280" alt={t.cbcEditorialAlt} loading="lazy" decoding="async" />
+      </figure>}
+    </div>
     <div className="supply-logos">{group.brands.map(id => <BrandCard key={id} brand={byId(id)} t={t} showLine={id === 'hornady' || group.id === 'accessories'} />)}</div>
   </section>)}</div>;
 }
@@ -48,7 +54,13 @@ export function Representations({ t }) {
     </article>
     <div className="optics-editorial shell">
       <article className="konus-feature" data-brand-id="konus"><p className="eyebrow">{t.opticsLabel}</p><div className="partner-identity tone-dark"><Mark id="konus" /></div><h3>Konus Optics</h3><p className="partner-status">{t.exclusiveBrazil}</p><p>{t.konusText}</p></article>
-      <div className={'konus-imagery' + (meeting?.image ? '' : ' is-institutional')}><ArchivePhoto photo={meeting} t={t} className="konus-image konus-meeting" /><figure className="konus-material" data-reveal><img src="/partners/konus-outdoor.webp" width="1500" height="366" style={{ aspectRatio: '1500 / 366' }} alt={t.konusPhotoAlt} loading="lazy" decoding="async" /></figure></div>
+      <div className={'konus-imagery' + (meeting?.image ? '' : ' is-institutional')}>
+        <ArchivePhoto photo={meeting} t={t} className="konus-image konus-meeting" />
+        <figure className="konus-material" data-reveal><img src="/partners/konus-outdoor.webp" width="1500" height="366" style={{ aspectRatio: '1500 / 366' }} alt={t.konusPhotoAlt} loading="lazy" decoding="async" /></figure>
+        <figure className="archive-photo konus-compass" data-reveal>
+          <img src="/partners/konus-bussola.webp" width="720" height="720" alt={t.konusCompassAlt} loading="lazy" decoding="async" />
+        </figure>
+      </div>
       <article className="sightron-feature" data-brand-id="sightron"><div className="partner-identity tone-light"><Mark id="sightron" /></div><div><p className="partner-status">{t.representationLabel} · {t.usaOrigin}</p><h3>Sightron</h3><p>{t.sightronText}</p></div></article>
     </div>
     <div className="brand-network shell"><div className="brand-network-heading"><p className="eyebrow">{t.brandNetworkLabel}</p><h3><Lines text={t.brandNetworkHeading} /></h3><p>{t.brandNetworkIntro}</p></div><BrandDirectory t={t} /></div>
@@ -56,7 +68,12 @@ export function Representations({ t }) {
 }
 
 export function OwnerArchive({ t }) {
+  const fairPhotos = ownerArchive.filter(item => item.format === 'fair');
+  const ghostGroup = ownerArchive.find(item => item.id === 'ghost-group');
   return <section className="owner-archive shell" aria-labelledby="owner-archive-heading"><div className="archive-intro"><p className="eyebrow">{t.archiveLabel}</p><h3 id="owner-archive-heading"><Lines text={t.archiveHeading} /></h3><p>{t.archiveText}</p></div>
-    <div className="archive-collection">{ownerArchive.filter(item => item.image && ['ghost-group', 'italy-fair'].includes(item.id)).map(item => <ArchivePhoto key={item.id} photo={item} t={t} className={'archive-photo--' + item.format} />)}</div>
+    <div className="archive-collection">
+      <div className="archive-fair-pair">{fairPhotos.map(photo => <ArchivePhoto key={photo.id} photo={photo} t={t} className="archive-photo--fair" />)}</div>
+      <ArchivePhoto photo={ghostGroup} t={t} className="archive-photo--group" />
+    </div>
   </section>;
 }
