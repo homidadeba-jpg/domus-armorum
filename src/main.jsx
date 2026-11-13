@@ -185,6 +185,9 @@ export function App({ initialLocale } = {}) {
         <JourneyMap t={t} />
         <figure className="italy-landscape" data-photo><img src="/experiences/italia.webp" alt={t.italyPhoto} width="1800" height="1200" loading="lazy" /><div className="landscape-shade" /><span className="italy-word" aria-hidden="true">{t.italyCountry.toUpperCase()}.</span></figure>
         <ItalyExperiences t={t} />
+        <figure className="experience-photo experience-photo--showroom">
+          <img src="/experiences/showroom-italia.webp" alt={t.showroomPhotoAlt} width="1280" height="960" loading="lazy" decoding="async" />
+        </figure>
         <OwnerArchive t={t} />
         <div className="italy-pull shell"><span className="pull-rule" /><p data-reveal>{t.italyPull}</p><span className="pull-rule" /></div>
       </section>
