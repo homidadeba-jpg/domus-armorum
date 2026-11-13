@@ -18,14 +18,12 @@
 .cbc-editorial{width:min(100%,280px);margin:24px 0 0;border:1px solid var(--line)}
 .konus-compass img,.cbc-editorial img{display:block;width:100%;height:auto}
 .owner-archive{--partner-edge:max(64px,calc((100vw - 1376px)/2));grid-template-columns:1.25fr .75fr;gap:80px;align-items:center}
-.archive-intro{grid-column:2;grid-row:1;align-self:start;padding-top:clamp(0px,3vw,44px)}
+.archive-intro{grid-column:2;grid-row:1}
 .archive-intro h3{font-size:39px;line-height:1.12;margin-top:22px}
 .archive-intro h3>span{display:block}
 .archive-intro>p:last-child{font-size:12px;line-height:1.9;color:var(--muted);max-width:450px;margin-top:25px}
 .archive-collection{grid-column:1;grid-row:1;display:block;margin:0 0 0 calc(-1 * var(--partner-edge))}
 .archive-collection .archive-photo img{width:100%;height:auto;object-fit:contain;filter:none}
-.archive-fair-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:clamp(12px,2.3vw,32px);width:min(calc(100% - var(--partner-edge)),520px);margin:0 0 32px auto}
-.archive-fair-pair .archive-photo--fair:nth-child(2){margin-top:clamp(12px,2vw,28px)}
 .archive-photo--group figcaption{padding-left:var(--partner-edge)}
 .archive-collection figcaption{font-size:8px;line-height:1.8;letter-spacing:.4px}
 @media(max-width:1199px){
@@ -43,11 +41,10 @@
  .konus-compass{margin-right:0}
  .cbc-editorial{margin-inline:auto}
  .owner-archive{--partner-edge:20px;grid-template-columns:1fr;gap:28px}
- .archive-intro{grid-column:1;grid-row:auto;padding-top:0}
+ .archive-intro{grid-column:1;grid-row:auto}
  .archive-intro h3{font-size:33px;margin-top:18px}
  .archive-intro>p:last-child{margin-top:20px}
  .archive-collection{grid-column:1;grid-row:auto;margin:0 -20px}
- .archive-fair-pair{width:calc(100% - 40px);margin:0 auto 24px}
  .archive-photo--group figcaption{padding-inline:20px}
  .archive-collection figcaption{font-size:7px}
 }

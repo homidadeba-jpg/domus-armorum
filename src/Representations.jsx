@@ -68,11 +68,9 @@ export function Representations({ t }) {
 }
 
 export function OwnerArchive({ t }) {
-  const fairPhotos = ownerArchive.filter(item => item.format === 'fair');
   const ghostGroup = ownerArchive.find(item => item.id === 'ghost-group');
   return <section className="owner-archive shell" aria-labelledby="owner-archive-heading"><div className="archive-intro"><p className="eyebrow">{t.archiveLabel}</p><h3 id="owner-archive-heading"><Lines text={t.archiveHeading} /></h3><p>{t.archiveText}</p></div>
     <div className="archive-collection">
-      <div className="archive-fair-pair">{fairPhotos.map(photo => <ArchivePhoto key={photo.id} photo={photo} t={t} className="archive-photo--fair" />)}</div>
       <ArchivePhoto photo={ghostGroup} t={t} className="archive-photo--group" />
     </div>
   </section>;

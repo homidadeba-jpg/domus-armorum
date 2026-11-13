@@ -1,9 +1,13 @@
+import { ownerArchive } from './data/partners.js';
 import './italy-experiences.css';
 
-function ExperienceText({ title, text, className = '' }) {
+const fairPhotos = ownerArchive.filter(photo => photo.format === 'fair');
+
+function ExperienceText({ title, text, className = '', children }) {
   return <article className={className} data-reveal>
     <span className="experience-diamond" aria-hidden="true" />
     <h3>{title}</h3><p>{text}</p>
+    {children}
   </article>;
 }
 
@@ -20,7 +24,14 @@ export function ItalyExperiences({ t }) {
         <img src="/experiences/treinamento-fuzil.webp" alt={t.trainingPhoto} width="1600" height="1067" loading="lazy" decoding="async" />
       </figure>
       <ExperienceText title={t.trainingTitle} text={t.trainingText} className="experience-training-copy" />
-      <ExperienceText title={t.cultureTitle} text={t.cultureText} />
+      <ExperienceText title={t.cultureTitle} text={t.cultureText}>
+        <div className="experience-visit-photos">
+          {fairPhotos.map(photo => <figure className="experience-photo" key={photo.id}>
+            <img src={photo.image} width={photo.width} height={photo.height} alt={t[photo.alt]} loading="lazy" decoding="async" />
+            {photo.caption && <figcaption>{t[photo.caption]}</figcaption>}
+          </figure>)}
+        </div>
+      </ExperienceText>
       <div className="experience-table">
         <ExperienceText title={t.foodTitle} text={t.foodText} />
         <figure className="experience-photo experience-photo--food">
