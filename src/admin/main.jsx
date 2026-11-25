@@ -91,7 +91,7 @@ function PasswordForm({ required, onSaved, onCancel, onExpired }) {
   return <section className="admin-password" aria-labelledby="password-heading">
     <LockKey size={28} className="admin-accent" aria-hidden="true" />
     <h1 id="password-heading">{required ? 'Crie sua nova senha' : 'Alterar senha'}</h1>
-    <p>{required ? 'Este é seu primeiro acesso. Defina uma senha pessoal para abrir o painel.' : 'Escolha uma nova senha para acessar seu painel.'}</p>
+    <p>{required ? 'Este é seu primeiro acesso. Defina uma senha pessoal para sua conta.' : 'Escolha uma nova senha para acessar seu painel.'}</p>
     <form onSubmit={submit}>
       {!required && <><label htmlFor="current-password">Senha atual</label><input id="current-password" name="currentPassword" type="password" autoComplete="current-password" required maxLength={128} /></>}
       <label htmlFor="new-password">Nova senha</label>
@@ -100,7 +100,7 @@ function PasswordForm({ required, onSaved, onCancel, onExpired }) {
       <label htmlFor="confirm-password">Confirmar nova senha</label>
       <input id="confirm-password" name="confirmation" type="password" autoComplete="new-password" required minLength={10} maxLength={128} />
       {error && <p role="alert" className="admin-error">{error}</p>}
-      <div className="admin-form-actions"><button className="admin-primary" disabled={busy}>{busy ? 'Salvando…' : 'Salvar senha'}</button>{!required && <button type="button" onClick={onCancel} disabled={busy}>Cancelar</button>}</div>
+      <div className="admin-form-actions"><button className="admin-primary" disabled={busy}>{busy ? 'Salvando…' : 'Salvar senha'}</button><button type="button" onClick={onCancel} disabled={busy}>Cancelar</button></div>
     </form>
   </section>;
 }
@@ -150,7 +150,7 @@ function Chart({ data, metric }) {
   </figure>;
 }
 
-function Dashboard({ onExpired, notice }) {
+function Dashboard({ onExpired, notice, initialPassword, onChangePassword }) {
   const [period, setPeriod] = useState('week');
   const [metric, setMetric] = useState('views');
   const [data, setData] = useState(null);
@@ -169,6 +169,7 @@ function Dashboard({ onExpired, notice }) {
   }, [period, refresh, onExpired]);
   const selected = periods.find(item => item.id === period);
   return <main className="admin-dashboard">
+    {initialPassword && <div className="admin-password-notice" role="status"><p><strong>Defina sua senha pessoal</strong>A conta ainda usa a senha inicial.</p><button onClick={onChangePassword}>Alterar senha</button></div>}
     {notice && <p role="status" className="admin-success">Senha alterada com sucesso.</p>}
     <div className="admin-page-heading"><div><h1>Visitas ao site</h1><p>domusarmas.com.br</p></div><button className="admin-refresh" onClick={() => setRefresh(value => value + 1)} disabled={!data && !error}><ArrowClockwise size={18} aria-hidden="true" />Atualizar</button></div>
     <div className="admin-periods" role="group" aria-label="Período dos gráficos">{periods.map(item => <button key={item.id} aria-pressed={period === item.id} onClick={() => setPeriod(item.id)}>{item.label}</button>)}</div>
@@ -216,9 +217,9 @@ function Admin() {
   if (loading) return <main className="admin-auth"><Brand /><p role="status">Abrindo o painel…</p></main>;
   if (!user) return <>{error && <p role="alert" className="admin-global-error">{error}</p>}<Login onLogin={updated => { setUser(updated); setError(''); }} /></>;
   return <div className="admin-app">
-    <header className="admin-header"><Brand /><nav aria-label="Conta do administrador">{!user.mustChangePassword && <button onClick={() => { setSettings(value => !value); setNotice(false); }}><LockKey size={18} aria-hidden="true" />{settings ? 'Voltar aos gráficos' : 'Alterar senha'}</button>}<button onClick={logout} disabled={loggingOut}><SignOut size={18} aria-hidden="true" />{loggingOut ? 'Saindo…' : 'Sair'}</button></nav></header>
+    <header className="admin-header"><Brand /><nav aria-label="Conta do administrador"><button onClick={() => { setSettings(value => !value); setNotice(false); }}><LockKey size={18} aria-hidden="true" />{settings ? 'Voltar aos gráficos' : 'Alterar senha'}</button><button onClick={logout} disabled={loggingOut}><SignOut size={18} aria-hidden="true" />{loggingOut ? 'Saindo…' : 'Sair'}</button></nav></header>
     {error && <p role="alert" className="admin-error">{error}</p>}
-    {user.mustChangePassword || settings ? <main><PasswordForm required={user.mustChangePassword} onSaved={saved} onCancel={() => setSettings(false)} onExpired={expire} /></main> : <Dashboard onExpired={expire} notice={notice} />}
+    {settings ? <main><PasswordForm required={user.mustChangePassword} onSaved={saved} onCancel={() => setSettings(false)} onExpired={expire} /></main> : <Dashboard onExpired={expire} notice={notice} initialPassword={user.mustChangePassword} onChangePassword={() => setSettings(true)} />}
   </div>;
 }
 

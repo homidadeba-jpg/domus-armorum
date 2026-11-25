@@ -198,7 +198,6 @@ export async function handleApi({ request, env }) {
       return json({ ok: true }, 200, { 'Set-Cookie': cookie('', 0) });
     }
     if (path === '/api/admin/password' && request.method === 'POST') return await changePassword(db, user, body);
-    if (user.must_change_password) return json({ error: 'Troque sua senha para acessar os gráficos.' }, 403);
     if (path === '/api/admin/stats' && request.method === 'GET') return await statistics(db, url.searchParams.get('period') || 'week');
     return json({ error: 'Página não encontrada.' }, 404);
   } catch {

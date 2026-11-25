@@ -54,14 +54,14 @@ function call(db, path, body, cookie = '', origin = 'https://example.com') {
 
 function sessionCookie(response) { return response.headers.get('Set-Cookie').split(';')[0]; }
 
-test('first login requires a new password, rotates sessions, and rejects old credentials', async () => {
+test('first login allows viewing statistics, flags the initial password, and rotates sessions on password change', async () => {
   const db = await setup();
   const first = await call(db, 'admin/login', { username: 'admin', password: 'admin123' });
   assert.equal(first.status, 200);
   assert.equal((await first.json()).mustChangePassword, true);
   assert.match(first.headers.get('Set-Cookie'), /HttpOnly; Secure; SameSite=Strict/);
   const oldCookie = sessionCookie(first);
-  assert.equal((await call(db, 'admin/stats', undefined, oldCookie)).status, 403);
+  assert.equal((await call(db, 'admin/stats', undefined, oldCookie)).status, 200);
   assert.equal((await call(db, 'admin/password', { password: 'short' }, oldCookie)).status, 400);
   const changed = await call(db, 'admin/password', { password: 'a-strong-test-password' }, oldCookie);
   assert.equal(changed.status, 200);

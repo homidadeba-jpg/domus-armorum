@@ -96,6 +96,9 @@ th:first-child { text-align: left; }
 .admin-error, .admin-global-error { color: #ffd2c8; background: #422820; border-radius: 8px; font-size: 13px; padding: 14px 16px; margin-top: 20px; }
 .admin-global-error { max-width: 560px; margin: 20px auto 0; }
 .admin-success { color: #d7e7ca; background: #263920; border-radius: 8px; padding: 14px 16px; margin-bottom: 28px; font-size: 13px; }
+.admin-password-notice { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #665c43; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px; font-size: 13px; color: var(--admin-accent); }
+.admin-password-notice strong { display: block; font-weight: 600; }
+.admin-password-notice button { border-radius: 6px; background: #2a3024; font-size: 13px; }
 .admin-sr-only { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
 @media (max-width: 767px) {
   .admin-app { width: calc(100% - 40px); padding-bottom: 32px; }
